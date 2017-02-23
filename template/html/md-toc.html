@@ -1,0 +1,105 @@
+<template id="md-toc">
+       
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdtoctemplate = thisDoc.querySelector('#md-toc').content;
+
+    // var mdtocItems =  document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+    class TableOfContents extends HTMLElement {
+        
+       constructor() {
+            super();
+            // var shadow = this.attachShadow({mode: 'open'});
+            
+           
+        }
+
+        execute() {
+            
+        }
+
+        connectedCallback() {
+
+            var toc = this;
+
+            document.addEventListener("DOMContentLoaded", function(event) {
+                var level1 = 0;
+            var level2 = 0;
+            var level3 = 0;
+            var level4 = 0;
+            var level5 = 0;
+            var level6 = 0;
+
+            document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((item) => {
+                var clone = document.importNode(mdtoctemplate, true);
+                var addedText = "";
+                switch(item.localName)
+                {
+                    case "h1":
+                        level1++;
+                        addedText = level1;                        
+                        level2 = 0;
+                        level3 = 0;
+                        level4 = 0;
+                        level5 = 0;
+                        level6 = 0;
+                        break;
+                    case "h2":
+                        level2++;
+                        addedText = level1 + "." + level2;                        
+                        level3 = 0;
+                        level4 = 0;
+                        level5 = 0;
+                        level6 = 0;                  
+                        break;
+                    case "h3":
+                        level3++;                    
+                        addedText = level1 + "." + level2 + "." + level3;
+                        level4 = 0;
+                        level5 = 0;
+                        level6 = 0; 
+                        break;
+                    case "h4":
+                        level4++;                    
+                        addedText = level1 + "." + level2 + "." + level3 + "." + level4;
+                        level5 = 0;
+                        level6 = 0; 
+                        break;
+                    case "h5":
+                        level5++;                    
+                        addedText = level1 + "." + level2 + "." + level3 + "." + level4 + "." + level5;
+                        level6 = 0; 
+                        break;
+                    case "h6":
+                        level6++;                    
+                        addedText = level1 + "." + level2  + "." + level3 + "." + level4 + "." + level5 + "." + level6;
+                        level6 = 0; 
+                        break;
+                }
+
+                var tocItem = document.createElement('md-toc-item');
+                tocItem.setAttribute("chapter", addedText);
+                tocItem.setAttribute("name", item.innerHTML);
+                tocItem.setAttribute("indent", item.localName.replace("h", ""))
+                clone.appendChild(tocItem);
+
+                item.setAttribute("id", item.innerHTML.toString().toLowerCase().replace(new RegExp(' ', 'g'), '-'));
+                // item.innerHTML = addedText + '<span class="md-toc-item-extra-space"> </span>' + item.innerHTML;
+
+                toc.appendChild(clone);
+            });
+            });
+        }
+
+        
+
+    }
+    window.customElements.define('md-toc', TableOfContents);
+</script>

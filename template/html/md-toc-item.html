@@ -1,0 +1,36 @@
+<template id="md-toc-item">
+    <a class="md-toc-item"><span class="md-toc-item-chapter"></span><span class="md-toc-item-name"></span></div>
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdtocitemtemplate = thisDoc.querySelector('#md-toc-item').content;
+
+    class TableOfContentsItem extends HTMLElement {
+        
+       constructor() {
+            super();
+            // var shadow = this.attachShadow({mode: 'open'});
+        }
+
+        connectedCallback() {
+            var clone = document.importNode(mdtocitemtemplate, true);
+
+            this.className = this.className + " md-toc-item-indent-" + this.getAttribute("indent");
+            clone.children[0].getElementsByClassName("md-toc-item-chapter")[0].innerHTML = this.getAttribute("chapter");
+            clone.children[0].getElementsByClassName("md-toc-item-name")[0].innerHTML    = this.getAttribute("name");
+            // this.shadowRoot.children[1].setAttribute("href", "#" + this.getAttribute("chapter").toString().replace(new RegExp('\\.', 'g'), 'dot'));
+            clone.children[0].setAttribute("href", "#" + this.getAttribute("name").toString().toLowerCase().replace(new RegExp(' ', 'g'), '-'));
+
+            this.appendChild(clone);
+
+            // document.getElementsByTagName()
+        }
+
+    }
+    window.customElements.define('md-toc-item', TableOfContentsItem);
+</script>

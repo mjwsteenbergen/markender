@@ -1,0 +1,78 @@
+<template id="md-img">
+    <!--<style>
+        @import url('../css/main.css');
+        img.center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        span.center {
+            display: block;
+            text-align: center;
+        }
+
+        /*img.full {
+            align-self: center;  
+        }*/
+
+        .wrapper-full {
+            padding-top: 90mm;
+        }
+
+        span.full {
+            display: block;
+            text-align: center;
+        }
+
+    </style>
+    <div class="wrapper">
+        <img/>
+        <span class="md-img-desc"></span>
+    </div>-->
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdimgtemplate = thisDoc.querySelector('#md-img').content;
+
+    class MdImage extends HTMLElement {
+        
+        constructor() {
+            super();
+            // var shadow = this.attachShadow({mode: 'open'});
+        }
+
+    //     connectedCallback() {
+    //         // var clone = document.importNode(mdimgtemplate, true);
+    //         // var index = 1;
+    //         // document.querySelectorAll("md-img").forEach((item) => {
+    //         //     if(item === this){
+    //         //         return;
+    //         //     }
+    //         //     index++;
+    //         // });
+
+    //         // var alignment = this.getAttribute("align") || "center";
+
+    //         // var img = clone.querySelectorAll("img")[0]; 
+    //         // img.setAttribute("src", this.getAttribute("src"));
+    //         // img.className = "center"
+    //         // var alt = clone.querySelectorAll(".md-img-desc")[0];
+    //         // alt.innerHTML = "Figure " + index + ": " + this.getAttribute("desc");
+    //         // alt.className = "center";
+    //         // this.className = alignment;
+    //         // var div = clone.querySelectorAll("div")[0];
+    //         // if(alignment === "full")
+    //         // {
+    //         //     div.className = "wrapper-full";
+    //         // }
+    //         // this.shadowRoot.appendChild(clone);            
+    //     }
+
+    }
+    window.customElements.define('md-img', MdImage);
+</script>
