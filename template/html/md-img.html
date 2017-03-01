@@ -1,5 +1,5 @@
 <template id="md-img">
-    <!--<style>
+    <style>
         @import url('../css/main.css');
         img.center {
             display: block;
@@ -15,8 +15,10 @@
             align-self: center;  
         }*/
 
-        .wrapper-full {
-            padding-top: 90mm;
+        @page {
+            .wrapper-full {
+                padding-top: 90mm;
+            }
         }
 
         span.full {
@@ -28,7 +30,7 @@
     <div class="wrapper">
         <img/>
         <span class="md-img-desc"></span>
-    </div>-->
+    </div>
 </template>
 
 <script>
@@ -43,35 +45,35 @@
         
         constructor() {
             super();
-            // var shadow = this.attachShadow({mode: 'open'});
+            var shadow = this.attachShadow({mode: 'open'});
         }
 
-    //     connectedCallback() {
-    //         // var clone = document.importNode(mdimgtemplate, true);
-    //         // var index = 1;
-    //         // document.querySelectorAll("md-img").forEach((item) => {
-    //         //     if(item === this){
-    //         //         return;
-    //         //     }
-    //         //     index++;
-    //         // });
+        connectedCallback() {
+            var clone = document.importNode(mdimgtemplate, true);
+            var index = 1;
+            document.querySelectorAll("md-img").forEach((item) => {
+                if(item === this){
+                    return;
+                }
+                index++;
+            });
 
-    //         // var alignment = this.getAttribute("align") || "center";
+            var alignment = this.getAttribute("align") || "center";
 
-    //         // var img = clone.querySelectorAll("img")[0]; 
-    //         // img.setAttribute("src", this.getAttribute("src"));
-    //         // img.className = "center"
-    //         // var alt = clone.querySelectorAll(".md-img-desc")[0];
-    //         // alt.innerHTML = "Figure " + index + ": " + this.getAttribute("desc");
-    //         // alt.className = "center";
-    //         // this.className = alignment;
-    //         // var div = clone.querySelectorAll("div")[0];
-    //         // if(alignment === "full")
-    //         // {
-    //         //     div.className = "wrapper-full";
-    //         // }
-    //         // this.shadowRoot.appendChild(clone);            
-    //     }
+            var img = clone.querySelectorAll("img")[0]; 
+            img.setAttribute("src", this.getAttribute("src"));
+            img.className = "center"
+            var alt = clone.querySelectorAll(".md-img-desc")[0];
+            alt.innerHTML = "Figure " + index + ": " + this.getAttribute("desc");
+            alt.className = "center";
+            this.className = alignment;
+            var div = clone.querySelectorAll("div")[0];
+            if(alignment === "full")
+            {
+                div.className = "wrapper-full";
+            }
+            this.shadowRoot.appendChild(clone);            
+        }
 
     }
     window.customElements.define('md-img', MdImage);

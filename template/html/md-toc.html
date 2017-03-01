@@ -1,5 +1,5 @@
 <template id="md-toc">
-       
+       <h1>Table of Contents</h1>
 </template>
 
 <script>
@@ -16,9 +16,6 @@
         
        constructor() {
             super();
-            // var shadow = this.attachShadow({mode: 'open'});
-            
-           
         }
 
         execute() {
@@ -28,6 +25,8 @@
         connectedCallback() {
 
             var toc = this;
+            var chapter = this.getAttribute('chapters') || true;
+            
 
             document.addEventListener("DOMContentLoaded", function(event) {
                 var level1 = 0;
@@ -37,8 +36,10 @@
             var level5 = 0;
             var level6 = 0;
 
+            var clone = document.importNode(mdtoctemplate, true);
+
+
             document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((item) => {
-                var clone = document.importNode(mdtoctemplate, true);
                 var addedText = "";
                 switch(item.localName)
                 {
@@ -85,16 +86,25 @@
                 }
 
                 var tocItem = document.createElement('md-toc-item');
-                tocItem.setAttribute("chapter", addedText);
+                
+                if(chapter) {
+                    tocItem.setAttribute("chapter", addedText);                
+                }
+
                 tocItem.setAttribute("name", item.innerHTML);
                 tocItem.setAttribute("indent", item.localName.replace("h", ""))
                 clone.appendChild(tocItem);
 
                 item.setAttribute("id", item.innerHTML.toString().toLowerCase().replace(new RegExp(' ', 'g'), '-'));
-                // item.innerHTML = addedText + '<span class="md-toc-item-extra-space"> </span>' + item.innerHTML;
 
-                toc.appendChild(clone);
+                if(chapter)
+                {
+                    item.innerHTML = addedText + '<span class="md-toc-item-extra-space"> </span>' + item.innerHTML;                
+                }
+
+                
             });
+            toc.appendChild(clone);
             });
         }
 
