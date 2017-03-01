@@ -6,6 +6,7 @@ var ncp = require('ncp').ncp;
 var express = require('express');
 var app = express();
 var runningWebsite = false;
+var componentsPlugin = require('./components-plugin'); 
 
 var markdown;
 
@@ -20,6 +21,7 @@ function ConvertMDtoHTML()
         var md = new Remarkable({
             html: true
         });
+        md.use(componentsPlugin);
         markdown = data.toString();
         RenderHTML(md.render(markdown));
     });
