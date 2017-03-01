@@ -48,6 +48,17 @@
 	margin-right: 120px;
 	margin-top: 80px;
 	margin-bottom: 80px; 
+
+	@bottom-right {
+    	content: "hello";
+	}
+
+	@top-left {
+    	content: "Hamlet";
+  	}
+
+
+  @top-center { content: "This page is intentionally left blank." }
 }
 
 .break {
@@ -323,6 +334,9 @@ md-toc-item a {
 md-toc-item a:visited {
 	color: black;
 }
+
+
+/* Md-img */
 
 img {
     max-width: 100%;

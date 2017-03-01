@@ -1,0 +1,46 @@
+<template id="md-page">
+    <div></div>
+    <style>
+        md-page div {
+            page-break-after: always;
+            page-break-before: always;
+        }
+
+        md-page[intentional=true] div {
+            text-align: center;
+            padding-top: 100px;
+        }
+    </style>
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdpage = thisDoc.querySelector('#md-page').content;
+
+    class MdPage extends HTMLElement {
+        
+       constructor() {
+            super();
+        }
+
+        connectedCallback() {
+            var clone = document.importNode(mdpage, true);
+            var div = clone.children[0];
+            div.innerHTML = this.innerHTML;
+            console.log(this.getAttribute("intentional"));
+            if(this.getAttribute("intentional") === "true")
+            {
+                div.innerHTML = "This page was intentionally left blank";
+            }
+            this.appendChild(clone);
+        }
+
+        
+
+    }
+    window.customElements.define('md-page', MdPage);
+</script>

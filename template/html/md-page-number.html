@@ -1,0 +1,34 @@
+<template id="md-page-number">
+    <style>
+        @import url('../css/main.css');
+    </style>
+    <span class=pagenumber>5</span>
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdpagenumber = thisDoc.querySelector('#md-page-number').content;
+
+    class PageNumber extends HTMLElement {
+        
+        constructor() {
+            super();
+            var shadow = this.attachShadow({mode: 'open'});
+            
+           
+        }
+
+        connectedCallback() {
+            var clone = document.importNode(mdpagenumber, true);
+
+            this.shadowRoot.appendChild(clone);
+            
+        }
+
+    }
+    window.customElements.define('md-page-number', PageNumber);
+</script>

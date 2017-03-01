@@ -16,6 +16,7 @@
     "express": "^4.14.1",
     "express-livereload": "0.0.24",
     "livereload": "^0.6.0",
+    "lodash": "^4.17.4",
     "node-watch": "^0.4.1"
   },
   "devDependencies": {
