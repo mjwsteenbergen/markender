@@ -4,15 +4,21 @@ var replaceStream = require('replacestream');
 var fs = require('fs');
 var ncp = require('ncp').ncp;
 var express = require('express');
+var http = require('http');
 var app = express();
 var runningWebsite = false;
 var componentsPlugin = require('./components-plugin'); 
+var watch = require('watch');
 
 var markdown;
 
-ConvertMDtoHTML();
+ConvertMDtoHTML((markdown) => {
+    RenderHTML(markdown, () => {
+        SetUpWebserver();
+    });
+});
 
-function ConvertMDtoHTML()
+function ConvertMDtoHTML(done)
 {
     fs.readFile('./file.md', function (err, data) {
         if (err) {
@@ -23,11 +29,11 @@ function ConvertMDtoHTML()
         });
         md.use(componentsPlugin);
         markdown = data.toString();
-        RenderHTML(md.render(markdown));
+        done(md.render(markdown));
     });
 }
 
-function RenderHTML(html) {
+function RenderHTML(html, done) {
     
     var source = path.join(__dirname, "/template/");
     var destination = path.join(__dirname, "/build/");
@@ -42,7 +48,7 @@ function RenderHTML(html) {
         .pipe(fs.createWriteStream(path.join(__dirname, "/build/index.html")));
 
         stream.on('finish', function(){
-            SetUpWebserver();
+            done();
             console.log("The file was saved!");            
         });
     });
@@ -59,20 +65,32 @@ function SetUpWebserver() {
     runningWebsite = true;
 
     app.use(express.static(__dirname + '/build'))
-    app.use(require('connect-livereload')({
-        port: 35729
-    }));
 
     app.get('/', function (req, res, next) {
-    try {
-        res.send(__dirname + '/build/index.html');
-    } catch (e) {
-        next(e)
-    }
+        try {
+            res.sendFile(__dirname + '/build/index.html');
+        } catch (e) {
+            next(e)
+        }
     })
 
-    app.listen(process.env.PORT || 5000, function () {
-        console.log('Listening on http://localhost:' + (process.env.PORT || 5000))
+    var reload = require('reload')
+
+    var server = http.createServer(app)
+    var reloadServer = reload(server, app);
+
+    watch.watchTree(__dirname + "/template", function (f, curr, prev) {
+        console.log("Files changed. Reloading");
+        ConvertMDtoHTML((markdown) => {
+            RenderHTML(markdown, () => {
+                reloadServer.reload();        
+            });
+        });
+        // Fire server-side reload event 
+    });
+
+    server.listen(process.env.PORT || 3000, function () {
+        console.log('Listening on http://localhost:' + (process.env.PORT || 3000))
     })
     
 }
