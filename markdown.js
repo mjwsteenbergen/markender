@@ -9,24 +9,33 @@ var app = express();
 var runningWebsite = false;
 var componentsPlugin = require('./components-plugin'); 
 var watch = require('watch');
+var reload = require('reload')
 
 var markdown;
+var opts;
 
-ConvertMDtoHTML((markdown) => {
-    RenderHTML(markdown, () => {
-        SetUpWebserver();
+function markender(options) {
+    opts = options;
+    ConvertMDtoHTML(opts.file, (markdown) => {
+        RenderHTML(markdown, () => {
+            SetUpWebserver();
+        });
     });
-});
+}
 
-function ConvertMDtoHTML(done)
+function ConvertMDtoHTML(file, done)
 {
-    fs.readFile('./file.md', function (err, data) {
+    fs.readFile(file, function (err, data) {
         if (err) {
             throw err; 
         }
         var md = new Remarkable({
             html: true
         });
+        md.inline.ruler.enable([
+        'sub',
+        'sup'
+        ]);
         md.use(componentsPlugin);
         markdown = data.toString();
         done(md.render(markdown));
@@ -74,25 +83,39 @@ function SetUpWebserver() {
         }
     })
 
-    var reload = require('reload')
 
     var server = http.createServer(app)
     var reloadServer = reload(server, app);
 
     watch.watchTree(__dirname + "/template", function (f, curr, prev) {
-        console.log("Files changed. Reloading");
-        ConvertMDtoHTML((markdown) => {
-            RenderHTML(markdown, () => {
-                reloadServer.reload();        
-            });
-        });
+        watchReload(reloadServer)
         // Fire server-side reload event 
     });
+
+    fs.watchFile(opts.file, (curr,prev) => {
+        watchReload(reloadServer);
+    })
 
     server.listen(process.env.PORT || 3000, function () {
         console.log('Listening on http://localhost:' + (process.env.PORT || 3000))
     })
     
 }
+
+function watchReload(reloadServer) {
+    ConvertMDtoHTML(opts.file, (markdown) => {
+        var once = false;
+        RenderHTML(markdown, () => {
+            if(once)
+            {
+                return;
+            }
+            once = true;
+            reloadServer.reload();        
+        });
+    });
+}
+
+module.exports = markender;
 
 
