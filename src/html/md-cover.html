@@ -1,7 +1,9 @@
 <template id="md-cover">
-    <style>
-        @import url('../css/main.css');
-    </style>
+    <div>
+        <md-cover-title></md-cover-title>
+        <md-cover-author></md-cover-author>
+        <md-cover-date></md-cover-date>
+    </div>
 </template>
 
 <script src="http://momentjs.com/downloads/moment.js"></script>
@@ -17,29 +19,22 @@
         
         constructor() {
             super();
-            var shadow = this.attachShadow({mode: 'open'});
-            
-           
         }
 
         connectedCallback() {
 
-            var title = document.createElement('div');
-            title.innerHTML = this.getAttribute("title");
-            title.className = 'md-cover-title';
-            this.shadowRoot.appendChild(title);  
-            document.title = this.getAttribute("title");
-
             var clone = document.importNode(mdcovertemplate, true);
-            this.shadowRoot.appendChild(clone);
+            var title = this.getAttribute("title") || "";
+            clone.querySelectorAll('md-cover-title')[0].innerHTML = title;        
+            document.title = title;
 
-             var author = document.createElement('md-cover-author');
-            author.innerHTML = this.getAttribute("author");
-            this.shadowRoot.appendChild(author);
+
+            var author = this.getAttribute("author") || "";
+            clone.querySelectorAll('md-cover-author')[0].innerHTML = author;
             
-            var date    = document.createElement('md-cover-date');
-            date.innerHTML = moment().format('MMMM Do, YYYY');
-            this.shadowRoot.appendChild(date);
+            clone.querySelectorAll('md-cover-date')[0].innerHTML = moment().format('MMMM Do, YYYY');
+            
+            this.appendChild(clone);
             
             
         }

@@ -25,11 +25,11 @@
         connectedCallback() {
 
             var toc = this;
-            var chapter = this.getAttribute('chapters') || true;
-            
+            var chapters = this.getAttribute('chapters') || "true";
+            var chapter = chapters === "true";
 
             document.addEventListener("DOMContentLoaded", function(event) {
-                var level1 = 0;
+            var level1 = 0;
             var level2 = 0;
             var level3 = 0;
             var level4 = 0;
@@ -92,14 +92,14 @@
                 }
 
                 tocItem.setAttribute("name", item.innerHTML);
-                tocItem.setAttribute("indent", item.localName.replace("h", ""))
+                tocItem.setAttribute("indent", item.localName.replace("h", ""))                
                 clone.appendChild(tocItem);
 
                 item.setAttribute("id", item.innerHTML.toString().toLowerCase().replace(new RegExp(' ', 'g'), '-'));
 
                 if(chapter)
                 {
-                    item.innerHTML = addedText + '<span class="md-toc-item-extra-space"> </span>' + item.innerHTML;                
+                    item.innerHTML = '<span class="md-toc-chapter-number">' + addedText + '</span>' + '<span class="md-toc-chapter-extra-space"> </span>' + item.innerHTML;                
                 }
 
                 

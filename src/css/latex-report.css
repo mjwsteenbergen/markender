@@ -1,0 +1,9 @@
+@import './latex.css';
+
+h1 .md-toc-chapter-number::before {
+	content: "Chapter "
+}
+h1 .md-toc-chapter-number {
+	display: block;
+  	font-size: 20pt;
+}

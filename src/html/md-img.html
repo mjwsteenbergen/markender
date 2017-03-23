@@ -1,32 +1,66 @@
+<style>
+    md-img {
+        page-break-inside: avoid;
+    }
+
+    img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    md-img div {
+	    margin-bottom: 10px;
+    }
+
+    
+    md-img div span {
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    md-img div img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    md-img[small] div img {
+        max-height: 74mm; 
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    ul[collage] md-img {
+        display: table-cell;
+        vertical-align: middle;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    ul[collage] {
+        padding: 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        page-break-inside: avoid;
+    }
+
+    md-img[full] {
+        height: 290mm;        
+    }
+
+    md-img[full] div{
+        page-break-before: always;
+        page-break-after: always;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+
+</style>
+
 <template id="md-img">
-    <style>
-        @import url('../css/main.css');
-        img.center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        span.center {
-            display: block;
-            text-align: center;
-        }
-
-        /*img.full {
-            align-self: center;  
-        }*/
-
-        @page {
-            .wrapper-full {
-                padding-top: 90mm;
-            }
-        }
-
-        span.full {
-            display: block;
-            text-align: center;
-        }
-
-    </style>
     <div class="wrapper">
         <img/>
         <span class="md-img-desc"></span>
@@ -45,7 +79,7 @@
         
         constructor() {
             super();
-            var shadow = this.attachShadow({mode: 'open'});
+            // var shadow = this.attachShadow({mode: 'open'});
         }
 
         connectedCallback() {
@@ -64,15 +98,15 @@
             img.setAttribute("src", this.getAttribute("src"));
             img.className = "center"
             var alt = clone.querySelectorAll(".md-img-desc")[0];
-            alt.innerHTML = "Figure " + index + ": " + this.getAttribute("desc");
-            alt.className = "center";
+            var alt_text = this.getAttribute("alt") || "";
+            if(alt_text !== "")
+            {
+                alt_text = ": " + alt_text;
+            }
+            alt.innerHTML = "Figure " + index + alt_text;
             this.className = alignment;
             var div = clone.querySelectorAll("div")[0];
-            if(alignment === "full")
-            {
-                div.className = "wrapper-full";
-            }
-            this.shadowRoot.appendChild(clone);            
+            this.appendChild(clone);            
         }
 
     }

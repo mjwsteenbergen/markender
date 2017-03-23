@@ -5,9 +5,9 @@ var program = require('commander')
 const path = require('path');
 
 program.version(require('../package.json').version)
-  .usage('[options] <file>')
+  .usage('<file> [options]')
   .option('<file>', 'Path of the markdown file to convert')
-  .option('--css [cssPath]', 'Css template')
+  .option('-c, --css [type]', 'Use a certain css template', 'latex')
   .parse(process.argv)
 
 if (program.args.length === 0) program.help()
@@ -17,12 +17,12 @@ if (program.args.length === 0) program.help()
 
 var opts = {
   cwd: program.cwd,
-  file: program.args[0]
+  file: program.args[0],
 }
 
-console.log(program.css);
 opts.cwd = opts.cwd ? path.resolve(opts.cwd) : process.cwd()
 opts.file = path.resolve(opts.cwd, opts.file);
+opts.css = program.css;
 
 markender(opts)
 // .concat.from(program.args).to(program.out, function (err) {

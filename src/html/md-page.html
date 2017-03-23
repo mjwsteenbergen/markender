@@ -31,7 +31,6 @@
             var clone = document.importNode(mdpage, true);
             var div = clone.children[0];
             div.innerHTML = this.innerHTML;
-            console.log(this.getAttribute("intentional"));
             if(this.getAttribute("intentional") === "true")
             {
                 div.innerHTML = "This page was intentionally left blank";

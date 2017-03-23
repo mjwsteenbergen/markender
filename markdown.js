@@ -39,6 +39,7 @@ function ConvertMDtoHTML(file, done)
         // ]);
         // md.use(componentsPlugin);
         md.use(mkatex);
+        md.use(require('markdown-it-enml-todo'))
         markdown = data.toString();
         done(md.render(markdown));
     });
@@ -47,6 +48,7 @@ function ConvertMDtoHTML(file, done)
 function RenderHTML(html, done) {
     var stream = fs.createReadStream(path.join(__dirname, "src/template.html"))
     .pipe(replaceStream('{{content}}', html))
+    .pipe(replaceStream('{{css}}', opts.css))
     .pipe(fs.createWriteStream(path.join(__dirname, "src/index.html")));
 
     stream.on('finish', function(){
@@ -76,13 +78,14 @@ function SetUpWebserver() {
     var server = http.createServer(app)
     var reloadServer = reload(server, app);
 
-    // watch.watchTree(__dirname + "/src", function (f, curr, prev) {
-    //     watchReload(reloadServer)
-    //     console.info(f);
-    //     console.info(curr);
-    //     console.info(prev);
-    //     // Fire server-side reload event 
-    // });
+    watch.watchTree(__dirname + "/src", function (f, curr, prev) {
+        if(f.toString().includes("index.html"))
+        {
+            return;
+        }
+        watchReload(reloadServer)
+        // Fire server-side reload event 
+    });
 
     fs.watchFile(opts.file, (curr,prev) => {
         watchReload(reloadServer);
