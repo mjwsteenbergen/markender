@@ -2,7 +2,6 @@ var remarkable = require('markdown-it');
 var path = require('path');
 var replaceStream = require('replacestream');
 var fs = require('fs');
-var ncp = require('ncp').ncp;
 var express = require('express');
 var http = require('http');
 var app = express();
