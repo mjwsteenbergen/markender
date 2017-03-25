@@ -2,4 +2,4 @@ language: node_js
 node_js:
   - "7"
 script:
-  - node markdown.js
+  - node markdown.js ./fixture.md
