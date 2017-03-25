@@ -1,0 +1,26 @@
+@media screen {
+    body {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media print {
+    pre {
+        white-space: pre-wrap;
+    }
+}
+
+.task-list-item {
+    list-style-type: none;
+}
+
+en-todo {
+    margin-left: -18px;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    background-size: contain;
+    vertical-align: middle;
+}

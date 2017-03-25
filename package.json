@@ -4,6 +4,7 @@
   "description": "A markdown to html converter using web component",
   "main": "markdown.js",
   "scripts": {
+    "start": "node markdown.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,11 +14,14 @@
   "author": "Martijn Steenbergen",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.9.0",
     "express": "^4.14.1",
     "express-livereload": "0.0.24",
-    "livereload": "^0.6.0",
     "lodash": "^4.17.4",
-    "node-watch": "^0.4.1"
+    "markdown-it-enml-todo": "^1.0.2",
+    "markdown-it-katex": "^2.0.3",
+    "reload": "^1.1.1",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.0"

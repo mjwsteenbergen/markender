@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +16,15 @@
         <link rel="import" href="./html/md-formula.html">
         <link rel="import" href="./html/md-page.html">
  
-        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/{{css}}.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
 
         <!--Live reload code-->
-  </head>
-</html>
+        
     </head>
     <body>
         <!-- Add your site or application content here -->
         {{content}}
+        <script src="/reload/reload.js"></script> 
     </body>
 </html>

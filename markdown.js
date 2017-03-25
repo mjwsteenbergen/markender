@@ -1,54 +1,60 @@
-var Remarkable = require('remarkable');
+var remarkable = require('markdown-it');
 var path = require('path');
 var replaceStream = require('replacestream');
 var fs = require('fs');
 var ncp = require('ncp').ncp;
 var express = require('express');
+var http = require('http');
 var app = express();
 var runningWebsite = false;
 var componentsPlugin = require('./components-plugin'); 
+var watch = require('watch');
+var reload = require('reload');
+var mkatex = require('./formula-plugin')
 
 var markdown;
+var opts;
 
-ConvertMDtoHTML();
-
-function ConvertMDtoHTML()
-{
-    fs.readFile('./file.md', function (err, data) {
-        if (err) {
-            throw err; 
-        }
-        var md = new Remarkable({
-            html: true
+function markender(options) {
+    opts = options;
+    ConvertMDtoHTML(opts.file, (markdown) => {
+        RenderHTML(markdown, () => {
+            SetUpWebserver();
         });
-        md.use(componentsPlugin);
-        markdown = data.toString();
-        RenderHTML(md.render(markdown));
     });
 }
 
-function RenderHTML(html) {
-    
-    var source = path.join(__dirname, "/template/");
-    var destination = path.join(__dirname, "/build/");
-
-    ncp(source, destination, function (err) {
+function ConvertMDtoHTML(file, done)
+{
+    fs.readFile(file, function (err, data) {
         if (err) {
-            return console.error(err);
+            throw err; 
         }
-
-        var stream = fs.createReadStream(path.join(__dirname, "/build/template.html"))
-        .pipe(replaceStream('{{content}}', html))
-        .pipe(fs.createWriteStream(path.join(__dirname, "/build/index.html")));
-
-        stream.on('finish', function(){
-            SetUpWebserver();
-            console.log("The file was saved!");            
+        var md = new remarkable({
+            html: true
         });
+        // md.inline.ruler.enable([
+        // 'sub',
+        // 'sup'
+        // ]);
+        // md.use(componentsPlugin);
+        md.use(mkatex);
+        md.use(require('markdown-it-enml-todo'))
+        markdown = data.toString();
+        done(md.render(markdown));
     });
+}
 
-    
+function RenderHTML(html, done) {
+    var stream = fs.createReadStream(path.join(__dirname, "src/template.html"))
+    .pipe(replaceStream('{{content}}', html))
+    .pipe(replaceStream('{{css}}', opts.css))
+    .pipe(fs.createWriteStream(path.join(__dirname, "src/index.html")));
 
+    stream.on('finish', function(){
+        done();
+        console.log("The file was saved!");            
+    });
 }
 
 
@@ -58,23 +64,53 @@ function SetUpWebserver() {
     }
     runningWebsite = true;
 
-    app.use(express.static(__dirname + '/build'))
-    app.use(require('connect-livereload')({
-        port: 35729
-    }));
+    app.use(express.static(__dirname + '/src'))
 
     app.get('/', function (req, res, next) {
-    try {
-        res.send(__dirname + '/build/index.html');
-    } catch (e) {
-        next(e)
-    }
+        try {
+            res.sendFile(__dirname + '/src/index.html');
+        } catch (e) {
+            next(e)
+        }
     })
 
-    app.listen(process.env.PORT || 5000, function () {
-        console.log('Listening on http://localhost:' + (process.env.PORT || 5000))
+
+    var server = http.createServer(app)
+    var reloadServer = reload(server, app);
+
+    watch.watchTree(__dirname + "/src", function (f, curr, prev) {
+        if(f.toString().includes("index.html"))
+        {
+            return;
+        }
+        watchReload(reloadServer)
+        // Fire server-side reload event 
+    });
+
+    fs.watchFile(opts.file, (curr,prev) => {
+        watchReload(reloadServer);
+    })
+
+    server.listen(process.env.PORT || 3000, function () {
+        console.log('Listening on http://localhost:' + (process.env.PORT || 3000))
     })
     
 }
+
+function watchReload(reloadServer) {
+    ConvertMDtoHTML(opts.file, (markdown) => {
+        var once = false;
+        RenderHTML(markdown, () => {
+            if(once)
+            {
+                return;
+            }
+            once = true;
+            reloadServer.reload();        
+        });
+    });
+}
+
+module.exports = markender;
 
 
