@@ -235,6 +235,10 @@ sup {
 	text-indent: 0;
 }
 
+/*Katex*/
+
+.katex { font-size: 1em !important; }
+
 /*Extra Items*/
 md-cover {
   margin-top: 150px;
@@ -283,6 +287,7 @@ md-img.full {
 en-todo {
 	background-repeat: no-repeat;
     background-image: url('./img/checkbox-latex.svg');	
+	margin-bottom: 5px;
 }
 
 en-todo[checked="true"] {
