@@ -6,11 +6,15 @@
     }
 }
 
-@media print {
     pre {
         white-space: pre-wrap;
+        word-wrap: break-word;
     }
+
+p {
+    word-wrap: break-word;
 }
+
 
 .task-list-item {
     list-style-type: none;
