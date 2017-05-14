@@ -30,13 +30,9 @@ function ConvertMDtoHTML(file, done)
             throw err; 
         }
         var md = new remarkable({
-            html: true
+            html: true,
+            typographer:  false
         });
-        // md.inline.ruler.enable([
-        // 'sub',
-        // 'sup'
-        // ]);
-        // md.use(componentsPlugin);
         md.use(mkatex);
         md.use(require('markdown-it-enml-todo'))
         markdown = data.toString();
@@ -63,7 +59,8 @@ function SetUpWebserver() {
     }
     runningWebsite = true;
 
-    app.use(express.static(__dirname + '/src'))
+    app.use(express.static(__dirname + '/src/'));
+    
 
     app.get('/', function (req, res, next) {
         try {

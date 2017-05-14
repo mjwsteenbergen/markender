@@ -2,7 +2,6 @@
 
 <md-toc></md-toc>
 
-
 Borrowed from https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 ---
@@ -1717,7 +1716,7 @@ Hr's:
 </ul>
 
 <md-page>
-<md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
+    <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
 </md-page>
 
 <ul collage>
@@ -1731,3 +1730,9 @@ Hr's:
 - [ ] This is a todo that needs to be done
 - [X] This is a todo that has been done
 - This is a normal list item
+
+# References
+
+Some text and then a ref [small] and then another[bib:online]
+
+<md-bib></md-bib>

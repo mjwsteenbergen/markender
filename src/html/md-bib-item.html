@@ -1,0 +1,142 @@
+<template id="md-bib-item">
+    <style>
+        md-bib-item {
+	        display: block;	
+        }
+
+        md-bib-item .wrapper {
+            display: flex;
+        }
+
+        md-bib-item .reference {
+            flex-grow: 2;
+            margin-left: 3px;
+        }
+    </style>
+    <div class="wrapper">
+        <p class="refnumber">
+
+        </p>
+        <p class="reference">
+
+        </p>
+    </div>
+</template>
+
+<script>
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var mdbibitem = thisDoc.querySelector('#md-bib-item').content;
+
+    class MdBibItem extends HTMLElement {
+        
+       constructor(bibitem, refnumber) {
+            super();
+        }
+
+        connectedCallback() {
+            var clone = document.importNode(mdbibitem, true);
+            this.bibitem = JSON.parse(this.getAttribute("bibitem"));
+            this.refnumber = this.getAttribute("refnumber") || 0;
+
+            var wrapper = clone.children[1];
+
+            wrapper.getElementsByClassName("refnumber")[0].innerText = "[" + this.refnumber + "]";
+            wrapper.getElementsByClassName("reference")[0].innerHTML = this.formatReference();
+            wrapper.id = "bib-item-" + this.refnumber;
+
+            this.appendChild(clone);
+        }
+
+        formatReference()
+        {
+            switch(this.bibitem.entryType) {
+                case "misc":
+                    return this.getReference([], ["author", "title", "howpublished", "month", "year", "note", "key", "url"]);
+                case "article":
+                    return this.getReference(["author", "title", "journal", "year", "volume"],["number", "pages", "month", "note", "key", "url"]);
+                case "book":
+                    return this.getReference(["author", "title", "publisher", "year"], ["volume", "number", "series", "address", "edition", "month", "note", "url"])
+                default:
+                    return "format: " + this.bibitem.entryType + " not recognized."
+            }
+        }
+
+        formatMisc() {
+            return "misc";
+        }
+
+        formatArticle() {
+            
+            return "Article"
+        }
+
+        getReference(required, optional)
+        {
+            var item = this.bibitem;
+            var check = this.checkValid(item, required);
+            if (check !== "")
+            {
+                return check;
+            }
+            return this.chain(item, required.concat(optional));
+        }
+
+        checkValid(input, items)
+        {
+            var res = [];
+            items.forEach(function(element) {
+                if (input.entryTags[element] == null) {
+                    res.push(element);
+                }
+            }, this);
+            if (res.length == 0)
+            {
+                return "";
+            }
+            return "<span style='color: red'>required elements " + res.join() + " from " + input["citationKey"] + " were not found </span>";
+        }
+
+        chain(input, items) {
+            var res = [];
+            items.forEach(function(element) {
+                if (input.entryTags[element] !== undefined) {
+                    res.push(this.formatEntryTag(element, input.entryTags[element]));
+                }
+            }, this);
+            return res.join(", ");
+        }
+
+        formatEntryTag(entryTag, input)
+        {
+            switch(entryTag) {
+                case "volume": {
+                    return "vol. " + input;
+                }
+                case "howpublished": {
+                    var regex = /\\url{(.+)}/g
+                    var output = regex.exec(input);
+                    if (output !== null)
+                    {
+                        input = input.replace(output[0], output[1]);
+                        return "<a target=\"_blank\" href=" + input +">View Online</a>";
+                    }
+                    return input;
+                }
+                case "url": {
+                    if(input.startsWith("http"))
+                    {
+                        return "<a target=\"_blank\" href=" + input +">View Online</a>";
+                    }
+                }
+                default: {
+                    return input;
+                }
+            }
+        }
+    }
+    window.customElements.define('md-bib-item', MdBibItem);
+</script>
