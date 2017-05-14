@@ -21,31 +21,29 @@
 //value -> value_quotes | value_braces | key;
 //value_quotes -> '"' .*? '"'; // not quite
 //value_braces -> '{' .*? '"'; // not quite
-(function(exports) {
-
-    function BibtexParser() {
+export class BibtexParser {
         
-        this.months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-        this.notKey = [',','{','}',' ','='];
-        this.pos = 0;
-        this.input = "";
-        this.entries = new Array();
+        months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        notKey = [',','{','}',' ','='];
+        pos = 0;
+        input = "";
+        entries = new Array<AbstractBibtexEntry>();
 
-        this.currentEntry = "";
+        currentEntry:BibtexEntry = null;
 
-        this.setInput = function(t) {
+        setInput(t) {
             this.input = t;
         };
 
-        this.getEntries = function() {
+        getEntries() {
             return this.entries;
         };
 
-        this.isWhitespace = function(s) {
+        isWhitespace(s) {
             return (s == ' ' || s == '\r' || s == '\t' || s == '\n');
         };
 
-        this.match = function(s, canCommentOut) {
+        match(s, canCommentOut = true) {
             if (canCommentOut == undefined || canCommentOut == null)
                 canCommentOut = true;
             this.skipWhitespace(canCommentOut);
@@ -56,9 +54,9 @@
                         + this.input.substring(this.pos);
             };
             this.skipWhitespace(canCommentOut);
-        };
+        }
 
-        this.tryMatch = function(s, canCommentOut) {
+        tryMatch(s, canCommentOut = true) {
             if (canCommentOut == undefined || canCommentOut == null)
                 canCommentOut = true;
             this.skipWhitespace(canCommentOut);
@@ -67,11 +65,10 @@
             } else {
                 return false;
             };
-            this.skipWhitespace(canCommentOut);
-        };
+        }
 
         /* when search for a match all text can be ignored, not just white space */
-        this.matchAt = function() {
+        matchAt() {
             while (this.input.length > this.pos && this.input[this.pos] != '@') {
                 this.pos++;
             };
@@ -80,9 +77,9 @@
                 return true;
             };
             return false;
-        };
+        }
 
-        this.skipWhitespace = function(canCommentOut) {
+        skipWhitespace(canCommentOut) {
             while (this.isWhitespace(this.input[this.pos])) {
                 this.pos++;
             };
@@ -92,9 +89,9 @@
                 };
                 this.skipWhitespace(canCommentOut);
             };
-        };
+        }
 
-        this.value_braces = function() {
+        value_braces() {
             var bracecount = 0;
             this.match("{", false);
             var start = this.pos;
@@ -121,9 +118,9 @@
                     escaped = false;
                 this.pos++;
             };
-        };
+        }
 
-        this.value_comment = function() {
+        value_comment() {
             var str = '';
             var brcktCnt = 0;
             while (!(this.tryMatch("}", false) && brcktCnt == 0)) {
@@ -133,14 +130,14 @@
                 if (this.input[this.pos] == '}')
                     brcktCnt--;
                 if (this.pos >= this.input.length - 1) {
-                    throw "Unterminated value:" + this.input.substring(start);
+                    throw "Unterminated value:" + this.input.substring(0);
                 };
                 this.pos++;
             };
             return str;
-        };
+        }
 
-        this.value_quotes = function() {
+        value_quotes() {
             this.match('"', false);
             var start = this.pos;
             var escaped = false;
@@ -160,9 +157,9 @@
                     escaped = false;
                 this.pos++;
             };
-        };
+        }
 
-        this.single_value = function() {
+        single_value() {
             var start = this.pos;
             if (this.tryMatch("{")) {
                 return this.value_braces();
@@ -180,7 +177,7 @@
             };
         };
 
-        this.value = function() {
+        value() {
             var values = [];
             values.push(this.single_value());
             while (this.tryMatch("#")) {
@@ -190,7 +187,7 @@
             return values.join("");
         };
 
-        this.key = function(optional) {
+        key(optional = false) {
             var start = this.pos;
             while (true) {
                 if (this.pos >= this.input.length) {
@@ -211,7 +208,7 @@
             };
         };
 
-        this.key_equals_value = function() {
+        key_equals_value() {
             var key = this.key();
             if (this.tryMatch("=")) {
                 this.match("=");
@@ -221,12 +218,11 @@
                 throw "... = value expected, equals sign missing:"
                         + this.input.substring(this.pos);
             };
-        };
+        }
 
-        this.key_value_list = function() {
+        key_value_list() {
             var kv = this.key_equals_value();
-            this.currentEntry['entryTags'] = {};
-            this.currentEntry['entryTags'][kv[0]] = kv[1];
+            this.currentEntry.entryTags[kv[0]] = kv[1];
             while (this.tryMatch(",")) {
                 this.match(",");
                 // fixes problems with commas at the end of a list
@@ -237,61 +233,59 @@
                 kv = this.key_equals_value();
                 this.currentEntry['entryTags'][kv[0]] = kv[1];
             };
-        };
+        }
 
-        this.entry_body = function(d) {
-            this.currentEntry = {};
-            this.currentEntry['citationKey'] = this.key(true);
-            this.currentEntry['entryType'] = d.substring(1);
-            if (this.currentEntry['citationKey'] != null) {            
+        entry_body(d) {
+            this.currentEntry = new BibtexEntry();
+            this.currentEntry.citationKey = this.key(true);
+            this.currentEntry.entryType = d.substring(1);
+            if (this.currentEntry.citationKey != null) {            
                 this.match(",");
             }
             this.key_value_list();
             this.entries.push(this.currentEntry);
-        };
+        }
 
-        this.directive = function() {
+        directive() {
             this.match("@");
             return "@" + this.key();
+        }
+
+        preamble() {
+            let currentEntry = new BibtexEntryPreamble();
+            currentEntry.entryType = 'PREAMBLE';
+            currentEntry.entry = this.value_comment();
+            this.entries.push(currentEntry);
         };
 
-        this.preamble = function() {
-            this.currentEntry = {};
-            this.currentEntry['entryType'] = 'PREAMBLE';
-            this.currentEntry['entry'] = this.value_comment();
-            this.entries.push(this.currentEntry);
+        comment() {
+            let currentEntry = new BibtexEntryComment();
+            currentEntry.entryType = 'COMMENT';
+            currentEntry.entry = this.value_comment();
+            this.entries.push(currentEntry);
         };
 
-        this.comment = function() {
-            this.currentEntry = {};
-            this.currentEntry['entryType'] = 'COMMENT';
-            this.currentEntry['entry'] = this.value_comment();
-            this.entries.push(this.currentEntry);
-        };
-
-        this.entry = function(d) {
+        entry(d) {
             this.entry_body(d);
         };
 
-        this.alernativeCitationKey = function () {
+        alernativeCitationKey () {
             this.entries.forEach(function (entry) {
-                if (!entry.citationKey && entry.entryTags) {
+                if (entry instanceof BibtexEntry && !entry.citationKey && entry.entryTags) {
                     entry.citationKey = '';
-                    if (entry.entryTags.author) {
-                        entry.citationKey += entry.entryTags.author.split(',')[0] += ', ';
+                    if (entry.entryTags['author']) {
+                        entry.citationKey += entry.entryTags['author'].split(',')[0] += ', ';
                     }
-                    entry.citationKey += entry.entryTags.year;
+                    entry.citationKey += entry.entryTags['year'];
                 }
             });
         }
 
-        this.bibtex = function() {
+        bibtex() {
             while (this.matchAt()) {
                 var d = this.directive();
                 this.match("{");
-                if (d == "@STRING") {
-                    this.string();
-                } else if (d == "@PREAMBLE") {
+                if (d == "@PREAMBLE") {
                     this.preamble();
                 } else if (d == "@COMMENT") {
                     this.comment();
@@ -302,18 +296,17 @@
             };
 
             this.alernativeCitationKey();
-        };
-    };
-    
-    exports.toJSON = function(bibtex) {
-        var b = new BibtexParser();
-        b.setInput(bibtex);
-        b.bibtex();
-        return b.entries;
-    };
+        }
+
+        toJSON(bibtex) {
+            var b = new BibtexParser();
+            b.setInput(bibtex);
+            b.bibtex();
+            return b.entries;
+        }
 
     /* added during hackathon don't hate on me */
-    exports.toBibtex = function(json) {
+    toBibtex(json) {
         var out = '';
         for ( var i in json) {
             out += "@" + json[i].entryType;
@@ -333,10 +326,33 @@
             }
             out += '}\n\n';
         }
-        return out;
-        
-    };
+        return out;       
+    }
+}
 
-})(typeof exports === 'undefined' ? this['bibtexParse'] = {} : exports);
+export class AbstractBibtexEntry {
+    entryType: string;
+}
 
-/* end bibtexParse */
+export class BibtexEntryComment extends AbstractBibtexEntry {
+    entry: string;
+
+    constructor() {
+        super();
+        this.entryType = 'COMMENT';
+    }
+}
+
+export class BibtexEntryPreamble extends AbstractBibtexEntry {
+    entry: string;
+
+    constructor() {
+        super();
+        this.entryType = 'PREAMBLE';
+    }
+}
+
+export class BibtexEntry extends AbstractBibtexEntry {
+    citationKey: string;
+    entryTags: Map<string, string> = new Map();
+}
