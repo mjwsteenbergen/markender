@@ -6,7 +6,8 @@ var clean = require('gulp-clean');
 var rename = require('gulp-rename');
 var argv = require('yargs').argv;
 var fs = require("fs");
-var server = require('gulp-express');
+var gls = require('gulp-live-server');
+var runSequence = require('run-sequence');
 
 //Markdown
 var MdIt = require('markdown-it');
@@ -16,19 +17,26 @@ var program = require('commander')
 const path = require('path');
 var argv = require('yargs').alias('l', 'location').argv;
 var webpack = require("webpack-stream");
-
+var server;
 
 
 var paths = {
-    ts: ["html/**/*.ts"],
+    ts: ["./html/**/*.ts"],
     html: ["html/**/.html"],
 }
 
 var tsProject = ts.createProject('tsconfig.json');
 
-gulp.task("default", ["document", "html", "css", "watch", "webpack"], function() {
-    server.run(["server.js"]);
-    gulp.watch("./**/*", server.notify);
+gulp.task("default", ['clean'], function() {
+    runSequence(["document", "html", "css", "webpack"], function() {
+        gulp.start('server');
+        gulp.start('watch');        
+    })
+});
+
+gulp.task("server", function() {
+    server = gls.new('server.js'); //equals to gls.static('public', 3000); 
+    server.start();
 });
 
 gulp.task("typescript", function() {
@@ -63,6 +71,8 @@ gulp.task("document", ["render-markdown"], function () {
     .pipe(gulp.dest('dist/'));
 });
 
+
+
 gulp.task("html", function () {
     return gulp.src('src/html/*.html')
     .pipe(gulp.dest('dist/html/'));
@@ -78,9 +88,27 @@ gulp.task("clean", function () {
         .pipe(clean());
 });
 
+gulp.task('reload-server', ['html','document','webpack'], function(done) {
+    done();
+});
+
 gulp.task("watch", function () {
-    gulp.watch(paths.html, ['copy-html']);
-    gulp.watch(argv.file, ['document']);
+    console.log(argv.location);
+    gulp.watch("src/html/*.html", function(file) {
+        gulp.start('reload-server', function() {
+            server.notify.apply(server, [file]);        
+        });        
+    });
+    gulp.watch("src/script/*.ts", function(file) {
+        gulp.start('reload-server', function() {
+            server.notify.apply(server, [file]);        
+        });        
+    });
+    gulp.watch(argv.location, function(file) {
+        gulp.start('reload-server', function() {
+            server.notify.apply(server, [file]);        
+        });
+    });
 });
 
 gulp.task("webpack", ["typescript"], function () {

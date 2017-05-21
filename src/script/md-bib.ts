@@ -1,27 +1,27 @@
 import { BibtexParser, AbstractBibtexEntry, BibtexEntry, BibtexEntryComment,BibtexEntryPreamble } from "./bibtexParse";
 
-class Bibliography extends HTMLElement {
+class Bibliography extends HTMLElement{
     bibtex: AbstractBibtexEntry[];
     src: string;
     format: string;
     searchElements: string[];
-    // template = document.createElement('template')
+    template: HTMLTemplateElement = document.createElement('template');
 
         constructor() {
             super();
             this.searchElements = ["P", "H2"];
             this.format = null;
             this.bibtex = null;
-            // this.template.innerHTML = `
-            //     <h1>Bibliography</h1>
-            // `
         }
 
         connectedCallback() {
-
             var bib = this;
             this.format = this.getAttribute("format") || "[{refnumber}]";
             this.src = this.getAttribute("src");
+
+            let header = document.createElement("h1");
+            header.innerHTML = "Bibliography";
+            this.appendChild(header);
 
             document.addEventListener("DOMContentLoaded", function(event) {
                 bib.startAlgorithm();
@@ -43,7 +43,7 @@ class Bibliography extends HTMLElement {
                     once = true;
                     var bibtex = httpRequest.responseText;
                     bib.bibtex = new BibtexParser().toJSON(bibtex);
-                    bib.replaceText(bib.parentNode.parentNode,  {}, 0);
+                    bib.replaceText(bib.parentNode.parentNode,  new Map<string, number>());
                 }
                 else {
                     console.error(httpRequest.status);  
@@ -53,46 +53,55 @@ class Bibliography extends HTMLElement {
             httpRequest.send();            
         }
 
-        replaceText(node: Node, refs, reflength: number) {
+        replaceText(node: Node, refs: Map<string, number>) {
             var bib = this;
             node.childNodes.forEach(function(element) {
                 //Replace if text
                 if (element.nodeName == "#text")
                 {
-                    this.replaceTextNode(element, refs, reflength);
+                    refs = this.replaceTextNode(element, refs);
                 }
 
                 //Continue down searchtree if not
                 if (this.searchElements.includes(element.nodeName)) {
-                    reflength = this.replaceText(element, refs, reflength);    
+                    refs = this.replaceText(element, refs);    
                 }
             }, this);  
-            return reflength;      
+            return refs;      
         }
 
-        replaceTextNode(element: Node, refs, reflength)
+        replaceTextNode(element: Node, refs: Map<string,number>): Map<string, number>
         {
             var regex = /\[([^[]+)\]/g;
             var output = regex.exec(element.textContent);
             let bib = this;
             if(output != null)
             {
+                let refelement: Node = document.createTextNode(output[0]);
                 this.bibtex.forEach(function(bibitem){
                     if(bibitem instanceof BibtexEntry && bibitem.citationKey == output[1]){
-                        var ref = refs[bibitem.citationKey]; 
+                        var ref = refs.get(bibitem.citationKey); 
 
                         //If it is new
                         if (ref === undefined) {
-                            reflength = reflength + 1;
-                            refs[bibitem.citationKey] = reflength;
-                            bib.addBibItem(bibitem, reflength);                                 
+                            refs.set(bibitem.citationKey, refs.size + 1);
+                            bib.addBibItem(bibitem, refs.size);                                 
                         }
 
-                        element.parentNode.removeChild(element);
-                        element.parentElement.innerHTML = element.parentElement.innerHTML.replace("[" + output[1] + "]", bib.formatBib(bibitem, refs[bibitem.citationKey]));
+                        let actualRef = document.createElement("a");
+                        actualRef.innerHTML =  bib.formatBib(bibitem, refs.get(bibitem.citationKey));
+                        refelement = actualRef;                        
                     }
                 });
+                let parent = element.parentNode;
+                let textArray:string[] = element.textContent.split(output[0]);
+                let textNode2 = document.createTextNode(textArray[1]);
+                parent.replaceChild(textNode2,element);
+                parent.insertBefore(refelement, textNode2);
+                parent.insertBefore(document.createTextNode(textArray[0]), refelement);
+                bib.replaceTextNode(textNode2, refs);   
             }
+            return refs;
         }
 
         formatBib(bibitem, refnumber)

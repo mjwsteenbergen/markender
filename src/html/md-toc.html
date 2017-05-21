@@ -23,12 +23,15 @@
         }
 
         connectedCallback() {
-
             var toc = this;
             var chapters = this.getAttribute('chapters') || "true";
             var chapter = chapters === "true";
 
-            document.addEventListener("DOMContentLoaded", function(event) {
+            document.onreadystatechange = function () {
+            if (document.readyState !== "complete" & document.readyState !== "loaded") {
+                return;
+     // document is already ready to go
+            }
             var level1 = 0;
             var level2 = 0;
             var level3 = 0;
@@ -105,7 +108,7 @@
                 
             });
             toc.appendChild(clone);
-            });
+            };
         }
 
         

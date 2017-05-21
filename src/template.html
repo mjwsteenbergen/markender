@@ -6,20 +6,21 @@
         <title>Markender Document</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="./output.bundle.js"></script>
+        <script src="./static/output.bundle.js"></script>
+        <script src="http://localhost:35729/livereload.js"></script>
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="import" href="./html/md-cover.html">
-        <link rel="import" href="./html/md-toc.html">
-        <link rel="import" href="./html/md-toc-item.html">
-        <link rel="import" href="./html/md-img.html">
-        <link rel="import" href="./html/md-page-number.html">
-        <link rel="import" href="./html/md-formula.html">
-        <link rel="import" href="./html/md-page.html">
-        <link rel="import" href="./html/md-bib.html">
-        <link rel="import" href="./html/md-bib-item.html">
+        <link rel="import" href="./static/html/md-cover.html">
+        <link rel="import" href="./static/html/md-toc.html">
+        <link rel="import" href="./static/html/md-toc-item.html">
+        <link rel="import" href="./static/html/md-img.html">
+        <link rel="import" href="./static/html/md-page-number.html">
+        <link rel="import" href="./static/html/md-formula.html">
+        <link rel="import" href="./static/html/md-page.html">
+        <link rel="import" href="./static/html/md-bib.html">
+        <link rel="import" href="./static/html/md-bib-item.html">
  
-        <link rel="stylesheet" href="./css/{{css}}.css">
+        <link rel="stylesheet" href="./static/css/{{css}}.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
 
         <!--Live reload code-->
@@ -28,6 +29,6 @@
     <body>
         <!-- Add your site or application content here -->
         {{content}}
-        <script src="/reload/reload.js"></script> 
+        <!--<script src="/reload/reload.js"></script> -->
     </body>
 </html>
