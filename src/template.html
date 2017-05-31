@@ -19,16 +19,20 @@
         <link rel="import" href="./static/html/md-page.html">
         <link rel="import" href="./static/html/md-bib.html">
         <link rel="import" href="./static/html/md-bib-item.html">
+        <link rel="import" href="./static/html/stl-dropdown.html">
+        <link rel="import" href="./static/html/style-chooser.html">
  
         <link rel="stylesheet" href="./static/css/{{css}}.css">
+        <link rel="stylesheet" href="./static/css/basic.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
 
         <!--Live reload code-->
         
     </head>
     <body>
-        <!-- Add your site or application content here -->
+        <stl-chooser></stl-chooser>
+        <div id="markenderContent">
         {{content}}
-        <!--<script src="/reload/reload.js"></script> -->
+        </div>
     </body>
 </html>

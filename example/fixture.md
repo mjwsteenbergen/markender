@@ -1734,4 +1734,4 @@ Hr's:
 
 Some text and then a ref [small] and then another[bib:online]
 
-<md-bib src='https://gist.githubusercontent.com/mjwsteenbergen/dd8111ac9d04e80e1dce2640ccce9676/raw/b6bd73f8fe0d680b6e63bcf79c6e3727a039348c/bib.bib'></md-bib>
+<md-bib src='Literature.bib'></md-bib>

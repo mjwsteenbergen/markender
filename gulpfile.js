@@ -35,7 +35,7 @@ gulp.task("default", ['clean'], function() {
 });
 
 gulp.task("server", function() {
-    server = gls.new('server.js'); //equals to gls.static('public', 3000); 
+    server = gls.new(['server.js', '-l ' + argv.location]); //equals to gls.static('public', 3000); 
     server.start();
 });
 
@@ -53,7 +53,8 @@ gulp.task("render-markdown", function (done) {
         }
         var md = new MdIt({
             html: true,
-            typographer:  false
+            typographer:  false,
+            linkify: true
         });
         md.use(mkatex);
         md.use(require('markdown-it-enml-todo'))
@@ -95,24 +96,31 @@ gulp.task('reload-server', ['html','document','webpack'], function(done) {
 gulp.task("watch", function () {
     console.log(argv.location);
     gulp.watch("src/html/*.html", function(file) {
-        gulp.start('reload-server', function() {
+        gulp.start('html', function() {
             server.notify.apply(server, [file]);        
         });        
     });
     gulp.watch("src/script/*.ts", function(file) {
-        gulp.start('reload-server', function() {
+        gulp.start('webpack', function() {
             server.notify.apply(server, [file]);        
         });        
     });
+
+    gulp.watch("src/css/**/*.*", function(file) {
+        gulp.start('css', function() {
+            server.notify.apply(server, [file]);        
+        });
+    });
+
     gulp.watch(argv.location, function(file) {
-        gulp.start('reload-server', function() {
+        gulp.start('document', function() {
             server.notify.apply(server, [file]);        
         });
     });
 });
 
 gulp.task("webpack", ["typescript"], function () {
-    return gulp.src('dist/script/md-bib.js')
+    return gulp.src('dist/script/StartingPoint.js')
     .pipe(webpack({
          output: {
             path: path.resolve(__dirname, 'dist'),
