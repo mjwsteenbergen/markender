@@ -84,8 +84,10 @@
         connectedCallback() {
             var clone = document.importNode(mdimgtemplate, true);
             var index = 1;
+            var usedIndex = -1;
             document.querySelectorAll("md-img").forEach((item) => {
                 if(item === this){
+                    usedIndex = index;
                     return;
                 }
                 index++;
@@ -102,7 +104,7 @@
             {
                 alt_text = ": " + alt_text;
             }
-            alt.innerHTML = "Figure " + index + alt_text;
+            alt.innerHTML = "Figure " + usedIndex + alt_text;
             this.className = alignment;
             var div = clone.querySelectorAll("div")[0];
             this.appendChild(clone);            

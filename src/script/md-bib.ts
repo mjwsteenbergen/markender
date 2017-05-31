@@ -1,15 +1,15 @@
 import { BibtexParser, AbstractBibtexEntry, BibtexEntry, BibtexEntryComment,BibtexEntryPreamble } from "./bibtexParse";
 
-class Bibliography extends HTMLElement{
+export class Bibliography extends HTMLElement{
     bibtex: AbstractBibtexEntry[];
     src: string;
     format: string;
-    searchElements: string[];
+    excludeElements: string[];
     template: HTMLTemplateElement = document.createElement('template');
 
         constructor() {
             super();
-            this.searchElements = ["P", "H2"];
+            this.excludeElements = ["pre"];
             this.format = null;
             this.bibtex = null;
         }
@@ -63,7 +63,7 @@ class Bibliography extends HTMLElement{
                 }
 
                 //Continue down searchtree if not
-                if (this.searchElements.includes(element.nodeName)) {
+                if (!this.excludeElements.includes(element.nodeName)) {
                     refs = this.replaceText(element, refs);    
                 }
             }, this);  
@@ -95,8 +95,12 @@ class Bibliography extends HTMLElement{
                 });
                 let parent = element.parentNode;
                 let textArray:string[] = element.textContent.split(output[0]);
-                let textNode2 = document.createTextNode(textArray[1]);
+                let rightTextArray = textArray.concat([]);
+                rightTextArray.shift();
+                console.log(rightTextArray.join(output[0]));
+                let textNode2 = document.createTextNode(rightTextArray.join(output[0]));
                 parent.replaceChild(textNode2,element);
+                console.log(textArray);
                 parent.insertBefore(refelement, textNode2);
                 parent.insertBefore(document.createTextNode(textArray[0]), refelement);
                 bib.replaceTextNode(textNode2, refs);   

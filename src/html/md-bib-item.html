@@ -60,6 +60,9 @@
                     return this.getReference(["author", "title", "journal", "year", "volume"],["number", "pages", "month", "note", "key", "url"]);
                 case "book":
                     return this.getReference(["author", "title", "publisher", "year"], ["volume", "number", "series", "address", "edition", "month", "note", "url"])
+                case "unpublished":
+                    return this.getReference(["author", "title", "note"],["month", "year", "key", "url"]);
+
                 default:
                     return "format: " + this.bibitem.entryType + " not recognized."
             }
