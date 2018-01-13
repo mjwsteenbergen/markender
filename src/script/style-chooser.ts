@@ -17,7 +17,7 @@ class StyleChooser extends HTMLElement{
         let doc = document;
         selector.addEventListener('change', i => {
             let done = false;
-            document.querySelectorAll('link').forEach(i => {
+            Array.from(document.querySelectorAll('link')).forEach(i => {
                 if(!i.getAttribute('href').endsWith("/basic.css") && i.getAttribute('href').startsWith("./"))
                 {
                     i.setAttribute("href", "./static/css/" + (selector.selectedOptions[0] as HTMLOptionElement).value + ".css");

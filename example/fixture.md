@@ -1734,4 +1734,4 @@ Hr's:
 
 Some text and then a ref [small] and then another[bib:online]
 
-<md-bib src='Literature.bib'></md-bib>
+<md-bib src='./Literature.bib'></md-bib>
