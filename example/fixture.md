@@ -1694,6 +1694,12 @@ Hr's:
 
 
 ## Md-Image
+
+### Normal images
+
+![image](https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg)
+
+### Special images
 <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
 <md-img center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
 <md-img small center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
@@ -1715,7 +1721,7 @@ Hr's:
 </ul>
 
 <md-page>
-    <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
+    <md-img id='myFigure' src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
 </md-page>
 
 <ul collage>
@@ -1732,6 +1738,13 @@ Hr's:
 
 # References
 
-Some text and then a ref [small] and then another[bib:online]
+## Bib
+Some text and then a ref [small] and then another [bib:online]
+
+## Figures
+
+Referencing [fig:1] figure 1
+
+Referencing myFigure [myFigure]
 
 <md-bib src='./Literature.bib'></md-bib>
