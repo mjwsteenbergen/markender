@@ -30,6 +30,11 @@
         max-width: 75%;
     }
 
+    md-img[medium] div img {
+        max-height: 120mm; 
+        max-width: 75%;
+    }
+
     ul[collage] md-img {
         display: table-cell;
         vertical-align: middle;
@@ -107,7 +112,28 @@
             alt.innerHTML = "Figure " + usedIndex + alt_text;
             this.className = alignment;
             var div = clone.querySelectorAll("div")[0];
-            this.appendChild(clone);            
+            this.appendChild(clone);
+
+            var id = this.getAttribute("id") || "fig:"+usedIndex;
+            this.setAttribute("id", id);
+            var outside = this;
+            document.addEventListener("readystatechange", function(event) {
+                
+                var storage = outside.getLinkStorageOrCreate();
+                storage.setLink(id, "Figure " + usedIndex, "#" + id);
+            });
+        }
+
+        getLinkStorageOrCreate() {
+            var storage = document.getElementsByTagName("md-link-storage");
+            if(storage.length > 0) {
+                return storage[0];
+            } else {
+                var storage = document.createElement("md-link-storage");
+                document.body.appendChild(storage);
+                return storage;
+            }
+
         }
 
     }
