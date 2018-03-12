@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    //@ts-check
     // Refers to the "importer", which is index.html
     var thatDoc = document;
     // Refers to the "importee", which is src/hello-world.html
@@ -36,6 +37,8 @@
        constructor(bibitem, refnumber) {
             super();
         }
+
+        static get observedAttributes() {return ['name']; } 
 
         connectedCallback() {
             var clone = document.importNode(mdbibitem, true);
@@ -62,7 +65,8 @@
                     return this.getReference(["author", "title", "publisher", "year"], ["volume", "number", "series", "address", "edition", "month", "note", "url"])
                 case "unpublished":
                     return this.getReference(["author", "title", "note"],["month", "year", "key", "url"]);
-
+                case "inproceedings":
+                    return this.getReference(["author", "booktitle", "title","year"],["address", "editor", "month", "note", "number", "organization", "pages", "publisher", "series", "volume", "url"]);
                 default:
                     return "format: " + this.bibitem.entryType + " not recognized."
             }

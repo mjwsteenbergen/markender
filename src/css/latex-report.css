@@ -1,9 +1,13 @@
 @import './latex.css';
 
+h1 {
+  page-break-before: always;
+}
+
 h1 .md-toc-chapter-number::before {
-	content: "Chapter "
+  content: 'Chapter ';
 }
 h1 .md-toc-chapter-number {
-	display: block;
-  	font-size: 20pt;
+  display: block;
+  font-size: 20pt;
 }
