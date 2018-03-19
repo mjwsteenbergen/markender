@@ -22,6 +22,9 @@
         connectedCallback() {
             var clone = document.importNode(mdLinkStorage, true);
             this.appendChild(clone);
+            document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((item) => {
+                item.setAttribute("id", item.innerHTML.toString().toLowerCase().replace(new RegExp(' ', 'g'), '-'));
+            });
         }
 
 

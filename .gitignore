@@ -39,3 +39,5 @@ jspm_packages
 
 # Repository ignores
 src/index.html
+src/css/fonts/linuxlibertine/*
+src/css/fonts/LinuxBiolinum/*
