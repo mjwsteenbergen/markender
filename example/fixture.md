@@ -1717,7 +1717,7 @@ Hr's:
     <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
     <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
     <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
-    <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
+    <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture with a long name'></md-img>
 </ul>
 
 <md-page>
