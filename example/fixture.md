@@ -1747,4 +1747,7 @@ Referencing [fig:1] figure 1
 
 Referencing myFigure [myFigure]
 
-<md-bib src='./Literature.bib'></md-bib>
+<md-bib src='./Literature.bib'>
+    <md-bib-doi>10.1080/01639269.2014.904696</md-bib-doi>
+    <md-bib-url>https://daringfireball.net/projects/markdown/</md-bib-url>
+</md-bib>

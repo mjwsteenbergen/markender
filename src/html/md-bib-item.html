@@ -12,6 +12,11 @@
             flex-grow: 2;
             margin-left: 3px;
         }
+        @media print {
+            md-bib-item .id {
+                display: none;
+            }
+        }
     </style>
     <div class="wrapper">
         <p class="refnumber">
@@ -47,11 +52,15 @@
 
             var wrapper = clone.children[1];
 
-            wrapper.getElementsByClassName("refnumber")[0].innerText = "[" + this.refnumber + "]";
+            wrapper.getElementsByClassName("refnumber")[0].innerHTML = "[" + this.refnumber + this.getRef() + "]";
             wrapper.getElementsByClassName("reference")[0].innerHTML = this.formatReference();
             wrapper.id = "bib-item-" + this.refnumber;
 
             this.appendChild(clone);
+        }
+
+        getRef() {
+            return "<span class='id'> - " + this.bibitem.citationKey + "</span>"
         }
 
         formatReference()
@@ -140,7 +149,7 @@
                     }
                 }
                 default: {
-                    return input;
+                    return input.replace("{\\&}","&");
                 }
             }
         }
