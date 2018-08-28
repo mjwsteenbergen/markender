@@ -1,20 +1,11 @@
 @import './tudelft-basic.css';
 
-/* @page :first {
-    margin: 0;
-} */
-
-body {
-    margin: 50px;
-    background: #E6E45A;
+@page :first {
+    
 }
 
-@page {
-    padding: 300px;
-    -webkit-print-color-adjust: exact;
-    @bottom-left {
-        content: "this still does not work";
-    }
+@page :first {
+    margin: 0;
 }
 
 md-cover div::after  { 

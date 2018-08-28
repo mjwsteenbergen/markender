@@ -1,4 +1,5 @@
 <md-cover title='Fixture and an extra long title' author='adam-p'></md-cover>
+<md-style name="latex"></md-style>
 
 <md-toc></md-toc>
 
@@ -26,9 +27,10 @@ PLEASE DO NOT EDIT THIS PAGE! You can play around with Markdown on our [live dem
 [Line Breaks](#lines)
 [Youtube videos](#videos)
 
+
 ## Headers
 
-```no-highlight
+```
 # H1
 ## H2
 ### H3
@@ -62,7 +64,7 @@ Alt-H2
 
 ## Emphasis
 
-```no-highlight
+```
 Emphasis, aka italics, with *asterisks* or _underscores_.
 
 Strong emphasis, aka bold, with **asterisks** or __underscores__.
@@ -249,6 +251,8 @@ Reference-style:
 ![alt text][logo]
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
+![local image](local-image.jpg)
 
 ## Code and Syntax Highlighting
 
@@ -1701,8 +1705,8 @@ Hr's:
 
 ### Special images
 <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
-<md-img center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
-<md-img small center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg'></md-img>
+<md-img center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='center'></md-img>
+<md-img small center src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='small-center'></md-img>
 <md-img small src='https://unsplash.it/720/1920'></md-img>
 
 
@@ -1730,6 +1734,11 @@ Hr's:
     <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
 </ul>
 
+## Formulas
+
+$$\sqrt{3x-1}+(1+x)^2$$
+
+
 ## Todo
 
 - [ ] This is a todo that needs to be done
@@ -1748,6 +1757,6 @@ Referencing [fig:1] figure 1
 Referencing myFigure [myFigure]
 
 <md-bib src='./Literature.bib'>
-    <md-bib-doi>10.1080/01639269.2014.904696</md-bib-doi>
+    <md-bib-doi>10.1109/5.771073</md-bib-doi>
     <md-bib-url>https://daringfireball.net/projects/markdown/</md-bib-url>
 </md-bib>

@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-'use strict'
-var yargs = require('yargs');
-var path = require('path');
-
-var argv = yargs.alias('l', 'location').argv;
-
-var child_process = require('child_process');
-var child = child_process.spawn('gulp', ["-l" + path.resolve(process.cwd(), argv._[0])], {stdio: 'inherit', cwd: __dirname + "/../"});

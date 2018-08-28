@@ -1,0 +1,68 @@
+{
+    "Generate toc": {
+        "prefix": "toc",
+        "body": [
+            "<md-toc></md-toc>"
+        ]
+    },
+    "Generate cover": {
+        "prefix": "cover",
+        "body": [
+            "<md-cover title='${1:title}' author='${2:author}'></md-cover>$0"
+        ]
+    },
+    "Generate formula": {
+        "prefix": "formula",
+        "body": [
+            "<md-formula>$1</md-formula>"
+        ]
+    },
+    "Generate page": {
+        "prefix": "page",
+        "body": [
+            "<md-page></md-page>"
+        ]
+    },
+    "Generate image": {
+        "prefix": "img",
+        "body": [
+            "<md-img src='$1' alt='$2'></md-img>"
+        ]
+    },
+    "Generate todo": {
+        "prefix": "-",
+        "body": [
+            "- [ ] "
+        ]
+    },
+    "Generate bibliography": {
+        "prefix": "bib",
+        "body": [
+            "<md-bib src='${1:source}'>$2</md-bib>$0"
+        ]
+    },
+    "Generate bib url": {
+        "prefix": "bib-url",
+        "body": [
+            "<md-bib-url>$1</md-bib-url>$0"
+        ]
+    },
+    "Generate bib from doi": {
+        "prefix": "bib-doi",
+        "body": [
+            "<md-bib-doi>$1</md-bib-doi>$0"
+        ]
+    },
+    "Collage": {
+        "prefix": "mdcollage",
+        "body": [
+            "<ul collage>\n\t$TM_SELECTED_TEXT\n</ul>$0"
+        ]
+    },
+    "Style": {
+        "prefix": "style",
+        "body": [
+            "<md-style name=\"latex\"></md-style>"
+        ]
+    }
+}
