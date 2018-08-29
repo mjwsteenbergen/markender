@@ -11,12 +11,6 @@
             "<md-cover title='${1:title}' author='${2:author}'></md-cover>$0"
         ]
     },
-    "Generate formula": {
-        "prefix": "formula",
-        "body": [
-            "<md-formula>$1</md-formula>"
-        ]
-    },
     "Generate page": {
         "prefix": "page",
         "body": [
@@ -37,8 +31,9 @@
     },
     "Generate bibliography": {
         "prefix": "bib",
+        "description": "Create bibliography",
         "body": [
-            "<md-bib src='${1:source}'>$2</md-bib>$0"
+            "<md-bib src='${1:source}'></md-bib>$0"
         ]
     },
     "Generate bib url": {
@@ -54,15 +49,16 @@
         ]
     },
     "Collage": {
-        "prefix": "mdcollage",
+        "prefix": "collage",
         "body": [
             "<ul collage>\n\t$TM_SELECTED_TEXT\n</ul>$0"
         ]
     },
-    "Style": {
+    "Add Style": {
         "prefix": "style",
         "body": [
-            "<md-style name=\"latex\"></md-style>"
-        ]
+            "<md-style name=\"${1|latex,acm,github,dropbox,latex-report,somnox,tudelft|}\"></md-style>$0"
+        ],
+        "description": ""
     }
 }

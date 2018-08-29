@@ -4,9 +4,18 @@
     "description": "Creating beautiful markdown documents",
     "version": "0.0.1",
     "publisher": "mjwsteenbergen",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mjwsteenbergen/markender"
+    },
     "engines": {
         "vscode": "^1.26.0"
     },
+    "keywords": [
+        "markdown",
+        "tools",
+        "web-components"
+    ],
     "categories": [
         "Other"
     ],
@@ -34,7 +43,7 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
+        "compile": "tsc -p ./ && npx webpack",
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
