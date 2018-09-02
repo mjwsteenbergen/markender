@@ -1,5 +1,5 @@
 <md-cover title='Fixture and an extra long title' author='adam-p'></md-cover>
-<md-style name="acm"></md-style> 
+<md-style name="latex report"></md-style>
 
 <md-toc></md-toc>
 
@@ -1107,7 +1107,7 @@ or one tab:
         vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
         sit amet velit.
 
-    2.  Suspendisse id sem consectetuer libero luctus adipiscing.
+2.  Suspendisse id sem consectetuer libero luctus adipiscing
 
 It looks nice if you indent every line of the subsequent
 paragraphs, but here again, Markdown will allow you to be

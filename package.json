@@ -22,7 +22,7 @@
     "activationEvents": [
         "onCommand:extension.sayHello"
     ],
-    "main": "./out/extension",
+    "main": "./dist/extension",
     "contributes": {
         "commands": [
             {
@@ -37,7 +37,10 @@
             }
         ],
         "markdown.previewScripts": [
-            "./dist/main.js"
+            "./dist/scripts.js"
+        ],
+        "markdown.previewStyles": [
+            "./dist/scripts.css"
         ],
         "markdown.markdownItPlugins": true
     },
@@ -45,6 +48,7 @@
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./ && npx webpack",
         "watch": "tsc -watch -p ./",
+        "watch-plugin": "npx webpack --watch --progress",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
@@ -55,6 +59,12 @@
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
+        "css-loader": "^1.0.0",
+        "mini-css-extract-plugin": "^0.4.2",
+        "node-sass": "^4.9.3",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.0",
+        "ts-loader": "^4.5.0",
         "tslint": "^5.8.0",
         "typescript": "^3.0.1",
         "vscode": "^1.1.21",

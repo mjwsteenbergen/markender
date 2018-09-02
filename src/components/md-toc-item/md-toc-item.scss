@@ -1,0 +1,51 @@
+md-toc-item {
+	display: block;	
+}
+
+:root {
+  --toc-item-indent: 30px;
+}
+
+.md-toc-item-chapter {
+	padding-left: 10px;
+}
+
+.md-toc-item-name {
+	padding-left: 5px;
+}
+
+.md-toc-item-extra-space {
+	padding-left: 10px;
+}
+
+.md-toc-item-indent-1 {
+	font-weight: bold;
+}
+
+.md-toc-item-indent-2 {
+	margin-left: var(--toc-item-indent);
+}
+
+.md-toc-item-indent-3 {
+	margin-left: calc(var(--toc-item-indent)*2);
+}
+
+.md-toc-item-indent-4 {
+	margin-left: calc(var(--toc-item-indent)*3);
+}
+
+.md-toc-item-indent-5 {
+	margin-left: calc(var(--toc-item-indent)*4);
+}
+
+.md-toc-item-indent-6 {
+	margin-left: calc(var(--toc-item-indent)*5);
+}
+
+md-toc-item a {
+	color: inherit;
+	text-decoration: none;
+}
+md-toc-item a:visited {
+	color: black;
+}

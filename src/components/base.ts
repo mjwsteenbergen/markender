@@ -13,10 +13,11 @@ import { CoverPage } from "./md-cover";
 import { MdImage } from "./md-img";
 import { TableOfContents } from "./md-toc";
 import { MdLinkStorage } from "./md-link-storage";
-import { TableOfContentsItem } from "./md-toc-item";
+import { TableOfContentsItem } from "./md-toc-item/md-toc-item";
 import { MdLink } from "./md-link";
 import { Bibliography } from "./md-bib";
 import { MdStyle } from "./md-style";
+import "../../src/css/base.scss";
 
 window.customElements.define('md-bib', Bibliography);
 window.customElements.define('md-bib-item', MdBibItem);

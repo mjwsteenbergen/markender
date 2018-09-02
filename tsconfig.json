@@ -3,14 +3,14 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es6",
-        "outDir": "out",
+        "outDir": "./dist/",
         "lib": [
             "es2016",
             "dom",
             "es5"
         ],
         "sourceMap": true,
-        "rootDir": "src",
+        "rootDir": "./src/",
         /* Strict Type-Checking Option */
         "strict": false,   /* enable all strict type-checking options */
         /* Additional Checks */

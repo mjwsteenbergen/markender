@@ -1,0 +1,11 @@
+
+body.report {
+  h1 {
+    page-break-before: always;
+  }
+
+  h1 .md-toc-chapter-number::before {
+    content: 'Chapter ';
+  }
+}
+
