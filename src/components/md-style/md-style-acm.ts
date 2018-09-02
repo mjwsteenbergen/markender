@@ -6,21 +6,28 @@ export function getACMStyle(): string {
 	font-family: 'Libertine';
 	font-weight: normal;
 	font-style: normal;
-    src: url('http://localhost:3000/static/css/fonts/linuxlibertine/LinLibertine_R.ttf') format('woff');
+    src: url('https://cdn.rawgit.com/mjwsteenbergen/markender/master/src/css/fonts/LinuxBiolinum/LinLibertine_R.otf') format('opentype');
 }
 
 @font-face {
-	font-family: 'LibertineBold';
+	font-family: 'LibertineB';
 	font-weight: normal;
 	font-style: normal;
-    src: url('http://localhost:3000/static/css/fonts/linuxlibertine/LinLibertine_RB.ttf') format('woff');
+    src: url('https://cdn.rawgit.com/mjwsteenbergen/markender/master/src/css/fonts/LinuxBiolinum/LinLibertine_RB.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'BiolinumBold';
+	font-weight: normal;
+	font-style: normal;
+    src: url('https://cdn.rawgit.com/mjwsteenbergen/markender/master/src/css/fonts/LinuxBiolinum/LinBiolinum_RB.ttf') format('woff');
 }
 
 @font-face {
 	font-family: 'Biolinum';
 	font-weight: normal;
 	font-style: normal;
-    src: url('http://localhost:3000/static/css/fonts/LinuxBiolinum/LinBiolinum_R.ttf') format('woff');
+    src: url('https://cdn.rawgit.com/mjwsteenbergen/markender/master/src/css/fonts/LinuxBiolinum/LinBiolinum_R.ttf') format('woff');
 }
 
 @page {
@@ -35,16 +42,17 @@ md-cover div {
 }
 
 h1 {
-    font-family: "LibertineBold";
-    font-weight: bold;
+    font-family: "LibertineB";
+    /* font-weight: bold; */
     text-transform: uppercase;
     font-size: 11pt;
     margin: 0;
     padding-top: 10px;
+    border-bottom-style: none;
 }
 
 h2 {
-    font-family: "LibertineBold";
+    font-family: "BiolinumBold";
     font-weight: bold;
     font-size: 11pt;
 }
@@ -69,7 +77,7 @@ md-cover {
   }
   
   md-cover-title {
-    font-family: "Biolinum";
+    font-family: "BiolinumBold";
     font-weight: bold;
     font-size: 17.5pt;
     text-align: center;
@@ -97,10 +105,12 @@ md-cover {
   }
 
   a {
-      color: blue;
+      color: black;
   }
   
-
+    md-bib p {
+        margin: 0;
+    }
 
 
 `
