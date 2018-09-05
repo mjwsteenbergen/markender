@@ -1,0 +1,27 @@
+body.vscode-body {
+    md-cover {
+        margin-top: 150px;
+        display: block;
+        margin-bottom: 50px;
+    }
+
+    md-cover-title {
+        font-size: 18pt;
+        display: block;
+    }
+
+    md-cover-author {
+        margin-top: 15px;
+        font-size: 13pt;
+        display: block;
+        font-weight: bold;
+    }
+
+    md-cover-date {
+        margin-top: 10px;
+        font-size: 12pt;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}

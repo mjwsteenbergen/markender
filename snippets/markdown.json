@@ -57,7 +57,7 @@
     "Add Style": {
         "prefix": "style",
         "body": [
-            "<md-style name=\"${1|latex,acm,github,dropbox,latex-report,somnox,tudelft|}\"></md-style>$0"
+            "<md-style name=\"${1|latex,acm,github,dropbox,latex report,somnox,tudelft|}\"></md-style>$0"
         ],
         "description": ""
     }

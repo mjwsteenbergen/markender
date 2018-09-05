@@ -32,6 +32,8 @@ body.dropbox {
     font-size: 10pt;
 	/*margin: 3cm;*/
 	color: #1b2733;
+    background-color: white;
+
 
 	h1 {
 		font-family: 'AtlasR';
@@ -64,6 +66,17 @@ body.dropbox {
 		color: #1b2733;
 	}
 
+	md-cover-title {
+        font-size: 18pt;
+        display: block;
+    }
+
+    md-cover-author {
+        margin-top: 15px;
+        font-size: 13pt;
+        display: block;
+    }
+
 	md-cover-date {
 		visibility: hidden;
 	}
@@ -73,6 +86,8 @@ body.dropbox {
 	md-toc-item {
 		margin-top: 3px;
 	}
+
+
 
 	/* todo's */
 

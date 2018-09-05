@@ -49,6 +49,14 @@ en-todo {
     vertical-align: middle;
 }
 
+body {
+}
+
+h1 {
+    border: none;
+}
+
+@import "vscode";
 @import "acm";
 @import "dropbox";
 @import "github";
