@@ -1,5 +1,5 @@
 import { AbstractBibtexEntry, BibtexEntry, BibtexParser } from "./bibtexParse";
-import { MdLinkStorage } from "./md-link-storage";
+import { MdLinkStorage } from "../md-link/md-link-storage";
 
 export class Bibliography extends HTMLElement {
     bibtex: AbstractBibtexEntry[];
@@ -36,10 +36,10 @@ export class Bibliography extends HTMLElement {
                     bib.removeChild(i);
                     bib.addBibItem(bib.addBibItemFromUrl(i.textContent || "", (i as HTMLElement).id), bib);
                     break;
-                case "#text":
+                case "#text" || "md-bib-item" || "h1":
                     break;
                 default:
-                    console.log("Unknown type: " + i.nodeName);
+                    console.log("Unknown type: " + i.nodeName.toLowerCase());
                     break;
             }
         });

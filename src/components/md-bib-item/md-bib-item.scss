@@ -1,0 +1,12 @@
+md-bib-item {
+    display: block;	
+}
+
+md-bib-item .wrapper {
+    display: flex;
+}
+
+md-bib-item .reference {
+    flex-grow: 2;
+    margin-left: 3px;
+}

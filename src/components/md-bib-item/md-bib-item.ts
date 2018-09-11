@@ -1,4 +1,4 @@
-import { BibtexEntry } from "./bibtexParse";
+import { BibtexEntry } from "../md-bib/bibtexParse";
 
 export class MdBibItem extends HTMLElement {
     bibitem: BibtexEntry = new BibtexEntry();
@@ -9,20 +9,7 @@ export class MdBibItem extends HTMLElement {
     }
 
     public template: string = /* html */`
-     <style>
-        md-bib-item {
-	        display: block;	
-        }
-
-        md-bib-item .wrapper {
-            display: flex;
-        }
-
-        md-bib-item .reference {
-            flex-grow: 2;
-            margin-left: 3px;
-        }
-    </style>
+    <style></style>
     <div class="wrapper">
         <p class="refnumber">
 

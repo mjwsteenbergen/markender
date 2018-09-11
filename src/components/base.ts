@@ -8,15 +8,15 @@ katexcss.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.
 document.head.appendChild(katexcss);
 
 
-import { MdBibItem } from "./md-bib-item";
-import { CoverPage } from "./md-cover";
-import { MdImage } from "./md-img";
-import { TableOfContents } from "./md-toc";
-import { MdLinkStorage } from "./md-link-storage";
+import { MdBibItem } from "./md-bib-item/md-bib-item";
+import { CoverPage } from "./md-cover/md-cover";
+import { MdImage } from "./md-img/md-img";
+import { TableOfContents } from "./md-toc/md-toc";
+import { MdLinkStorage } from "./md-link/md-link-storage";
 import { TableOfContentsItem } from "./md-toc-item/md-toc-item";
-import { MdLink } from "./md-link";
-import { Bibliography } from "./md-bib";
-import { MdStyle } from "./md-style";
+import { MdLink } from "./md-link/md-link";
+import { Bibliography } from "./md-bib/md-bib";
+import { MdStyle } from "./md-style/md-style";
 import "../../src/css/base.scss";
 
 window.customElements.define('md-bib', Bibliography);

@@ -1,4 +1,4 @@
-import { MdLinkStorage } from "./md-link-storage";
+import { MdLinkStorage } from "../md-link/md-link-storage";
 
 export class MdImage extends HTMLElement {
     template: string = /* html */ `
@@ -10,8 +10,6 @@ export class MdImage extends HTMLElement {
 
     constructor() {
         super();
-        // var shadow = this.attachShadow({mode: 'open'});
-        this.addStyle();
     }
 
     connectedCallback() {
@@ -68,82 +66,5 @@ export class MdImage extends HTMLElement {
             return newStorage;
         }
 
-    }
-
-    addStyle() {
-        var styleTag = document.createElement("style");
-        styleTag.innerHTML = /* css */ `
-    md-img {
-        page-break-inside: avoid;
-    }
-
-    img.center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    md-img div {
-	    margin-bottom: 10px;
-    }
-
-    
-    md-img div span {
-        display: block;
-        text-align: center;
-        margin-top: 5px;
-    }
-
-    md-img div img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    md-img[super-small] div img {
-        max-height: 40mm; 
-        max-width: 75%;
-    }
-
-    md-img[small] div img {
-        max-height: 74mm; 
-        max-width: 75%;
-    }
-
-    md-img[medium] div img {
-        max-height: 120mm; 
-        max-width: 75%;
-    }
-
-    ul[collage] md-img {
-        align-self: flex-end;
-        vertical-align: middle;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-    ul[collage] {
-        padding: 0;
-        display: flex;
-        width: 100%;
-        page-break-inside: avoid;
-    }
-
-    md-img .wrapper {
-        page-break-inside: avoid;
-    }
-
-    md-img[full] {
-        height: 290mm;        
-    }
-
-    md-img[full] div{
-        page-break-before: always;
-        page-break-after: always;
-        display: table-cell;
-        vertical-align: middle;
-    }
-        `;
-
-        document.head.appendChild(styleTag);
     }
 }
