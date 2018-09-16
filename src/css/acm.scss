@@ -30,14 +30,9 @@
     format("woff");
 }
 
-@page {
-  margin-top: 2.65cm;
-  margin-left: 1.9cm;
-  margin-bottom: 2.82cm;
-  margin-right: 1.9cm;
-}
-
 body.acm {
+  --pagemargin: 2.65cm, 1.9cm, 2.82cm, 1.9cm; 
+
   column-count: 2;
   font-family: "Libertine";
   background-color: white;

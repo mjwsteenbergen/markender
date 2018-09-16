@@ -40,18 +40,30 @@
     src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
 }
 
-@page {
-    margin-left: 120px;
-    margin-right: 120px;
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
+// @media print {
+//     body.latex {
+//         font-size: 8pt;
+//     }
+
+//     h1 {
+//         font-size: 20pt;
+//     }
+//     h2 {
+//         font-size: 10pt;
+//         font-weight: normal;
+//     }
+//     h3 {
+//         font-size: 9pt;
+//     }
+// }
 
 body.latex {
-    font-size: 10pt;
+    font-size: 15px;
     font-family: 'Latin Modern Roman', serif;
     color: black;
     background-color: white;
+
+    --pagemargin: 80px, 120px, 80px, 120px; 
 
     .break {
         page-break-before: always;
@@ -67,14 +79,14 @@ body.latex {
         font-weight: 700;
     }
     h1 {
-        font-size: 24pt;
+        font-size: 30px;
     }
     h2 {
-        font-size: 13pt;
+        font-size: 19px;
         font-weight: normal;
     }
     h3 {
-        font-size: 10.5pt;
+        font-size: 15px;
     }
     a,
     a:visited {
@@ -215,6 +227,11 @@ body.latex {
     code {
         font-family: 'Latin Modern Mono', monospace !important;
     }
+
+    pre {
+        background-color: rgba(211, 211, 211, 0.521);
+    }
+
     sup {
         text-indent: 0;
     }
@@ -229,7 +246,7 @@ body.latex {
         margin-bottom: 50px;
     }
     md-cover-title {
-        font-size: 18pt;
+        font-size: 27px;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
@@ -237,7 +254,7 @@ body.latex {
     }
     md-cover-author {
         margin-top: 15px;
-        font-size: 13pt;
+        font-size: 19.5px;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
@@ -245,7 +262,7 @@ body.latex {
     }
     md-cover-date {
         margin-top: 10px;
-        font-size: 12pt;
+        font-size: 18px;
         text-align: center;
         margin-left: auto;
         margin-right: auto;

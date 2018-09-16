@@ -12,6 +12,10 @@
     }
 }
 
+@page {
+	margin: var(--page-margin);
+}
+
 pre {
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -49,8 +53,7 @@ en-todo {
     vertical-align: middle;
 }
 
-body {
-}
+body { }
 
 h1 {
     border: none;

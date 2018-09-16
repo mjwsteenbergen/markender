@@ -1,14 +1,6 @@
 @import './tudelft-basic.css';
 
-@page :first {
-    
-}
-
-@page :first {
-    margin: 0;
-}
-
-md-cover div::after  { 
+md-cover div::after  {
     height: 500px;
     width: 300px;
     background-image: url("http://www.tudelft.nl/fileadmin/Files/medewerkersportal/mc/huisstijl/Downloads/TU_Delft_logo_White.png");
