@@ -133,6 +133,11 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 ## Release Notes
+### 1.1.0
+- Move css to actual css files
+- Remove css from ts components
+- Improve acm
+
 ### 1.0.1
 Improve documentation
 
