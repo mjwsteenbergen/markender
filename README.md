@@ -64,6 +64,8 @@ However, there might be a few cases, where it would be useful to use the element
 
 Markdown does not contain a specification to have images on the same line. This extension adds this functionality
 
+![collage](./example/collage.png)
+
 Example:
 ```html
 <ul collage>
