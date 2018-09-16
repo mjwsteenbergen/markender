@@ -50,7 +50,7 @@ The following properties are available to customize the component:
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 
 ## Images
-By default any image (`[alt](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/128px-Markdown-mark.svg.png)`) is converted to a `<md-img></md-img>` element.
+By default any image (`![alt](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/128px-Markdown-mark.svg.png)`) is converted to a `<md-img></md-img>` element.
 
 However, there might be a few cases, where it would be useful to use the element alone.
 
@@ -59,14 +59,17 @@ However, there might be a few cases, where it would be useful to use the element
 | src      | Source of the image                                   |
 | alt      | Description of the image that is displayed below      |
 | id       | How to reference the figure using the \[ref\] format  |
+| size     | add the words: `full,medium,small or super-small` to change the size of the image like so: `<md-img small></md-img>`  |
 
 ### Collages
 
 Markdown does not contain a specification to have images on the same line. This extension adds this functionality
 
-![collage](./example/collage.png)
 
 Example:
+![collage](./example/collage.png)
+in markdown:
+
 ```html
 <ul collage>
     <md-img src='https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg' alt='Picture'></md-img>
@@ -108,7 +111,8 @@ The property name can have the values shown when using the snippet `style` withi
 
 ## Extra functionality
 
-Formula's with latex-math syntax can be used by using double dollar signs. For all possibilties look at 
+Formula's with latex-math syntax can be used by using double dollar signs. For all possibilties look at [this resource](https://en.wikibooks.org/wiki/LaTeX/Mathematics). 
+
 Example:
 ```
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
