@@ -2,6 +2,12 @@ md-bib-item {
     display: block;	
 }
 
+@media print {
+    md-bib-item p.citation_key {
+        display: none;	
+    }
+}
+
 md-bib-item .wrapper {
     display: flex;
 }

@@ -11,12 +11,9 @@ export class MdBibItem extends HTMLElement {
     public template: string = /* html */`
     <style></style>
     <div class="wrapper">
-        <p class="refnumber">
-
-        </p>
-        <p class="reference">
-
-        </p>
+        <p class="refnumber"></p>
+        <p class="citation_key"></p>
+        <p class="reference"></p>
     </div>
     `;
 
@@ -29,6 +26,7 @@ export class MdBibItem extends HTMLElement {
         var wrapper = this.children[1];
 
         wrapper.getElementsByClassName("refnumber")[0].innerHTML = "[" + this.refnumber + "]";
+        wrapper.getElementsByClassName("citation_key")[0].innerHTML = "[" + this.bibitem.citationKey + "]";
         wrapper.getElementsByClassName("reference")[0].innerHTML = this.formatReference();
         wrapper.id = "bib-item-" + this.refnumber;
     }
