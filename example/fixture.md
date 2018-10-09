@@ -1,5 +1,5 @@
 <md-cover title='Fixture and an extra long title' author='adam-p'></md-cover>
-<md-style name="latex report"></md-style>
+<md-style name="latex disable_theme"></md-style>
 
 <md-toc></md-toc>
 

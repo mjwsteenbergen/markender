@@ -10,7 +10,11 @@
 body.somnox {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 10pt;
-    background-color: white;    
+    --md-background: white;    
+    --md-h2: #515b69;
+    --md-h3: #515b69;
+    --md-h4: #515b69;
+    --md-a: rgb(37, 170, 225);
 
     h1 {
         font-family: 'Source Sans Pro';
@@ -19,16 +23,14 @@ body.somnox {
 
     h2 {
         font-weight: 400;
-        color: #515b69;    
     }
 
     h3, h4 {
         font-weight: 400;    
-        color: #515b69;
     }
 
     a {
-        color: rgb(37, 170, 225);
+        
         font-weight: 600;
         text-decoration: none;
         /*border-bottom: 1px solid black;*/

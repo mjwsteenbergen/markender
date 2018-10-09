@@ -3,24 +3,8 @@ body.github {
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   line-height: 1.6;
-  background-color: white;
-
-  a {
-    color: #4183c4;
-  }
-  a.absent {
-    color: #cc0000;
-  }
-  a.anchor {
-    display: block;
-    padding-left: 30px;
-    margin-left: -30px;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-  }
+  --md-background: white;
+  --md-a: #4183c4;
 
   h1,
   h2,
@@ -79,13 +63,11 @@ body.github {
 
   h1 {
     font-size: 28px;
-    color: black;
   }
 
   h2 {
     font-size: 24px;
     border-bottom: 1px solid #cccccc;
-    color: black;
   }
 
   h3 {
@@ -101,9 +83,10 @@ body.github {
   }
 
   h6 {
-    color: #777777;
     font-size: 14px;
   }
+
+  --md-h6: #777777;
 
   p,
   blockquote,
@@ -120,7 +103,7 @@ body.github {
     // background: transparent url("../../images/modules/pulls/dirty-shade.png")
       // repeat-x 0 0;
     border: 0 none;
-    color: #cccccc;
+    // color: #cccccc;
     height: 4px;
     padding: 0;
   }
@@ -216,8 +199,10 @@ body.github {
   blockquote {
     border-left: 4px solid #dddddd;
     padding: 0 15px;
-    color: #777777;
   }
+
+  --md-blockquote: #777777;
+
   blockquote > :first-child {
     margin-top: 0;
   }
@@ -343,10 +328,13 @@ body.github {
     margin: 0 2px;
     padding: 0 5px;
     white-space: nowrap;
-    border: 1px solid #eaeaea;
-    background-color: #f8f8f8;
+    border-width: 1px;
+    border-style: solid;
     border-radius: 3px;
   }
+
+  --md-pre-back:  #f8f8f8;
+  --md-pre-border: #cccccc;
 
   pre code {
     margin: 0;
@@ -357,8 +345,8 @@ body.github {
   }
 
   .highlight pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
+    border-width: 1px;
+    border-style: solid;
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
@@ -367,8 +355,8 @@ body.github {
   }
 
   pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
+    border-width: 1px;
+    border-style: solid;
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
