@@ -49,6 +49,28 @@ The following properties are available to customize the component:
 
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 
+### Reference from doi
+`<md-bib-doi>${doi}</md-bib-doi>` will tell the bibliography to get a reference from the given doi.
+
+Example:
+
+```
+<md-bib>
+    <md-bib-doi>10.1109/5.771073</md-bib-doi>
+</md-bib>
+```
+
+### Reference from url
+`<md-bib-url>${url}</md-bib-url>` will tell the bibliography to get a reference from the given url.
+
+Example:
+
+```
+<md-bib>
+    <md-bib-url>https://github.com/mjwsteenbergen/markender</md-bib-url>
+</md-bib>
+```
+
 ## Images
 By default any image (`![alt](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/128px-Markdown-mark.svg.png)`) is converted to a `<md-img></md-img>` element.
 
@@ -78,28 +100,6 @@ in markdown:
 </ul>
 ```
 
-### Reference from doi
-`<md-bib-doi>${doi}</md-bib-doi>` will tell the bibliography to get a reference from the given doi.
-
-Example:
-
-```
-<md-bib>
-    <md-bib-doi>10.1109/5.771073</md-bib-doi>
-</md-bib>
-```
-
-### Reference from url
-`<md-bib-url>${url}</md-bib-url>` will tell the bibliography to get a reference from the given url.
-
-Example:
-
-```
-<md-bib>
-    <md-bib-url>https://github.com/mjwsteenbergen/markender</md-bib-url>
-</md-bib>
-```
-
 ## Style
 `<md-style></md-style>` will add css styling to the page to make it look amazing.
 
@@ -107,7 +107,7 @@ Example:
 |----------|----------------------------|
 | name     | The style it should assume |
 
-The property name can have the values shown when using the snippet `style` within markdown.
+The property name can have the values shown when using the snippet `style` within markdown. Append the `name` property with `disable_style` to disable the style used by vscode and show the text as it will be printed.
 
 ## Extra functionality
 
@@ -137,6 +137,9 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 ## Release Notes
+### 1.2.0
+- Combine vscode styles and document styles
+
 ### 1.1.0
 - Move css to actual css files
 - Remove css from ts components
