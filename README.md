@@ -144,6 +144,7 @@ Make sure to use the following settings to make it very pretty:
 ## Release Notes
 ### 1.2.0
 - Combine vscode styles and document styles
+- Show citation key in bibliography
 
 ### 1.1.0
 - Move css to actual css files
