@@ -20,7 +20,7 @@ export class Bibliography extends HTMLElement {
 
     connectedCallback() {
         var bib = this;
-        this.format = this.getAttribute("format") || "[{refnumber}]";
+        this.format = this.getAttribute("format") || "{refnumber}";
         this.src = this.getAttribute("src") || "";
 
         let header = document.createElement("h1");

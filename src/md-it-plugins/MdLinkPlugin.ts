@@ -1,7 +1,4 @@
-import { State, MarkdownIt } from "./MarkdownItTypings";
-
-//@ts-check
-'use strict'
+import { State, MarkdownIt, Token } from "./MarkdownItTypings";
 
 function isSpace(code: number) {
     switch (code) {
@@ -22,24 +19,14 @@ function normalizeReference(str: string) {
 module.exports = function linkDing(md: MarkdownIt, options: any) {
     md.renderer.rules.linker = linker;
     md.inline.ruler.after('escape', 'linker', linker);
-    //console.error("hi");
-}
+};
 
 function linker(state: State, silent: boolean) {
-    var attrs,
-        code,
-        label,
-        pos,
-        res,
-        ref,
-        title,
-        token,
-        href = '',
-        oldPos = state.pos,
-        max = state.posMax,
-        start = state.pos,
-        parseReference = true;
-
+    var pos,
+        res: Result,
+        token: Token,
+        max = state.posMax;
+        
     var labelEnd: number = 0;
     var labelStart: number = 0;
 
@@ -72,33 +59,44 @@ function linker(state: State, silent: boolean) {
         state.pos = labelStart;
         state.posMax = labelEnd;
 
-        token = state.push('link_open', 'md-link', 1);
-        token.attrs = attrs = [['link', res.str]];
-        if (title) {
-            attrs.push(['title', title]);
-        }
+        var links = res.str.split(',');
+        
+        links.forEach(element => {
+            token = state.push('link_open', 'md-link', 1);
+            token.attrs = [['link', element.trimLeft()]];
+            
+            var classe = "";
+            if(links.indexOf(element) === 0) {
+                classe = "first";
+            }
 
-        state.md.inline.tokenize(state);
+            if (links.indexOf(element) === links.length - 1) {
+                classe += " last";
+            }
 
-        token = state.push('link_close', 'md-link', -1);
+            if (classe !== "") {
+                token.attrs.push(['class', classe]);
+            }
+
+            state.md.inline.tokenize(state);
+
+            token = state.push('link_close', 'md-link', -1);
+        });
+
+        
     }
 
     state.pos = pos;
     state.posMax = max;
     return true;
-};
+}
 
-function parseLinkName(str: string, pos: number, max: number) {
+function parseLinkName(str: string, pos: number, max: number): Result {
     var code,
         marker,
         lines = 0,
         start = pos,
-        result = {
-            ok: false,
-            pos: 0,
-            lines: 0,
-            str: ''
-        };
+        result = new Result();
 
     if (pos >= max) { return result; }
     if ((pos - 1 >= 0 && str.charCodeAt(pos - 1) === 0x2d) || ((pos - 2 >= 0 && str.charCodeAt(pos - 2) === 0x2d)) ||
@@ -140,4 +138,11 @@ function parseLinkName(str: string, pos: number, max: number) {
     }
 
     return result;
+}
+
+class Result {
+    ok: boolean = false;
+    pos: number = 0;
+    lines: number = 0;
+    str: string = '';
 }
