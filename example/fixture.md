@@ -1748,7 +1748,7 @@ $$\sqrt{3x-1}+(1+x)^2$$
 # References
 
 ## Bib
-Some text and then a ref [small] and then another [bib:online]
+Some text and then a ref [small, big] and then another [bib] and [daring] and [quante2009revenue]
 
 ## Figures
 
@@ -1756,7 +1756,7 @@ Referencing [fig:1] figure 1
 
 Referencing myFigure [myFigure]
 
-<md-bib src='./Literature.bib'>
+<md-bib src='./Literature.bib' format='{author}, {year}'>
     <md-bib-doi>10.1109/5.771073</md-bib-doi>
-    <md-bib-url>https://daringfireball.net/projects/markdown/</md-bib-url>
+    <md-bib-url id=daring>https://daringfireball.net/projects/markdown/</md-bib-url>
 </md-bib>

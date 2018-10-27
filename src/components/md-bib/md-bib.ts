@@ -65,6 +65,8 @@ export class Bibliography extends HTMLElement {
         entry.entryTags = {};
         entry.entryTags["title"] = parser.pathname.replace(/\//g, " ") + " from " + parser.host;
         entry.entryTags["url"] = url;
+        entry.entryTags["author"] = parser.host;
+        entry.entryTags["year"] = new Date().getFullYear().toString();
         entry.entryTags["note"] = "(Accessed on " + new Date(Date.now()).toDateString() + ")";
         return entry;
 
@@ -112,6 +114,18 @@ export class Bibliography extends HTMLElement {
 
     formatBib(bibitem: BibtexEntry, refnumber: number) {
         var res = this.format.replace("{refnumber}", refnumber.toString());
+        res = res.replace("{authors}", (bibitem.entryTags["author"] || ""));
+
+        const authors = (bibitem.entryTags["author"] || "").split(/and|&/g);
+        var authorString = authors[0].trimRight();
+        if (authors.length > 1) {
+            authorString += " et al.";
+        }
+
+        res = res.replace("{author}", authorString);
+
+        const year = (bibitem.entryTags["year"] || "");
+        res = res.replace("{year}", year);
         return res;
     }
 
@@ -130,6 +144,7 @@ export class Bibliography extends HTMLElement {
         item.setAttribute("bibitem", JSON.stringify(bibitem));
         item.setAttribute("refnumber", bib.number.toString());
         item.setAttribute("name", bib.formatBib(bibitem, bib.number));
+
         const myNumber = bib.number;
         bib.number++;
 
