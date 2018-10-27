@@ -39,13 +39,16 @@ The following properties are available to customize the component:
 |----------|-----------------------------------------------------------------|
 | chapters | Flag to display chapter numbers before chapters (true or false) |
 
-## Bibliography
+## Referencing
+Basic markdown does not implement referencing. This is why markdown implements its own form of referencing. One can reference items by using the `[reference]` notation. You can combine references by splitting them with a comma: `[reference1, reference2]`
+
+### Bibliography
 `<md-bib></md-bib>` will create the bibliography.
 
 | Property | Description                                           |
 |----------|-------------------------------------------------------|
 | src      | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) |
-| format   | How to format the references (default: \[{refnumber}\]) |
+| format   | How to format the references (default: {refnumber}) |
 
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 The citation key is shown between brackets, to help you quickly find that reference. It will automatically be removed when converting to pdf.
