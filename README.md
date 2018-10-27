@@ -151,6 +151,12 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 ## Release Notes
+
+### 1.3.0
+ - Multiple references at once!
+ - You can now reference anything that BibTex can!
+ - More options to format your references
+
 ### 1.2.0
 - Combine vscode styles and document styles
 - Show citation key in bibliography
