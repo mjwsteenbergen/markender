@@ -53,6 +53,12 @@ Basic markdown does not implement referencing. This is why markdown implements i
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 The citation key is shown between brackets, to help you quickly find that reference. It will automatically be removed when converting to pdf.
 
+The format property of the `md-bib` element will say how the element will display its reference. For example `format="Hello World"` will make all reference have the form of `[Hello World]`. Within this format you can use a few variables. These are notated in the form of `{variableName}`. The following can be used within formatting:
+ - `{refnumber}`: Will display the reference number of the item
+ - `{authors}`: Will show all authors
+ - `{author}`: Will try to show only the first author and add `et al.` if there are more than one.
+ - `{year}`: The year when the item was published. For `md-bib-url` this is the current year.
+
 ### Reference from doi
 `<md-bib-doi>${doi}</md-bib-doi>` will tell the bibliography to get a reference from the given doi.
 
