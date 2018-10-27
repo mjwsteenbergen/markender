@@ -36,13 +36,31 @@ export class MdBibItem extends HTMLElement {
             case "misc":
                 return this.getReference([], ["author", "title", "howpublished", "month", "year", "note", "key", "url"]);
             case "article":
-                return this.getReference(["author", "title", "journal", "year", "volume"], ["number", "pages", "month", "note", "key", "url"]);
+                return this.getReference(["author", "title", "journal", "year"], ["volume", "number", "pages", "month", "note", "key", "url"]);
             case "book":
-                return this.getReference(["author", "title", "publisher", "year"], ["volume", "number", "series", "address", "edition", "month", "note", "url"]);
-            case "unpublished":
-                return this.getReference(["author", "title", "note"], ["month", "year", "key", "url"]);
+                return this.getReference(["title", "publisher", "year"], ["author", "editor", "volume", "number", "series", "address", "edition", "month", "note", "url"]);
+            case "booklet":
+                return this.getReference(["title"], ["author", "howpublished", "address", "month", "year", "note", "key", "url"]);
+            case "conference":
+                return this.getReference(["author", "title", "booktitle", "year"], ["editor", "volume", "number", "series", "pages", "address", "month", "organization", "publisher", "note", "url"]);
+            case "inbook":
+                return this.getReference(["author", "title", "publisher", "year"], ["chapter", "pages", "volume", "number", "series", "type", "address", "edition", "month", "note"]);
+            case "incollection":
+                return this.getReference(["author", "title", "booktitle", "publisher", "year"], ["editor", "volume", "number", "series", "type", "chapter", "pages", "address", "edition", "month", "note"]);
             case "inproceedings":
                 return this.getReference(["author", "booktitle", "title", "year"], ["address", "editor", "month", "note", "number", "organization", "pages", "publisher", "series", "volume", "url"]);
+            case "manual":
+                return this.getReference(["title"], ["author", "organization", "address", "edition", "month", "year", "note"]);
+            case "mastersthesis":
+                return this.getReference(["author", "title", "school", "year"], ["type", "address", "month", "note"]);
+            case "phdthesis":
+                return this.getReference(["author", "title", "year", "school"], ["address", "month", "keywords", "note"]);
+            case "proceedings":
+                return this.getReference(["title", "year"], ["editor", "volume", "number", "series", "address", "month", "organization", "publisher", "note"]);
+            case "techreport":
+                return this.getReference(["author", "title", "institution", "year"], ["type", "number", "address", "month", "note"]);
+            case "unpublished":
+                return this.getReference(["author", "title", "note"], ["month", "year", "key", "url"]);
             default:
                 return "format: " + this.bibitem.entryType + " not recognized.";
         }
