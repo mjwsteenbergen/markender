@@ -1,20 +1,50 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i');
 
-// @page {
-// 	margin-left: 120px;
-// 	margin-right: 120px;
-// 	margin-top: 80px;
-// 	margin-bottom: 80px; 
-// }
-
-body.somnox {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 10pt;
-    --md-background: white;    
+body.somnox.disable_theme {
+    --vscode-editor-foreground: black;
+    --vscode-editor-background: white;
+    --vscode-textLink-foreground: rgb(37, 170, 225);
     --md-h2: #515b69;
     --md-h3: #515b69;
     --md-h4: #515b69;
-    --md-a: rgb(37, 170, 225);
+}
+
+//Copy directly from 'disable theme'
+@media print {
+    body.somnox {
+        --vscode-editor-foreground: black;
+        --vscode-editor-background: white;
+        --vscode-textLink-foreground: rgb(37, 170, 225);
+        --md-h2: #515b69;
+        --md-h3: #515b69;
+        --md-h4: #515b69;
+    }
+}
+
+body.somnox {
+    // Page Margins
+	--mk-margin-top: 80px;
+	--mk-margin-bottom: 80px;
+	--mk-margin-left: 120px;
+	--mk-margin-right: 120px;
+
+    --vscode-editor-font-size: 10pt;
+    --vscode-editor-font-family: 'Source Sans Pro', sans-serif;
+
+    //Default Tables
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     h1 {
         font-family: 'Source Sans Pro';
@@ -40,17 +70,6 @@ body.somnox {
         border-right: none !important; 
         border-left: none !important;
     }
-
-    // en-todo {
-    //     background-repeat: no-repeat;
-    //     background-image: url('./img/checkbox-latex.svg');	
-    //     margin-bottom: 5px;
-    // }
-
-    // en-todo[checked="true"] {
-    //     background-image: url('./img/checkbox-latex-checked.svg');
-    // }
-
     .md-toc-item-name {
         font-weight: 400;    
     }
@@ -91,4 +110,14 @@ body.somnox {
     h1 {
         page-break-before: always;
     }
+
+    // en-todo {
+    //     background-repeat: no-repeat;
+    //     background-image: url('./img/checkbox-latex.svg');	
+    //     margin-bottom: 5px;
+    // }
+
+    // en-todo[checked="true"] {
+    //     background-image: url('./img/checkbox-latex-checked.svg');
+    // }
 }

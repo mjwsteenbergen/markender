@@ -20,22 +20,52 @@
 }
 
 
-@page {
-	margin-top: 80px;
-	margin-bottom: 80px; 
-    margin-left: 2.5cm;
-    margin-right: 2.5cm;
+
+body.dropbox.disable_theme {
+    --vscode-editor-foreground: #1b2733;
+    --vscode-editor-background: white;
+    --md-toc-item-color: black;
+
+    --vscode-textBlockQuote-background: #f7f9fa;
+	--vscode-textBlockQuote-border: rgb(230, 232, 235);
+	
+	pre {
+		background-color: rgb(247, 249, 250);
+		border: 1px solid rgb(230, 232, 235);	
+	}
+
+}
+
+//Copy directly from 'disable theme'
+@media print {
+	body.dropbox {
+		--vscode-editor-foreground: #1b2733;
+		--vscode-editor-background: white;
+		--md-toc-item-color: black;
+
+		--vscode-textBlockQuote-background: #f7f9fa;
+		--vscode-textBlockQuote-border: rgb(230, 232, 235);
+		
+		pre {
+			background-color: rgb(247, 249, 250);
+			border: 1px solid rgb(230, 232, 235);	
+		}
+	}
 }
 
 body.dropbox {
-    font-family: 'AtlasR';
-    font-size: 10pt;
-	/*margin: 3cm;*/
-	--md-color: #1b2733;
-    --md-background: white;
+	// Page Margins
+	--mk-margin-top: 80px;
+	--mk-margin-bottom: 80px;
+	--mk-margin-left: 2.5cm;
+	--mk-margin-right: 2.5cm;
+
+    --vscode-editor-font-size: 10pt;
+    --vscode-editor-font-family: 'AtlasR', serif;
+    --vscode-textPreformat-font-family: SourceCodePro,'AtlasR', monospace;
 
 
-	h1 {
+    h1 {
 		font-family: 'AtlasR';
 		font-weight: normal;
 	}
@@ -48,15 +78,11 @@ body.dropbox {
 	h3 {
 		font-family: 'AtlasM';
 		font-weight: normal;
-	}
-
-
-	--md-pre-back: #f7f9fa;
-	pre {
+    }
+    
+    pre {
 		margin: 2px;
 		padding: 10px;
-		border: 1px solid rgb(230, 232, 235);
-		font-family: SourceCodePro,monospace;
 	}
 
 	/* md-cover */
@@ -86,10 +112,8 @@ body.dropbox {
 	md-toc-item {
 		margin-top: 3px;
 	}
-
-
-
-	/* todo's */
+    
+    /* todo's */
 
 	// en-todo {
 	// 	background-repeat: no-repeat;

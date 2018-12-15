@@ -12,64 +12,9 @@
     }
 }
 
-@media print {
-    color: var(--md-color, black);
-    background-color: var(--md-background, white);
-
-    h1 {
-        color: var(--md-h1);
-    }
-
-    h2 {
-        color: var(--md-h2);
-    }
-
-    h3 {
-        color: var(--md-h3);
-    }
-
-    h4 {
-        color: var(--md-h4);
-    }
-
-    h5 {
-        color: var(--md-h5);
-    }
-
-    h6 {
-        color: var(--md-h6);
-    }
-
-    code {
-        color: var(--md-color, black);
-    }
-
-    a {
-        color: var(--md-a);
-    }
-
-    a:visited {
-        color: var(--md-a_visited);
-    }
-
-    blockquote {
-        color: var(--md-blockquote, --md-color);
-        border-color: initial;
-    }
-
-    pre {
-        background-color: var(--md-pre-back);
-        border-color: var(--md-pre-border, transparent);
-    }
-
-    md-toc-item a {
-        color: var(--md-toc-item-color);
-    }
-}
-
+// Enabled only if user wants to see what end result looks like
 body.disable_theme {
-    color: var(--md-color, black);
-    background-color: var(--md-background, white);
+    --vscode-textBlockQuote-border: initial;
 
     h1 {
         color: var(--md-h1);
@@ -96,35 +41,82 @@ body.disable_theme {
     }
 
     code {
-        color: var(--md-color, black);
-    }
-
-    a {
-        color: var(--md-a);
-    }
-
-    a:visited {
-        color: var(--md-a_visited);
-    }
-
-    blockquote {
-        color: var(--md-blockquote, --md-color);
-        border-color: initial;
+        color: var(--vscode-editor-foreground);
+        font-family: var(--vscode-textPreformat-font-family, var(--vscode-editor-font-family));
+        border-color: var(--vscode-textPreformat-border);
+        background-color: var(--vscode-textPreformat-background); 
     }
 
     pre {
-        background-color: var(--md-pre-back);
-        border-color: var(--md-pre-border, transparent);
+        background-color: var(--vscode-textPreformat-background); 
     }
 
     md-toc-item a {
         color: var(--md-toc-item-color);
     }
+
+    // Defaults
+    --vscode-textLink-foreground: black;
 }
 
-@page {
-	margin: var(--page-margin);
+//Copied directly from 'disable theme'
+@media print {
+     --vscode-textBlockQuote-border: initial;
+
+    h1 {
+        color: var(--md-h1);
+    }
+
+    h2 {
+        color: var(--md-h2);
+    }
+
+    h3 {
+        color: var(--md-h3);
+    }
+
+    h4 {
+        color: var(--md-h4);
+    }
+
+    h5 {
+        color: var(--md-h5);
+    }
+
+    h6 {
+        color: var(--md-h6);
+    }
+
+    code {
+        color: var(--vscode-editor-foreground);
+        font-family: var(--vscode-textPreformat-font-family, var(--vscode-editor-font-family));
+        border-color: var(--vscode-textPreformat-border);
+        background-color: var(--vscode-textPreformat-background); 
+    }
+
+    pre {
+        background-color: var(--vscode-textPreformat-background); 
+    }
+
+    md-toc-item a {
+        color: var(--md-toc-item-color);
+    }
+
+    // Defaults
+    --vscode-textLink-foreground: black;
 }
+
+
+// Variables
+body {
+    font-family: var(--vscode-editor-font-family) !important;
+}
+
+code {
+    font-family: var(--vscode-textPreformat-font-family, inherit);
+}
+
+// Default Layout
 
 pre {
     white-space: pre-wrap;
@@ -135,18 +127,7 @@ p {
     word-wrap: break-word;
 }
 
-table,
-th,
-td {
-    border: 1px solid black;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 table {
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
     page-break-inside: avoid;
 }
 
@@ -163,12 +144,11 @@ en-todo {
     vertical-align: middle;
 }
 
-body { }
-
 h1 {
     border: none;
 }
 
+// Import all custom styles
 @import "vscode";
 @import "acm";
 @import "dropbox";
@@ -177,7 +157,17 @@ h1 {
 @import "somnox";
 @import "tudelft";
 @import "latex-report";
+
+// Import component styles
 @import "../components/md-toc-item/md-toc-item";
 @import "../components/md-bib-item/md-bib-item";
 @import "../components/md-img/md-img";
 @import "../components/md-link/md-link.scss";
+
+// Set print margins
+@page {
+	margin-top: var(--mk-margin-top, 80px);
+	margin-bottom: var(--mk-margin-bottom, 80px); 
+    margin-left: var(--mk-margin-left, 120px);
+    margin-right: var(--mk-margin-right, 120px);
+}

@@ -40,21 +40,95 @@
     src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
 }
 
-body.latex {
-    font-size: 15px;
-    font-family: 'Latin Modern Roman', serif;
-
-    --pagemargin: 80px, 120px, 80px, 120px; 
-    --md-color: black;
-    --mdbackground: white;
-    --md-a: #a00;
-    --md-a_visited: black;
-    --md-pre-back: rgba(211, 211, 211, 0.521);
+body.latex.disable_theme {
+    --vscode-editor-foreground: black;
+    --vscode-editor-background: white;
+    --vscode-textLink-foreground: #a00;
+    --vscode-textLink-activeForeground: black;
     --md-toc-item-color: black;
+
+    --vscode-textBlockQuote-background: rgb(233, 233, 233);
+    --vscode-textPreformat-background: rgb(233, 233, 233);
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        page-break-inside: avoid;
+    }
+}
+
+//Copy directly from 'disable theme'
+@media print {
+    body.latex {
+        --vscode-editor-foreground: black;
+        --vscode-editor-background: white;
+        --vscode-textLink-foreground: #a00;
+        --vscode-textLink-activeForeground: black;
+        --md-toc-item-color: black;
+
+        --vscode-textBlockQuote-background: rgb(233, 233, 233);
+        --vscode-textPreformat-background: rgb(233, 233, 233);
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            page-break-inside: avoid;
+        }
+    }
+}
+
+body.latex {
+    // Page Margins
+	--mk-margin-top: 80px;
+	--mk-margin-bottom: 80px;
+	--mk-margin-left: 2.5cm;
+	--mk-margin-right: 2.5cm;
+
+    --vscode-editor-font-size: 15px;
+    --vscode-editor-font-family: 'Latin Modern Roman', serif;
+
+    //Default Tables
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    pre,
+    code {
+        font-family: 'Latin Modern Mono', monospace !important;
+    }
 
     .break {
         page-break-before: always;
     }
+
     /* Page Layout */
     h1,
     h2,
@@ -78,133 +152,7 @@ body.latex {
     ul {
         list-style: disc;
     }
-    /* Content Box */
-    .mw-body {
-        max-width: 720px;
-        margin: 1em auto;
-    }
-    #firstHeading,
-    #siteSub {
-        text-align: center;
-        display: block;
-    }
-    #siteSub {
-        margin-top: -0.5em;
-        margin-bottom: 4em;
-    }
-    /* Article Body */
-    .mw-body-content {
-        font-size: inherit;
-        text-align: justify;
-        -moz-hyphens: auto;
-        -webkit-hyphens: auto;
-        hyphens: auto;
-        line-height: 1.5em;
-    }
-    .mw-body {
-        padding: 2em 0;
-    }
-    .mw-body h1,
-    .mw-body h2,
-    .mw-body h3,
-    .mw-body h4,
-    .mw-body h5,
-    .mw-body h6,
-    div#content h1,
-    div#content h2,
-    div#content #firstHeading {
-        font-family: inherit;
-        line-height: 1.5em;
-        margin-bottom: 0.5em;
-    }
-    .mw-body h1,
-    div#content h1 {
-        font-size: 2em;
-    }
-    .mw-body h2,
-    div#content h2 {
-        font-size: 1.5em;
-    }
-    .mw-body h3 {
-        font-size: 1.2em;
-    }
-    .mw-body h4 {
-        font-size: 1.1em;
-    }
-    .mw-body h5,
-    .mw-body h6 {
-        font-size: 1em;
-    }
-    .mw-body p {
-        margin: 0;
-    }
-    .mw-body p+p {
-        text-indent: 2em;
-    }
-    .mw-editsection {
-        /* hide more non-content */
-        display: none;
-    }
-    table.ambox {
-        margin-bottom: 1em;
-    }
-    dl dd {
-        /* center definitions (most useful for display equations) */
-        text-align: center;
-    }
-    span.texhtml {
-        /* revert inline math to default font */
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-    }
-    /* Table of Contents */
-    #toc,
-    .toc {
-        border: none;
-        padding: 0;
-        background: none;
-        font-size: inherit;
-        /* span 100% of the width */
-        display: block;
-    }
-    .mw-body #toc h2,
-    .mw-body .toc h2 {
-        font-family: inherit;
-        font-size: 1.5em;
-    }
-    #toc h2,
-    .toc h2 {
-        display: block;
-    }
-    #toc #toctitle,
-    .toc #toctitle,
-    #toc .toctitle,
-    .toc .toctitle {
-        text-align: left;
-    }
-    .toctoggle {
-        display: none;
-    }
-    /* Figures */
-    div.tright {
-        margin: 0.5em 0 0.5em 1.5em;
-    }
-    div.tleft {
-        margin: 0.5em 1.5em 0.5em 0;
-    }
-    /* Code */
-    .mw-code {
-        margin: 1em 0;
-    }
-    pre,
-    code {
-        font-family: 'Latin Modern Mono', monospace !important;
-    }
 
-    sup {
-        text-indent: 0;
-    }
     /*Katex*/
     .katex {
         font-size: 1em !important;
