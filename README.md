@@ -120,8 +120,14 @@ in markdown:
 | Property | Description                |
 |----------|----------------------------|
 | name     | The style it should assume |
+| margin   | Margin of the printed page |
+| url      | The url of your personal sheet |
 
 The property name can have the values shown when using the snippet `style` within markdown. Append the `name` property with `disable_style` to disable the style used by vscode and show the text as it will be printed.
+
+margin can have one value (top, bottom, left, right), two ((top, bottom), (left, right)) or four (top, right, bottom, left)
+
+url will get the contents of the stylesheet and set add it to the document. This will also disable the margin property, so if wanted needs to be set in the stylesheet.
 
 ## Extra functionality
 
