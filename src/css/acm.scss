@@ -54,13 +54,15 @@ body.acm.disable_theme {
   }
 }
 
-body.acm {
-	// Page Margins
+@page {
+    // Page Margins
     --mk-margin-top: 2.65cm;
     --mk-margin-bottom: 1.9cm;
     --mk-margin-left: 2.82cm;
     --mk-margin-right: 1.9cm;
+}
 
+body.acm {
     --vscode-editor-font-size: 11pt;
     --vscode-editor-font-family: "Libertine", serif;
 
@@ -68,7 +70,7 @@ body.acm {
     table,
     th,
     td {
-        border: 1px solid black;
+        border: 1px solid black !important;
         padding-left: 5px;
         padding-right: 5px;
     }

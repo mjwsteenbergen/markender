@@ -165,9 +165,9 @@ h1 {
 @import "../components/md-link/md-link.scss";
 
 // Set print margins
-@page {
-	margin-top: var(--mk-margin-top, 80px);
-	margin-bottom: var(--mk-margin-bottom, 80px); 
-    margin-left: var(--mk-margin-left, 120px);
-    margin-right: var(--mk-margin-right, 120px);
-}
+// @page {
+// 	margin-top: var(--mk-margin-top, 80px);
+// 	margin-bottom: var(--mk-margin-bottom, 80px); 
+//     margin-left: var(--mk-margin-left, 120px);
+//     margin-right: var(--mk-margin-right, 120px);
+// }
