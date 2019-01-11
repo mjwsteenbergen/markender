@@ -2,6 +2,7 @@
 
 ## 1.4.0
  - Remove command
+ - Page margins are now set using md-style, until better solution can be found
 
 ## 1.3.0
  - Multiple references at once!
