@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.4.0
+ - Remove command
+
 ## 1.3.0
  - Multiple references at once!
  - You can now reference anything that BibTex can!
