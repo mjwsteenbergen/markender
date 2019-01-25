@@ -77,6 +77,11 @@ Example:
 ### Reference from url
 `<md-bib-url>${url}</md-bib-url>` will tell the bibliography to get a reference from the given url.
 
+| Property | Description                                           |
+|----------|-------------------------------------------------------|
+| id       | The citation key of the reference                     |
+| accessed | The date of when the reference was accessed in the form `year-month-day` |
+
 Example:
 
 ```

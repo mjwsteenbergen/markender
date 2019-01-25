@@ -34,7 +34,7 @@ export class Bibliography extends HTMLElement {
                     break;
                 case "md-bib-url":
                     bib.removeChild(i);
-                    bib.addBibItem(bib.addBibItemFromUrl(i.textContent || "", (i as HTMLElement).id), bib);
+                    bib.addBibItem(bib.addBibItemFromUrl(i), bib);
                     break;
                 case "#text" || "md-bib-item" || "h1":
                     break;
@@ -55,7 +55,20 @@ export class Bibliography extends HTMLElement {
 
     }
 
-    addBibItemFromUrl(url: string, id: string): BibtexEntry {
+    addBibItemFromUrl(element: ChildNode): BibtexEntry {
+        let url = (element as HTMLElement).textContent || "";
+        let id = (element as HTMLElement).id;
+        console.warn("a")
+        let date;
+        try {
+            console.warn("a")
+            let dateString = (element as HTMLElement).getAttribute("accessed");
+            console.log(dateString);
+            date = new Date(dateString);
+        } catch {
+            date = Date.now();
+            console.warn("Invalid date")
+        }
         //this.getReference([], ["author", "title", "howpublished", "month", "year", "note", "key", "url"]);
         var parser = document.createElement('a');
         parser.href = url;
@@ -67,7 +80,7 @@ export class Bibliography extends HTMLElement {
         entry.entryTags["url"] = url;
         entry.entryTags["author"] = parser.host;
         entry.entryTags["year"] = new Date().getFullYear().toString();
-        entry.entryTags["note"] = "(Accessed on " + new Date(Date.now()).toDateString() + ")";
+        entry.entryTags["note"] = "(Accessed on " + date.toDateString() + ")";
         return entry;
 
     }
