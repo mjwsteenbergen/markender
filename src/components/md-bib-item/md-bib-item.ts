@@ -109,18 +109,20 @@ export class MdBibItem extends HTMLElement {
     }
 
     formatEntryTag(entryTag: string, input: string): string {
+        //Replace \url{} with a link
+        input = input.replace(/\\url{(.+)}/g, "<a target=\"_blank\" href=$1>View Online</a>");
+
+        //Replace {\textquotesingle} with '
+        input = input.replace(/{\\textquotesingle}/g, "'");
+
+        //Replace {ACM} with _ACM_
+        input = input.replace(/{ACM}/g, "<span style=\"font-style: italic;\">ACM</span>");
+        
+        // Remove all other {}
+        input = input.replace(/\{(.+?)\}/g, "$1");
         switch (entryTag) {
             case "volume": {
                 return "vol. " + input;
-            }
-            case "howpublished": {
-                var regex = /\\url{(.+)}/g;
-                var output = regex.exec(input);
-                if (output !== null) {
-                    input = input.replace(output[0], output[1]);
-                    return "<a target=\"_blank\" href=" + input + ">View Online</a>";
-                }
-                return input;
             }
             case "url": {
                 if (input.startsWith("http")) {
