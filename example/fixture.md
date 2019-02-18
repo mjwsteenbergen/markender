@@ -1748,11 +1748,11 @@ $$\sqrt{3x-1}+(1+x)^2$$
 # References
 
 ## Bib
-Some text and then a ref [small, big] and then another [bib] and [daring] and [quante2009revenue]
+Some text and then two references [small, big] and then another [bib] and [daring] and [quante2009revenue]
 
 ## Figures
 
-Referencing [fig:1] figure 1
+Referencing [fig:19] figure 19
 
 Referencing myFigure [myFigure]
 
