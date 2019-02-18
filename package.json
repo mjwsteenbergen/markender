@@ -55,16 +55,16 @@
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
-        "css-loader": "^1.0.0",
+        "css-loader": "^2.1.0",
         "mini-css-extract-plugin": "^0.4.2",
-        "node-sass": "^4.9.3",
+        "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.0",
-        "ts-loader": "^4.5.0",
+        "ts-loader": "^5.3.3",
         "tslint": "^5.8.0",
-        "typescript": "^3.0.1",
-        "vscode": "^1.1.21",
-        "webpack": "^4.17.1",
-        "webpack-cli": "^3.1.0"
+        "typescript": "^3.3.3",
+        "vscode": "^1.1.29",
+        "webpack": "^4.29.1",
+        "webpack-cli": "^3.2.3"
     }
 }
