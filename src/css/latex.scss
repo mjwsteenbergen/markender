@@ -92,6 +92,9 @@ body.latex.disable_theme {
             margin-right: auto;
             page-break-inside: avoid;
         }
+        h1 {
+            font-size: 25px !important;
+        }
     }
 }
 
