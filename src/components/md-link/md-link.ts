@@ -1,7 +1,6 @@
-import { MdLinkStorage } from "./md-link-storage";
+import { LinkSubscriber, Link, ReferenceType, getLinkStorage } from "./md-link-storage";
 
-export class MdLink extends HTMLElement {
-
+export class MdLink extends HTMLElement implements LinkSubscriber {
     static get observedAttributes() { return ['name', 'href']; }
 
     connectedCallback() {
@@ -11,26 +10,44 @@ export class MdLink extends HTMLElement {
 
         this.appendChild(reference);
 
-        var storage = this.getLinkStorageOrCreate();
-        storage.subscribe(this);
+        this.onReferenceChanged("", {
+            type: null,
+            isUsed: true,
+            href: "",
+            reportValue: "Not found",
+            index: -1
+        });
+
+        getLinkStorage((storage) => {
+            storage.subscribe(this.getAttribute("link"), this);
+        });
     }
 
-    getLinkStorageOrCreate(): MdLinkStorage {
-        var storage = document.getElementsByTagName("md-link-storage");
-        if (storage.length > 0) {
-            return storage[0] as MdLinkStorage;
-        } else {
-            throw Error("Link Storage Not Found");
+    onReferenceChanged(id: string, link: Link) {
+        this.getElementsByTagName("a")[0].innerHTML = link.reportValue;
+        this.getElementsByTagName("a")[0].setAttribute('href', link.href);
+
+        let update = false;
+        if(!link.isUsed) {
+            link.isUsed = true;
+            update = true;
+        }
+
+        if(link.index === -1 || link.index > this.getIndex()) {
+            link.index = this.getIndex();
+            update = true;
+        }
+
+        if(update) {
+            getLinkStorage((storage) => {
+                storage.update(id, link);
+            });
+
         }
 
     }
 
-    attributeChangedCallback(attr: string, oldValue: string, newValue: string) {
-        if (attr === 'name') {
-            this.getElementsByTagName("a")[0].innerHTML = newValue;
-        }
-        if (attr === 'href') {
-            this.getElementsByTagName("a")[0].setAttribute('href', newValue);
-        }
+    getIndex(): number {
+        return Array.from(document.getElementsByTagName("md-link")).indexOf(this);
     }
 }

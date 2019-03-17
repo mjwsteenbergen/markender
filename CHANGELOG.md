@@ -4,6 +4,9 @@
  - Remove command
  - Page margins are now set using md-style, until better solution can be found
  - `md-bib-url` now has accessed property
+ - Rebuilt link-storage for new functionality
+   - ordering
+   - removing unused references
 
 ## 1.3.0
  - Multiple references at once!

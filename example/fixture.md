@@ -1756,7 +1756,7 @@ Referencing [fig:19] figure 19
 
 Referencing myFigure [myFigure]
 
-<md-bib src='./Literature.bib' format='{author}, {year}'>
+<md-bib src='./Literature.bib' format='{refnumber} {author}, {year}'>
     <md-bib-doi>10.1109/5.771073</md-bib-doi>
     <md-bib-url id=daring accessed="2019-01-22">https://daringfireball.net/projects/markdown/ </md-bib-url>
 </md-bib>

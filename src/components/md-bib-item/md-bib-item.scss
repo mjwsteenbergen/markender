@@ -8,6 +8,10 @@ md-bib-item {
     }
 }
 
+md-bib-item[order="-1"] {
+    display: none;
+}
+
 md-bib-item .wrapper {
     display: flex;
 }

@@ -4,6 +4,8 @@ export class MdBibItem extends HTMLElement {
     bibitem: BibtexEntry = new BibtexEntry();
     refnumber: number = 0;
 
+    static get observedAttributes() { return ['name']; }
+
     constructor() {
         super();
     }
@@ -18,6 +20,7 @@ export class MdBibItem extends HTMLElement {
     `;
 
     connectedCallback() {
+        this.innerHTML = "";
         this.insertAdjacentHTML("afterbegin", this.template);
 
         this.bibitem = JSON.parse(this.getAttribute("bibitem") || "{}");
@@ -25,10 +28,22 @@ export class MdBibItem extends HTMLElement {
 
         var wrapper = this.children[1];
 
-        wrapper.getElementsByClassName("refnumber")[0].innerHTML = "[" + this.refnumber + "]";
+        wrapper.getElementsByClassName("refnumber")[0].innerHTML = "[" + this.getAttribute("name") + "]";
         wrapper.getElementsByClassName("citation_key")[0].innerHTML = "[" + this.bibitem.citationKey + "]";
         wrapper.getElementsByClassName("reference")[0].innerHTML = this.formatReference();
-        wrapper.id = "bib-item-" + this.refnumber;
+        wrapper.id = "ref-" + this.bibitem.citationKey;
+    }
+
+    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        var wrapper = this.children[1];
+        switch(name) {
+            case "name": 
+                if(wrapper === undefined) {
+                    return;
+                }
+                wrapper.getElementsByClassName("refnumber")[0].innerHTML = "[" + newValue + "]";
+                break;
+        }
     }
 
     formatReference() {

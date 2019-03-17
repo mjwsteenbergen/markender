@@ -1,8 +1,9 @@
-import { AbstractBibtexEntry, BibtexEntry, BibtexParser } from "./bibtexParse";
-import { MdLinkStorage } from "../md-link/md-link-storage";
+import { BibtexEntry, BibtexParser, AbstractBibtexEntry } from "./bibtexParse";
+import { ReferenceType, LinkSubscriber, Link, getLinkStorage } from "../md-link/md-link-storage";
+import { MdBibItem } from "../md-bib-item/md-bib-item";
 
-export class Bibliography extends HTMLElement {
-    bibtex: AbstractBibtexEntry[];
+export class Bibliography extends HTMLElement implements LinkSubscriber {
+    bibtex: BibtexEntry[];
     src: string;
     format: string;
     excludeElements: string[];
@@ -13,7 +14,7 @@ export class Bibliography extends HTMLElement {
         super();
         this.excludeElements = ["pre"];
         this.format = "";
-        this.bibtex = new Array<AbstractBibtexEntry>();
+        this.bibtex = new Array<BibtexEntry>();
         this.number = 1;
         this.src = "";
     }
@@ -39,37 +40,26 @@ export class Bibliography extends HTMLElement {
                 case "#text" || "md-bib-item" || "h1":
                     break;
                 default:
-                    console.log("Unknown type: " + i.nodeName.toLowerCase());
+                    console.warn("Unknown type: " + i.nodeName.toLowerCase());
                     break;
             }
         });
 
-
         bib.startAlgorithm();
-
-
-        // });
-
-        // this.appendChild(this.template);
-
-
     }
 
     addBibItemFromUrl(element: ChildNode): BibtexEntry {
-        let url = (element as HTMLElement).textContent || "";
-        let id = (element as HTMLElement).id;
-        console.warn("a")
+        const htmlElement = (element as HTMLElement);
+        let url = htmlElement.textContent || "";
+        let id = htmlElement.id;
         let date;
         try {
-            console.warn("a")
-            let dateString = (element as HTMLElement).getAttribute("accessed");
-            console.log(dateString);
+            let dateString = htmlElement.getAttribute("accessed");
             date = new Date(dateString);
         } catch {
             date = Date.now();
             console.warn("Invalid date")
         }
-        //this.getReference([], ["author", "title", "howpublished", "month", "year", "note", "key", "url"]);
         var parser = document.createElement('a');
         parser.href = url;
         var entry = new BibtexEntry();
@@ -91,38 +81,26 @@ export class Bibliography extends HTMLElement {
         // req.headers.append("Access-Control-Allow-Origin", "*");
         var res = await fetch(req);
         var textual = await res.text();
-        console.log({textual});
         var doi = new BibtexParser().toJSON(textual)[0] as BibtexEntry;
         doi.citationKey = id || doi.citationKey;
         return doi;
     }
 
-    startAlgorithm() {
+    async startAlgorithm() {
         var httpRequest = new XMLHttpRequest();
         var bib = this;
         var once = false;
 
-        httpRequest.onreadystatechange = function (e) {
-            if (httpRequest.status === 200 && httpRequest.responseText !== "") {
-                if (once) {
-                    return;
-                }
-                once = true;
-                var bibtex = httpRequest.responseText;
-                bib.bibtex = bib.bibtex.concat(new BibtexParser().toJSON(bibtex));
-                bib.bibtex.forEach(function (bibitem) {
-                    if (bibitem instanceof BibtexEntry) {
+        let res = await fetch(this.src);
+        let text = await res.text();
 
-                        bib.addBibItem(bibitem, bib);
-                    }
-                });
+        let newItems = new BibtexParser().toJSON(text);
+
+        newItems.forEach(bibitem => {
+            if (bibitem instanceof BibtexEntry) {
+                this.addBibItem(bibitem, bib);
             }
-            else {
-                console.error(httpRequest.status);
-            }
-        };
-        httpRequest.open('GET', this.src, true);
-        httpRequest.send();
+        });
     }
 
     formatBib(bibitem: BibtexEntry, refnumber: number) {
@@ -142,44 +120,99 @@ export class Bibliography extends HTMLElement {
         return res;
     }
 
-    getLinkStorageOrCreate(): MdLinkStorage {
-        var storage = document.getElementsByTagName("md-link-storage");
-        if (storage.length > 0) {
-            return storage[0] as MdLinkStorage;
-        } else {
-            throw new Error("Link Storage was not found");
-        }
-
-    }
-
     addBibItem(bibitem: BibtexEntry, bib: Bibliography) {
         var item = document.createElement('md-bib-item');
         item.setAttribute("bibitem", JSON.stringify(bibitem));
         item.setAttribute("refnumber", bib.number.toString());
         item.setAttribute("name", bib.formatBib(bibitem, bib.number));
+        item.setAttribute("order", "100000000");
+        item.setAttribute("tag-id", bibitem.citationKey);
 
         const myNumber = bib.number;
         bib.number++;
 
+        this.bibtex = this.bibtex.concat([bibitem]);
         bib.appendChild(item);
-        // document.addEventListener("load", function (event) {
-        var storage = bib.getLinkStorageOrCreate();
-        this.addBibItemToLink(storage, bibitem.citationKey, bib.formatBib(bibitem, myNumber), "#bib-item-" + myNumber, bib);
-
-        // document.addEventListener("readystatechange", function (event) {
-        //     if (document.readyState !== "complete") { return; }
-        //     var storage = bib.getLinkStorageOrCreate();
-        //     storage.setLink(bibitem.citationKey, bib.formatBib(bibitem, myNumber), "#bib-item-" + myNumber, bib);
-        // });
+        let showUnused = bib.hasAttribute("showUnused");
+        getLinkStorage((storage) => {
+            storage.subscribe(bibitem.citationKey, bib);
+            storage.update(bibitem.citationKey, {
+                reportValue: bib.formatBib(bibitem, myNumber),
+                type: ReferenceType.reference,
+                href: "#ref-" + bibitem.citationKey,
+                index: showUnused ? Number.MAX_SAFE_INTEGER : -1,
+                isUsed: false
+            });
+        });
     }
 
-    addBibItemToLink(storage: MdLinkStorage, id: string, name: string, href: string, bib: Bibliography) {
-        if (storage.setLink === undefined) {
-            setTimeout(() => {
-                this.addBibItemToLink(storage, id, name, href, bib);
-            }, 200);
-        } else {
-            storage.setLink(id, name, href, bib);
+    onReferenceChanged(id: string, link: Link) {
+        Array.from(this.children).forEach((el) => {
+            if (el.getAttribute("tag-id") === id) {
+                el.setAttribute("order", link.index.toString());
+            }
+        });
+
+        if(!this.hasAttribute("disableSort")) {
+            this.sort();
+        }
+    }
+
+    sort() {
+        let isSorted = true;
+        while(true) {
+            isSorted = true;
+            for (let index = 0; index < this.children.length; index++) {
+                if (index + 1 == this.children.length) {
+                    continue;
+                }
+                const element = this.children[index] as HTMLElement;
+                const myIndex = Number.parseInt(element.getAttribute("order"));
+
+                const nextElement = this.children[index + 1] as HTMLElement;
+                const nextIndex = Number.parseInt(nextElement.getAttribute("order"));
+
+                if(myIndex > nextIndex) {
+                    isSorted = false;
+                    this.insertBefore(nextElement, element)
+                }
+            }
+
+            if(isSorted) {
+                break;
+            }
+        }
+
+        let refNumber = 1;
+        for (let index = 0; index < this.children.length; index++) {
+            const element = this.children[index];
+            if(element instanceof MdBibItem) {
+                let citationKey = element.getAttribute("tag-id");
+                const item = this.bibtex.find(i => i.citationKey === citationKey)
+
+                if (item === undefined) {
+                    continue;
+                }
+
+                if (Number.parseInt(element.getAttribute("order")) === -1 && !this.hasAttribute("showUnused")) {
+                    continue;
+                }
+
+                element.setAttribute("refnumber", refNumber.toString());
+                let newreportValue = this.formatBib(item, refNumber)
+                element.setAttribute("name", newreportValue);
+                refNumber++;
+                getLinkStorage(storage => {
+                    let item = storage.values[citationKey];
+                    if(item === undefined) {
+                        return;
+                    }
+                    if(item.reportValue !== newreportValue) {
+                        item.reportValue = newreportValue;
+                        storage.update(citationKey, item);
+                    }
+                });
+            }
         }
     }
 }

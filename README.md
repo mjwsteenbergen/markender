@@ -45,10 +45,12 @@ Basic markdown does not implement referencing. This is why markdown implements i
 ### Bibliography
 `<md-bib></md-bib>` will create the bibliography.
 
-| Property | Description                                           |
-|----------|-------------------------------------------------------|
-| src      | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) |
-| format   | How to format the references (default: {refnumber}) |
+| Property    | Description                                           |
+|-------------|-------------------------------------------------------|
+| src         | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) |
+| format      | How to format the references (default: {refnumber}) |
+| showUnused  | By default the bibliography does not show unused references. Add this attribute to show them |
+| disableSort | By default the bibliography is sorted in the order of usage. Add this attribute to disable this functionality |
 
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 The citation key is shown between brackets, to help you quickly find that reference. It will automatically be removed when converting to pdf.
@@ -162,6 +164,13 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 ## Release Notes
+## 1.4.0
+ - Remove command
+ - Page margins are now set using md-style, until better solution can be found
+ - `md-bib-url` now has accessed property
+ - Rebuilt link-storage for new functionality
+   - ordering
+   - removing unused references
 
 ### 1.3.0
  - Multiple references at once!

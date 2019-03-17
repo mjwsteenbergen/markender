@@ -1,52 +1,77 @@
+
 export class MdLinkStorage extends HTMLElement {
-    requesters: HTMLElement[];
-    links: { [id: string]: Link; };
+    subscribers: { [id: string]: LinkSubscriber[]; };
+    values: { [id: string]: Link; };
 
     constructor() {
         super();
-        this.requesters = [];
-        this.links = {};
+        this.subscribers = {};
+        this.values = {};
     }
 
-    connectedCallback() {
-        var clone = document.createDocumentFragment();
-        this.appendChild(clone);
+    update(id: string, link: Link) {
+        this.values[id] = link;
+        this.updateLinkSubscribers(id, link);
     }
 
-
-    subscribe(element: HTMLElement) {
-        element.setAttribute("name", "Missing Link");
-        this.requesters.push(element);
-    }
-
-    componentInitialised() { }
-
-    setLink(id: string, name: string, href: string, linker: HTMLElement) {
-        this.links[id] = {
-            name: name,
-            href: href,
-            parent: linker
-        };
-        this.updateRequesters(id);
-    }
-
-    updateRequesters(id: string) {
-        var link = this.links[id];
-        this.requesters.forEach(i => {
-            if (i.getAttribute("link") === id) {
-                i.setAttribute("href", link.href);
-                i.setAttribute("name", link.name);
-                if (link.parent) {
-                    link.parent.setAttribute("used", "true");
-                }
-            }
+    updateLinkSubscribers(id: string, link: Link) {
+        let requesters = this.getSubscribers(id, this.subscribers);
+        requesters.forEach(element => {
+            element.onReferenceChanged(id, link);
+            // this.updateIndex(id, element.getIndex());
         });
+    }
+
+    private subscribeTo<T>(id: string, dict: { [id: string]: T[]; }, element: T) {
+        let arr = dict[id];
+        if (arr === null || arr === undefined) {
+            dict[id] = [];
+            arr = dict[id];
+        }
+
+        dict[id].push(element);
+    }
+
+    private getSubscribers<T>(id: string, dict: { [id: string]: T[]; }) {
+        let arr = dict[id];
+        if (arr === null || arr === undefined) {
+            return  [];
+        }
+
+        return dict[id];
+    }
+
+    subscribe(id: string, element: LinkSubscriber) {
+        let reference = this.values[id];
+        this.subscribeTo(id, this.subscribers, element);
     }
 }
 
-class Link {
-    name!: string;
-    href!: string;
-    parent: HTMLElement | undefined;
+export interface LinkSubscriber {
+    onReferenceChanged(id:string , link: Link);
+}
 
+export enum ReferenceType {
+    reference,
+    figure,
+    table
+}
+
+export class Link {
+    reportValue!: string;
+    href!: string;
+    index: number;
+    type: ReferenceType;
+    isUsed: boolean;
+}
+
+export function getLinkStorage(func: (storage: MdLinkStorage) => void): any {
+    var storage = document.getElementsByTagName("md-link-storage")[0] as MdLinkStorage;
+    if (storage.update === undefined) {
+        setTimeout(() => {
+            this.getLinkStorage(func);
+        }, 200);
+    } else {
+        func(storage);
+    }
 }
