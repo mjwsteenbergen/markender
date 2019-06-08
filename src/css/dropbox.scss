@@ -123,13 +123,11 @@ body.dropbox {
     
     /* todo's */
 
-	// en-todo {
-	// 	background-repeat: no-repeat;
-	// 	background-image: url('./img/checkbox-dropbox.png');
-	// 	margin-left: -17px;	
-	// }
+	en-todo {
+		background-image: url('https://raw.githubusercontent.com/mjwsteenbergen/markender/master/src/css/img/checkbox-dropbox.png');
+	}
 
-	// en-todo[checked="true"] {
-	// 	background-image: url('./img/checkbox-dropbox-checked.png');
-	// }
+	en-todo[checked="true"] {
+		background-image: url('https://raw.githubusercontent.com/mjwsteenbergen/markender/master/src/css/img/checkbox-dropbox-checked.png');
+	}
 }

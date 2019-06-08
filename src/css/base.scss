@@ -61,7 +61,6 @@ body.disable_theme {
 
 //Copied directly from 'disable theme'
 @media print {
-     --vscode-textBlockQuote-border: initial;
 
     h1 {
         color: var(--md-h1);
@@ -103,7 +102,10 @@ body.disable_theme {
     }
 
     // Defaults
-    --vscode-textLink-foreground: black;
+    :root{
+        --vscode-textLink-foreground: black;
+        --vscode-textBlockQuote-border: initial;
+    }
 }
 
 
@@ -135,13 +137,13 @@ table {
     list-style-type: none;
 }
 
-en-todo {
+en-todo::before {
     margin-left: -18px;
-    width: 13px;
-    height: 13px;
-    display: inline-block;
-    background-size: contain;
-    vertical-align: middle;
+    content: "☐";
+}
+
+en-todo[checked="true"]::before {
+    content: "🗹";
 }
 
 h1 {
@@ -171,3 +173,11 @@ h1 {
 //     margin-left: var(--mk-margin-left, 120px);
 //     margin-right: var(--mk-margin-right, 120px);
 // }
+
+// en-todo {
+	// 	background-repeat: no-repeat;
+	// 	background-image: url('./img/checkbox-dropbox.png');
+	// 	margin-left: -17px;	
+	// }
+
+	

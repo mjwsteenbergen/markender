@@ -197,12 +197,13 @@ body.latex {
         page-break-before: always;
     }
 
-    // en-todo {
-    //     background-repeat: no-repeat;
-    //     background-image: url('./img/checkbox-latex.svg');
-    //     margin-bottom: 5px;
-    // }
-    // en-todo[checked='true'] {
-    //     background-image: url('./img/checkbox-latex-checked.svg');
-    // }
+    en-todo {
+        background-repeat: no-repeat;
+        background-image: url('https://raw.githubusercontent.com/mjwsteenbergen/markender/master/src/css/img/checkbox-latex.svg');
+        margin-bottom: 5px;
+    }
+    
+    en-todo[checked='true'] {
+        background-image: url('https://raw.githubusercontent.com/mjwsteenbergen/markender/master/src/css/img/checkbox-latex-checked.svg');
+    }
 }
