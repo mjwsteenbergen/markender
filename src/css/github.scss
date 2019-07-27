@@ -136,7 +136,7 @@ body.github.disable_theme {
 body.github {
   --vscode-editor-font-size: 14px;
   line-height: 1.6;  
-  --vscode-editor-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --vscode-font-family-override: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   h1,
   h2,
   h3,
