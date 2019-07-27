@@ -164,6 +164,11 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 ## Release Notes
+## 1.5.0
+ - Bug fixes
+    - Checkbox works again
+    - Update vulnerable packages
+
 ## 1.4.0
  - Remove command
  - Page margins are now set using md-style, until better solution can be found
