@@ -76,7 +76,7 @@ export class Bibliography extends HTMLElement implements LinkSubscriber {
     }
 
     async addBibItemFromDoi(text: string, id: string): Promise<BibtexEntry> {
-        var req = new Request("http://dx.doi.org/" + text);
+        var req = new Request("https://dx.doi.org/" + text);
         req.headers.append("Accept", "application/x-bibtex; q = 1");
         // req.headers.append("Access-Control-Allow-Origin", "*");
         var res = await fetch(req);
