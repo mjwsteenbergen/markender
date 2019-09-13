@@ -1,4 +1,8 @@
 # Change Log
+## 1.5.1
+ - Bug fixes
+   - Switch to https when getting bibliography from doi
+
 ## 1.5.0
  - Bug fixes
     - Checkbox works again
