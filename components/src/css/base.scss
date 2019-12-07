@@ -1,0 +1,176 @@
+@media screen {
+    #markenderContent {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    body {
+        /* padding: 0; */
+        padding-left: 26px;
+        padding-right: 26px;
+        margin: 0;
+    }
+}
+
+// Enabled only if user wants to see what end result looks like
+body.disable_theme {
+    --vscode-textBlockQuote-border: initial;
+
+    h1 {
+        color: var(--md-h1);
+    }
+
+    h2 {
+        color: var(--md-h2);
+    }
+
+    h3 {
+        color: var(--md-h3);
+    }
+
+    h4 {
+        color: var(--md-h4);
+    }
+
+    h5 {
+        color: var(--md-h5);
+    }
+
+    h6 {
+        color: var(--md-h6);
+    }
+
+    code {
+        color: var(--vscode-editor-foreground);
+        font-family: var(--vscode-textPreformat-font-family, var(--vscode-editor-font-family));
+        border-color: var(--vscode-textPreformat-border);
+        background-color: var(--vscode-textPreformat-background);
+    }
+
+    pre {
+        background-color: var(--vscode-textPreformat-background);
+    }
+
+    md-toc-item a {
+        color: var(--md-toc-item-color);
+    }
+
+    // Defaults
+    --vscode-textLink-foreground: black;
+}
+
+//Copied directly from 'disable theme'
+@media print {
+
+    h1 {
+        color: var(--md-h1);
+    }
+
+    h2 {
+        color: var(--md-h2);
+    }
+
+    h3 {
+        color: var(--md-h3);
+    }
+
+    h4 {
+        color: var(--md-h4);
+    }
+
+    h5 {
+        color: var(--md-h5);
+    }
+
+    h6 {
+        color: var(--md-h6);
+    }
+
+    code {
+        color: var(--vscode-editor-foreground);
+        font-family: var(--vscode-textPreformat-font-family, var(--vscode-editor-font-family));
+        border-color: var(--vscode-textPreformat-border);
+        background-color: var(--vscode-textPreformat-background);
+    }
+
+    pre {
+        background-color: var(--vscode-textPreformat-background);
+    }
+
+    md-toc-item a {
+        color: var(--md-toc-item-color);
+    }
+
+    // Defaults
+    :root{
+        --vscode-textLink-foreground: black;
+        --vscode-textBlockQuote-border: initial;
+    }
+}
+
+
+// Variables
+body {
+    font-family: var(--vscode-font-family-override) !important;
+}
+
+code {
+    font-family: var(--vscode-textPreformat-font-family, inherit);
+}
+
+// Default Layout
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+table {
+    page-break-inside: avoid;
+}
+
+.task-list-item {
+    list-style-type: none;
+}
+
+en-todo::before {
+    margin-left: -18px;
+    content: "☐";
+}
+
+en-todo[checked="true"]::before {
+    content: "🗹";
+}
+
+h1 {
+    border: none;
+}
+
+// Import all custom styles
+@import "vscode";
+@import "acm";
+@import "dropbox";
+@import "github";
+@import "latex";
+@import "somnox";
+@import "tudelft";
+@import "latex-report";
+
+// Set print margins
+// @page {
+// 	margin-top: var(--mk-margin-top, 80px);
+// 	margin-bottom: var(--mk-margin-bottom, 80px);
+//     margin-left: var(--mk-margin-left, 120px);
+//     margin-right: var(--mk-margin-right, 120px);
+// }
+
+// en-todo {
+	// 	background-repeat: no-repeat;
+	// 	background-image: url('./img/checkbox-dropbox.png');
+	// 	margin-left: -17px;
+	// }
+

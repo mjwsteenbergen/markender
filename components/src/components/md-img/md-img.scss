@@ -1,0 +1,55 @@
+md-img {
+    page-break-inside: avoid;
+}
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+md-img div {
+    margin-bottom: 10px;
+}
+
+
+md-img div span {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+}
+
+md-img div img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+md-img[super-small] div img {
+    max-height: 40mm;
+    max-width: 75%;
+}
+
+md-img[small] div img {
+    max-height: 74mm;
+    max-width: 75%;
+}
+
+md-img[medium] div img {
+    max-height: 120mm;
+    max-width: 75%;
+}
+
+md-img .wrapper {
+    page-break-inside: avoid;
+}
+
+md-img[full] {
+    height: 290mm;
+}
+
+md-img[full] div{
+    page-break-before: always;
+    page-break-after: always;
+    display: table-cell;
+    vertical-align: middle;
+}

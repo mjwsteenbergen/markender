@@ -1,0 +1,17 @@
+md-link.reference::after {
+    content: ", "
+}
+
+md-link.last.reference::after {
+    content: "]"
+}
+
+md-link.first.reference::before {
+    content: "[";
+}
+
+@media print {
+    md-link.notfound {
+        display: none;
+    }
+}

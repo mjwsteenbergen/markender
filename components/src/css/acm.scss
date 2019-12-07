@@ -1,0 +1,138 @@
+@font-face {
+  font-family: "Libertine";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.rawgit.com/mjwsteenbergen/markender/master/components/src/css/fonts/LinuxBiolinum/LinLibertine_R.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "LibertineB";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.rawgit.com/mjwsteenbergen/markender/master/components/src/css/fonts/LinuxBiolinum/LinLibertine_RB.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "BiolinumBold";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.rawgit.com/mjwsteenbergen/markender/master/components/src/css/fonts/LinuxBiolinum/LinBiolinum_RB.ttf")
+    format("woff");
+}
+
+@font-face {
+  font-family: "Biolinum";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.rawgit.com/mjwsteenbergen/markender/master/components/src/css/fonts/LinuxBiolinum/LinBiolinum_R.ttf")
+    format("woff");
+}
+
+body.acm.disable_theme {
+    column-count: 2;
+    --vscode-editor-foreground: black;
+    --vscode-editor-background: white;
+
+    md-cover div {
+      column-span: all;
+    }
+
+}
+
+//Copy directly from 'disable theme'
+@media print {
+  body.acm {
+    column-count: 2;
+    --vscode-editor-foreground: black;
+    --vscode-editor-background: white;
+
+    md-cover div {
+      column-span: all;
+    }
+  }
+}
+
+@page {
+    // Page Margins
+    --mk-margin-top: 2.65cm;
+    --mk-margin-bottom: 1.9cm;
+    --mk-margin-left: 2.82cm;
+    --mk-margin-right: 1.9cm;
+}
+
+body.acm {
+    --vscode-editor-font-size: 11pt;
+    --vscode-font-family-override: "Libertine", serif;
+
+    //Default Tables
+    table,
+    th,
+    td {
+        border: 1px solid black !important;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    margin: 0;
+
+    h1 {
+        font-family: "LibertineB";
+        /* font-weight: bold; */
+        text-transform: uppercase;
+        font-size: 11pt;
+        margin: 0;
+        padding-top: 10px;
+        border-bottom-style: none;
+    }
+
+    h2 {
+        font-family: "BiolinumBold";
+        font-weight: bold;
+        font-size: 11pt;
+    }
+
+    /*Extra Items*/
+    md-cover {
+        display: block;
+    }
+
+    md-cover-title {
+        font-family: "BiolinumBold";
+        font-weight: bold;
+        font-size: 17.5pt;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    md-cover-author {
+        margin-top: 15px;
+        font-size: 13pt;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        padding-bottom: 30px;
+    }
+
+    md-cover-date {
+        display: none;
+    }
+
+    md-img div span {
+        font-weight: bold;
+    }
+
+    md-bib p {
+        margin: 0;
+    }
+}

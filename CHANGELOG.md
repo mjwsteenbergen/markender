@@ -1,4 +1,7 @@
 # Change Log
+## 2.0.0
+ - Moved from vanilla web components to StencilJS to make adding new features easier
+
 ## 1.5.1
  - Bug fixes
    - Switch to https when getting bibliography from doi

@@ -1,0 +1,39 @@
+{
+  "name": "markender-components",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/markender-components/markender-components.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "build.watch": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "build.patch": "sed -i \"s/const opts = scriptElm\\['data-opts'\\];/return Object.assign\\({}, { resourcesUrl: new URL\\(win.location.href\\).href }\\);/g\" dist/esm/core-*.js",
+    "generate": "stencil generate",
+    "webpack": "npx webpack --progress",
+    "deploy": "(npm run build) && (npm run build.patch) && (npm run webpack)"
+  },
+  "devDependencies": {
+    "@stencil/core": "^1.8.1",
+    "@stencil/sass": "^1.1.1",
+    "css-loader": "^3.2.1",
+    "file-loader": "^5.0.2",
+    "rollup": "^1.27.8",
+    "style-loader": "^1.0.1",
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10"
+  },
+  "license": "MIT"
+}
