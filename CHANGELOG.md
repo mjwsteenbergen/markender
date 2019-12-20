@@ -4,6 +4,10 @@
  - Fixed md-bib-url snippet
  - Show all references by default
  - Add bibliography export
+ - Table of contents
+   - Same chapter titles no longer clash
+   - Chapter names with weird characters are now correctly linkable
+   - Chapters are referencable
 
 ## 1.5.1
  - Bug fixes

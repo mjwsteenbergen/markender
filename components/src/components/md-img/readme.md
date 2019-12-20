@@ -5,6 +5,8 @@ However, there might be a few cases, where it would be useful to use the element
 
 To change the size of the image add the words: `full,medium,small or super-small` to change the size of the image like so: `<md-img small></md-img>` 
 
+To reference an image, one uses the `[fig:x]` where x is the number of the figure.
+
 ### Collages
 
 Markdown does not contain a specification to have images on the same line. This extension adds this functionality

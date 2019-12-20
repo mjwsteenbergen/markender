@@ -118,6 +118,25 @@ code {
     font-family: var(--vscode-textPreformat-font-family, inherit);
 }
 
+//Table of contents
+.md-toc-chapter-number {
+  display: none;
+}
+
+body.chapters {
+  .md-toc-chapter-number {
+    display: inherit;
+  }
+
+  .md-toc-extra-space {
+    padding-left: 10px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  display: flex;
+}
+
 // Default Layout
 
 pre {

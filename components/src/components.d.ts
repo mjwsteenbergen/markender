@@ -98,6 +98,7 @@ export namespace Components {
   }
   interface MdTocItem {
     'chapter': string;
+    'href': string;
     'indent': string;
     'name': string;
   }
@@ -259,6 +260,7 @@ declare namespace LocalJSX {
   }
   interface MdTocItem {
     'chapter'?: string;
+    'href'?: string;
     'indent'?: string;
     'name'?: string;
   }

@@ -5,7 +5,8 @@ export interface LinkSubscriber {
 export enum ReferenceType {
   reference,
   figure,
-  table
+  table,
+  chapter
 }
 
 export class Link {
