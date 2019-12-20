@@ -315,26 +315,28 @@ export class BibtexParser {
     }
 
     /* added during hackathon don't hate on me */
-    toBibtex(json: any) {
+    toBibtex(json: BibtexEntry[]) {
         var out = '';
         for (var i in json) {
-            out += "@" + json[i].entryType;
-            out += '{';
+            out += "@" + json[i].entryType + '{';
             if (json[i].citationKey) {
-                out += json[i].citationKey + ', ';
+                out += json[i].citationKey + ',';
             }
-            if (json[i].entry) {
-                out += json[i].entry;
+
+            out += "\n";
+
+            if (json[i]["entry"]) {
+                out += json[i]["entry"];
             }
             if (json[i].entryTags) {
                 var tags = '';
                 for (var jdx in json[i].entryTags) {
                     if (tags.length !== 0) {
-                        tags += ', ';
+                        tags += ', \n';
                     }
-                    tags += jdx + '= {' + json[i].entryTags[jdx] + '}';
+                    tags += '\t' + jdx.padEnd(12) + '= {' + json[i].entryTags[jdx] + '}';
                 }
-                out += tags;
+                out += tags + '\n';
             }
             out += '}\n\n';
         }

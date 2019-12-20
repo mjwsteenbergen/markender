@@ -1,10 +1,11 @@
 import { BibtexEntry, BibtexParser } from "./bibtexParse";
 import { LinkSubscriber, Link, ReferenceType } from "../md-link/md-link-files";
-import { Component, Prop, Element, h, State } from "@stencil/core";
+import { Component, Prop, Element, h, State, Listen } from "@stencil/core";
 import { MdLinkStorage } from "../md-link/md-link-storage";
 
 @Component({
-  tag: "md-bib"
+  tag: "md-bib",
+  styleUrl: "md-bib.scss"
 })
 export class Bibliography implements LinkSubscriber {
   /**
@@ -23,6 +24,12 @@ export class Bibliography implements LinkSubscriber {
 
   @State() items: BibtexEntry[];
   @State() forceRerender: boolean;
+  @State() showPopup: boolean;
+
+  @Listen('shouldClose')
+  todoCompletedHandler() {
+    this.showPopup = false;
+  }
 
 
   componentWillLoad() {
@@ -69,7 +76,12 @@ export class Bibliography implements LinkSubscriber {
   render() {
     console.warn(this.ranking);
     return <div>
-      <h1>Bibliography</h1>
+      <div class="vertical">
+        <h1>Bibliography</h1>
+        <span id="export" onClick={() => this.showPopup = true}>Export</span>
+      </div>
+      {this.showPopup ? <md-bib-export-popup bib={this.items}></md-bib-export-popup> : ""}
+
       {this.items.sort((a, b) => {
         var ranka = this.ranking[a.citationKey] || (Number.MAX_VALUE - this.items.indexOf(a));
         var rankb = this.ranking[b.citationKey] || (Number.MAX_VALUE - this.items.indexOf(b));

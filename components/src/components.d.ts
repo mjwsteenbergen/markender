@@ -26,6 +26,9 @@ export namespace Components {
     */
     'src': string;
   }
+  interface MdBibExportPopup {
+    'bib': BibtexEntry[];
+  }
   interface MdBibItem {
     'bibitem': BibtexEntry;
     'name': string;
@@ -109,6 +112,12 @@ declare global {
     new (): HTMLMdBibElement;
   };
 
+  interface HTMLMdBibExportPopupElement extends Components.MdBibExportPopup, HTMLStencilElement {}
+  var HTMLMdBibExportPopupElement: {
+    prototype: HTMLMdBibExportPopupElement;
+    new (): HTMLMdBibExportPopupElement;
+  };
+
   interface HTMLMdBibItemElement extends Components.MdBibItem, HTMLStencilElement {}
   var HTMLMdBibItemElement: {
     prototype: HTMLMdBibItemElement;
@@ -158,6 +167,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'md-bib': HTMLMdBibElement;
+    'md-bib-export-popup': HTMLMdBibExportPopupElement;
     'md-bib-item': HTMLMdBibItemElement;
     'md-cover': HTMLMdCoverElement;
     'md-img': HTMLMdImgElement;
@@ -179,6 +189,10 @@ declare namespace LocalJSX {
     * Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format)
     */
     'src'?: string;
+  }
+  interface MdBibExportPopup {
+    'bib'?: BibtexEntry[];
+    'onShouldClose'?: (event: CustomEvent<any>) => void;
   }
   interface MdBibItem {
     'bibitem'?: BibtexEntry;
@@ -251,6 +265,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'md-bib': MdBib;
+    'md-bib-export-popup': MdBibExportPopup;
     'md-bib-item': MdBibItem;
     'md-cover': MdCover;
     'md-img': MdImg;
@@ -269,6 +284,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'md-bib': LocalJSX.MdBib & JSXBase.HTMLAttributes<HTMLMdBibElement>;
+      'md-bib-export-popup': LocalJSX.MdBibExportPopup & JSXBase.HTMLAttributes<HTMLMdBibExportPopupElement>;
       'md-bib-item': LocalJSX.MdBibItem & JSXBase.HTMLAttributes<HTMLMdBibItemElement>;
       'md-cover': LocalJSX.MdCover & JSXBase.HTMLAttributes<HTMLMdCoverElement>;
       'md-img': LocalJSX.MdImg & JSXBase.HTMLAttributes<HTMLMdImgElement>;

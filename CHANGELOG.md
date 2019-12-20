@@ -3,6 +3,7 @@
  - Moved from vanilla web components to StencilJS to make adding new features easier
  - Fixed md-bib-url snippet
  - Show all references by default
+ - Add bibliography export
 
 ## 1.5.1
  - Bug fixes

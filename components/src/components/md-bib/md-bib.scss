@@ -1,0 +1,16 @@
+md-bib div.vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  vertical-align: bottom;
+}
+
+md-bib span#export {
+  margin-left: 4px;
+}
+
+@media print {
+    md-bib span#export {
+        display: none;
+    }
+}

@@ -1,0 +1,26 @@
+md-bib-export-popup div#outside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    height: 100%;
+    width: 100%;
+}
+
+
+md-bib-export-popup div#copy {
+  min-width: 100%;
+  text-align: right;
+}
+
+md-bib-export-popup div#modal {
+    white-space: pre-wrap;
+    margin: 10%;
+    background-color: var(--vscode-editor-background);
+    padding: 3%;
+    padding-top: 10px;
+    max-height: 80%;
+    display: block;
+    overflow: scroll;
+    border-radius: 5px;
+}

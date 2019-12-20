@@ -54,11 +54,13 @@ Example:
 
 ### Depends on
 
+- [md-bib-export-popup](../mb-bib-export-popup)
 - [md-bib-item](../md-bib-item)
 
 ### Graph
 ```mermaid
 graph TD;
+  md-bib --> md-bib-export-popup
   md-bib --> md-bib-item
   style md-bib fill:#f9f,stroke:#333,stroke-width:4px
 ```
