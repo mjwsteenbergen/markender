@@ -13,6 +13,6 @@
 | `title`  | `title`   | Title of the report  | `string` | `undefined`                           |
 
 
- 
+----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

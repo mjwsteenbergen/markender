@@ -1,6 +1,8 @@
 # Change Log
 ## 2.0.0
  - Moved from vanilla web components to StencilJS to make adding new features easier
+ - Fixed md-bib-url snippet
+ - Show all references by default
 
 ## 1.5.1
  - Bug fixes

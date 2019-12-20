@@ -45,7 +45,7 @@ Example:
 ## Properties
 
 | Property | Attribute | Description                                                                                   | Type     | Default         |
-| -------- | --------- |   - | -------- | --------------- |
+| -------- | --------- | --------------------------------------------------------------------------------------------- | -------- | --------------- |
 | `format` | `format`  | How to format the references)                                                                 | `string` | `"{refnumber}"` |
 | `src`    | `src`     | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) | `string` | `undefined`     |
 
@@ -63,6 +63,6 @@ graph TD;
   style md-bib fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
- 
+----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

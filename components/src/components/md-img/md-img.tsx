@@ -46,7 +46,7 @@ export class MdImg {
         type: ReferenceType.figure,
         href: "#" + this.refId,
         isUsed: false,
-        index: -1
+        index: Number.MAX_VALUE
       });
     });
 

@@ -7,6 +7,16 @@
 
 ## Methods
 
+### `getValue(id: string) => Promise<Link>`
+
+
+
+#### Returns
+
+Type: `Promise<Link>`
+
+
+
 ### `subscribe(id: string, element: LinkSubscriber) => Promise<void>`
 
 
@@ -18,16 +28,6 @@ Type: `Promise<void>`
 
 
 ### `update(id: string, link: Link) => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-### `updateLinkSubscribers(id: string, link: Link) => Promise<void>`
 
 
 
@@ -55,6 +55,6 @@ graph TD;
   style md-link-storage fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
- 
+----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

@@ -23,7 +23,7 @@
     "build.patch": "sed -i \"s/const opts = scriptElm\\['data-opts'\\];/return Object.assign\\({}, { resourcesUrl: new URL\\(win.location.href\\).href }\\);/g\" dist/esm/core-*.js",
     "generate": "stencil generate",
     "webpack": "npx webpack --progress",
-    "deploy": "(npm run build) && (npm run build.patch) && (npm run webpack)",
+    "deploy": "(npm run build) && (npm run build.patch) && (npm run webpack)"
   },
   "devDependencies": {
     "@stencil/core": "^1.8.1",

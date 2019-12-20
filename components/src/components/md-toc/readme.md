@@ -7,7 +7,7 @@
 ## Properties
 
 | Property   | Attribute  | Description                                     | Type      | Default |
-| ---------- | ---------- |  - | --------- | ------- |
+| ---------- | ---------- | ----------------------------------------------- | --------- | ------- |
 | `chapters` | `chapters` | Flag to display chapter numbers before chapters | `boolean` | `true`  |
 
 
@@ -24,6 +24,6 @@ graph TD;
   style md-toc fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
- 
+----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

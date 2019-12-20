@@ -1,5 +1,4 @@
 import { Component, Prop, h, State, Element } from "@stencil/core";
-import { MdLinkStorage } from "./md-link-storage";
 import { LinkSubscriber, Link, ReferenceType } from "./md-link-files";
 
 @Component({
@@ -17,7 +16,7 @@ export class MdLink implements LinkSubscriber {
   @Element() element: HTMLElement;
 
   async connectedCallback() {
-    let storage = document.querySelector("md-link-storage") as unknown as MdLinkStorage;
+    let storage = document.querySelector("md-link-storage");
     await storage.subscribe(this.link, this);
     this.element.classList.add("notfound");
   }
@@ -41,26 +40,25 @@ export class MdLink implements LinkSubscriber {
       update = true;
     }
 
-    if (link.index === -1 || link.index > this.rank) {
+    if (link.index === Number.MAX_VALUE || link.index > this.rank) {
       link.index = this.rank;
       update = true;
     }
 
     if (update) {
       document.querySelectorAll("md-link-storage").forEach((item) => {
-        const storage = item as unknown as MdLinkStorage;
+        const storage = item;
         storage.update(id, link);
       });
 
     }
-    this.linkObj = link;
+    this.linkObj = { ...this.linkObj, ...link} ;
   }
 }
 
 let mdLink_nr = 1;
 document.querySelectorAll("md-link").forEach((item) => {
-  // item.setAttribute("rank", mdImg_nr.toString());
-  let link = item as unknown as MdLink;
+  let link = item;
   link.rank = mdLink_nr;
   mdLink_nr++;
 });

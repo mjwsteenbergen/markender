@@ -28,7 +28,7 @@ in markdown:
 ## Properties
 
 | Property | Attribute | Description                                           | Type     | Default              |
-| -------- | --------- |  ------- | -------- | -------------------- |
+| -------- | --------- | ----------------------------------------------------- | -------- | -------------------- |
 | `align`  | `align`   | How to align the image                                | `string` | `"center"`           |
 | `alt`    | `alt`     | Description of the image that is displayed below      | `string` | `undefined`          |
 | `rank`   | `rank`    | The figure number. Do not add. Is added automatically | `number` | `undefined`          |
@@ -36,6 +36,6 @@ in markdown:
 | `src`    | `src`     | Source of the image                                   | `string` | `undefined`          |
 
 
- 
+----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

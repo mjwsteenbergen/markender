@@ -9,12 +9,21 @@ export class MdBibItem {
   @Prop() name: string;
   @Prop() bibitem: BibtexEntry;
 
+  async componentDidRender() {
+    let storage = document.querySelector("md-link-storage");
+    let lnk = await storage.getValue(this.bibitem.citationKey);
+    if(lnk !== undefined) {
+      lnk.displayValue = this.name;
+      storage.update(this.bibitem.citationKey, lnk);
+    }
+  }
+
   render() {
     return <div class="wrapper" id={"ref-" + this.bibitem.citationKey}>
       <p class="refnumber">{this.name}</p>
       <p class="citation_key"> [{this.bibitem.citationKey}] </p>
       <p class="reference" innerHTML={this.formatReference()}></p>
-    </div>
+    </div>;
   }
 
   formatReference() {

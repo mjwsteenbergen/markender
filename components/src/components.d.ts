@@ -69,9 +69,9 @@ export namespace Components {
     'rank': number;
   }
   interface MdLinkStorage {
+    'getValue': (id: string) => Promise<Link>;
     'subscribe': (id: string, element: LinkSubscriber) => Promise<void>;
     'update': (id: string, link: Link) => Promise<void>;
-    'updateLinkSubscribers': (id: string, link: Link) => Promise<void>;
   }
   interface MdStyle {
     /**

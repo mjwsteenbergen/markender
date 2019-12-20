@@ -86,6 +86,7 @@ export class TableOfContents {
                 level6;
               break;
           }
+          var chapterName = item.textContent;
           if (this.chapters) {
             item.innerHTML =
               '<span class="md-toc-chapter-number">' +
@@ -95,7 +96,7 @@ export class TableOfContents {
               item.innerHTML;
           }
 
-          return <md-toc-item chapter={addedText} name={item.innerHTML} indent={(item.localName || "").replace("h", "")}></md-toc-item>;
+          return <md-toc-item chapter={addedText} name={chapterName} indent={(item.localName || "").replace("h", "")}></md-toc-item>;
         })}
     </div>;
   }

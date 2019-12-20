@@ -25,7 +25,6 @@ export class MdLinkStorage {
     this.updateLinkSubscribers(id, link);
   }
 
-  @Method()
   async updateLinkSubscribers(id: string, link: Link) {
     let requesters = this.getSubscribers(id, this.subscribers);
     requesters.forEach(element => {
@@ -55,6 +54,11 @@ export class MdLinkStorage {
   @Method()
   async subscribe(id: string, element: LinkSubscriber) {
     this.subscribeTo(id, this.subscribers, element);
+  }
+
+  @Method()
+  async getValue(id: string): Promise<Link> {
+    return this.values[id];
   }
 }
 
