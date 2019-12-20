@@ -4,12 +4,14 @@ import { Component, Prop, h } from "@stencil/core";
   tag: "md-toc"
 })
 export class TableOfContents {
-  @Prop() chapters: boolean;
+
+  /**
+   * Flag to display chapter numbers before chapters
+   */
+  @Prop() chapters: boolean = true;
 
 
   render() {
-    var chapters = chapters;
-
     var level1 = 0;
     var level2 = 0;
     var level3 = 0;
@@ -84,7 +86,7 @@ export class TableOfContents {
                 level6;
               break;
           }
-          if (chapters) {
+          if (this.chapters) {
             item.innerHTML =
               '<span class="md-toc-chapter-number">' +
               addedText +
@@ -93,7 +95,7 @@ export class TableOfContents {
               item.innerHTML;
           }
 
-          return <md-toc-item chapter={chapters} name={item.innerHTML} indent={(item.localName || "").replace("h", "")}></md-toc-item>;
+          return <md-toc-item chapter={addedText} name={item.innerHTML} indent={(item.localName || "").replace("h", "")}></md-toc-item>;
         })}
     </div>;
   }

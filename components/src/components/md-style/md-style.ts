@@ -4,9 +4,20 @@ import { Component, Prop } from "@stencil/core";
   tag: "md-style"
 })
 export class MdStyle {
-  @Prop() url: string;
+  /**
+   * The style it should assume
+   */
   @Prop() name: string;
-  @Prop() margin: string;
+
+  /**
+   * The url of your personal sheet
+   */
+  @Prop() url: string;
+
+  /**
+   * Margin of the printed page
+   */
+  @Prop() margin: string = "80px 120px";
 
   connectedCallback() {
     let url = this.url;
@@ -23,11 +34,10 @@ export class MdStyle {
     let name = this.name;
     document.body.className = name;
     let pageStyle = document.createElement("style");
-    let pageMargin = this.margin || "80px 120px";
     pageStyle.innerHTML =
       `@page {
             margin: ` +
-      pageMargin +
+      this.margin +
       `;
         }`;
     document.head.appendChild(pageStyle);

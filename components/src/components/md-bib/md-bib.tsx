@@ -7,8 +7,16 @@ import { MdLinkStorage } from "../md-link/md-link-storage";
   tag: "md-bib"
 })
 export class Bibliography implements LinkSubscriber {
-  @Prop() format: string;
+  /**
+   * Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format)
+   */
   @Prop() src: string;
+
+  /**
+   * How to format the references)
+   */
+  @Prop() format: string = "{refnumber}";
+
   @Element() host: HTMLElement;
 
   ranking: { [key: string]: number; };

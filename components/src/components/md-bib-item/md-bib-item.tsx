@@ -52,15 +52,6 @@ export class MdBibItem {
     }
   }
 
-  formatMisc() {
-    return "misc";
-  }
-
-  formatArticle() {
-
-    return "Article";
-  }
-
   getReference(required: string[], optional: string[]) {
     var item = this.bibitem;
     var check = this.checkValid(item, required);

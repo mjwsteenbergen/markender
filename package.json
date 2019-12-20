@@ -44,7 +44,8 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile",
-		"test": "node ./out/test/runTest.js"
+		"test": "node ./out/test/runTest.js",
+		"docs": "node ./doc.js"
 	},
 	"dependencies": {
 		"markdown-it-enml-todo": "^1.0.2",

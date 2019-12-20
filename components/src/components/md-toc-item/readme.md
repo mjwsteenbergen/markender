@@ -1,5 +1,5 @@
 # md-toc-item
-
+<!-- EXCLUDE IN README -->
 
 
 <!-- Auto Generated Below -->
@@ -11,7 +11,7 @@
 | --------- | --------- | ----------- | -------- | ----------- |
 | `chapter` | `chapter` |             | `string` | `undefined` |
 | `indent`  | `indent`  |             | `string` | `undefined` |
-| `name`    | `name`    |             | `string` | `undefined` |
+| `name`    | `name`    |             | `string` | `""`        |
 
 
 ## Dependencies
@@ -27,6 +27,6 @@ graph TD;
   style md-toc-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
+ 
 
 *Built with [StencilJS](https://stenciljs.com/)*

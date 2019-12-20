@@ -17,41 +17,26 @@ Style it just the way you want with the following built in styles:
  - Somnox
  - ACM (work in progress)
 
-![the features](./example/animation.gif)
+![the features](./docs/animation.gif)
 
 # All Components
 By using [web-components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) we make additions easy and simple. Furthermore, if one does not have the extension, they see nothing! The following web components are defined and can be used within vscode:
+## md-bib-item
 
-## Cover Page
-`<md-cover></md-cover>` will create a cover page at the place you put it.
 
-The following properties are available to customize the component:
 
-| Property | Description          |
-|----------|----------------------|
-| title    | Title of the report  |
-| author   | Author of the report |
+<!-- Auto Generated Below -->
 
-## Table of contents
-`<md-toc></md-toc>` will create a new chapter and the bibliography.
 
-| Property | Description                                                     |
-|----------|-----------------------------------------------------------------|
-| chapters | Flag to display chapter numbers before chapters (true or false) |
+## Properties
 
-## Referencing
-Basic markdown does not implement referencing. This is why markdown implements its own form of referencing. One can reference items by using the `[reference]` notation. You can combine references by splitting them with a comma: `[reference1, reference2]`
+| Property  | Attribute | Description | Type          | Default     |
+| --------- | --------- | ----------- | ------------- | ----------- |
+| `bibitem` | --        |             | `BibtexEntry` | `undefined` |
+| `name`    | `name`    |             | `string`      | `undefined` |
 
-### Bibliography
-`<md-bib></md-bib>` will create the bibliography.
 
-| Property    | Description                                           |
-|-------------|-------------------------------------------------------|
-| src         | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) |
-| format      | How to format the references (default: {refnumber}) |
-| showUnused  | By default the bibliography does not show unused references. Add this attribute to show them |
-| disableSort | By default the bibliography is sorted in the order of usage. Add this attribute to disable this functionality |
-
+## md-bib
 For the loading of the bibliography and doi-references you need to disable security with `Markdown: Change Preview Security Settings`
 The citation key is shown between brackets, to help you quickly find that reference. It will automatically be removed when converting to pdf.
 
@@ -65,7 +50,7 @@ The format property of the `md-bib` element will say how the element will displa
 `<md-bib-doi>${doi}</md-bib-doi>` will tell the bibliography to get a reference from the given doi.
 
 | Property | Description                                           |
-|----------|-------------------------------------------------------|
+|----------| ---------|
 | id       | The citation key of the reference                     |
 
 Example:
@@ -80,7 +65,7 @@ Example:
 `<md-bib-url>${url}</md-bib-url>` will tell the bibliography to get a reference from the given url.
 
 | Property | Description                                           |
-|----------|-------------------------------------------------------|
+|----------| ---------|
 | id       | The citation key of the reference                     |
 | accessed | The date of when the reference was accessed in the form `year-month-day` |
 
@@ -92,17 +77,41 @@ Example:
 </md-bib>
 ```
 
-## Images
+<!-- Auto Generated Below -->
+
+
+## Properties
+
+| Property | Attribute | Description                                                                                   | Type     | Default         |
+| -------- | --------- |   - | -------- | --------------- |
+| `format` | `format`  | How to format the references)                                                                 | `string` | `"{refnumber}"` |
+| `src`    | `src`     | Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format) | `string` | `undefined`     |
+
+
+## md-cover
+`<md-cover></md-cover>` will create a cover page at the place you put it.
+
+<!-- Auto Generated Below -->
+
+
+## Properties
+
+| Property | Attribute | Description          | Type     | Default                               |
+| -------- | --------- | -------------------- | -------- | ------------------------------------- |
+| `author` | `author`  | Author of the report | `string` | `undefined`                           |
+| `date`   | `date`    |                      | `string` | `new Date(Date.now()).toDateString()` |
+| `title`  | `title`   | Title of the report  | `string` | `undefined`                           |
+
+
+ 
+
+
+## md-img
 By default any image (`![alt](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/128px-Markdown-mark.svg.png)`) is converted to a `<md-img></md-img>` element.
 
 However, there might be a few cases, where it would be useful to use the element alone.
 
-| Property | Description                                           |
-|----------|-------------------------------------------------------|
-| src      | Source of the image                                   |
-| alt      | Description of the image that is displayed below      |
-| id       | How to reference the figure using the \[ref\] format  |
-| size     | add the words: `full,medium,small or super-small` to change the size of the image like so: `<md-img small></md-img>`  |
+To change the size of the image add the words: `full,medium,small or super-small` to change the size of the image like so: `<md-img small></md-img>` 
 
 ### Collages
 
@@ -110,7 +119,7 @@ Markdown does not contain a specification to have images on the same line. This 
 
 
 Example:
-![collage](./example/collage.png)
+![collage](./docs/collage.png)
 in markdown:
 
 ```html
@@ -121,20 +130,58 @@ in markdown:
 </ul>
 ```
 
-## Style
-`<md-style></md-style>` will add css styling to the page to make it look amazing.
+<!-- Auto Generated Below -->
 
-| Property | Description                |
-|----------|----------------------------|
-| name     | The style it should assume |
-| margin   | Margin of the printed page |
-| url      | The url of your personal sheet |
 
+## Properties
+
+| Property | Attribute | Description                                           | Type     | Default              |
+| -------- | --------- |  ------- | -------- | -------------------- |
+| `align`  | `align`   | How to align the image                                | `string` | `"center"`           |
+| `alt`    | `alt`     | Description of the image that is displayed below      | `string` | `undefined`          |
+| `rank`   | `rank`    | The figure number. Do not add. Is added automatically | `number` | `undefined`          |
+| `refId`  | `ref-id`  | How to reference the figure using the \[ref\] format  | `string` | `"fig:" + this.rank` |
+| `src`    | `src`     | Source of the image                                   | `string` | `undefined`          |
+
+
+ 
+
+
+## md-style
 The property name can have the values shown when using the snippet `style` within markdown. Append the `name` property with `disable_style` to disable the style used by vscode and show the text as it will be printed.
 
 margin can have one value (top, bottom, left, right), two ((top, bottom), (left, right)) or four (top, right, bottom, left)
 
 url will get the contents of the stylesheet and set add it to the document. This will also disable the margin property, so if wanted needs to be set in the stylesheet.
+car
+
+<!-- Auto Generated Below -->
+
+
+## Properties
+
+| Property | Attribute | Description                    | Type     | Default        |
+| -------- | --------- | ------------------------------ | -------- | -------------- |
+| `margin` | `margin`  | Margin of the printed page     | `string` | `"80px 120px"` |
+| `name`   | `name`    | The style it should assume     | `string` | `undefined`    |
+| `url`    | `url`     | The url of your personal sheet | `string` | `undefined`    |
+
+
+----------------------------------------------
+
+
+## md-toc
+`<md-toc></md-toc>` will create a new chapter and the bibliography.
+
+<!-- Auto Generated Below -->
+
+
+## Properties
+
+| Property   | Attribute  | Description                                     | Type      | Default |
+| ---------- | ---------- |  - | --------- | ------- |
+| `chapters` | `chapters` | Flag to display chapter numbers before chapters | `boolean` | `true`  |
+
 
 ## Extra functionality
 
@@ -163,15 +210,19 @@ Make sure to use the following settings to make it very pretty:
     "markdownConverter.Document.Paper.Margin": { "Top": "0", "Bottom": "0", "Left": "0", "Right": "0"}
 ```
 
-## Release Notes
+# Change Log
+## 2.0.0
+ - Moved from vanilla web components to StencilJS to make adding new features easier
+
 ## 1.5.1
  - Bug fixes
    - Switch to https when getting bibliography from doi
+
 ## 1.5.0
  - Bug fixes
     - Checkbox works again
     - Update vulnerable packages
-
+    
 ## 1.4.0
  - Remove command
  - Page margins are now set using md-style, until better solution can be found
@@ -180,22 +231,22 @@ Make sure to use the following settings to make it very pretty:
    - ordering
    - removing unused references
 
-### 1.3.0
+## 1.3.0
  - Multiple references at once!
  - You can now reference anything that BibTex can!
  - More options to format your references
 
-### 1.2.0
+## 1.2.0
 - Combine vscode styles and document styles
 - Show citation key in bibliography
 
-### 1.1.0
+## 1.1.0
 - Move css to actual css files
 - Remove css from ts components
 - Improve acm
 
-### 1.0.1
+## 1.0.1
 Improve documentation
 
-### 1.0.0
+## 1.0.0
 Initial Release!

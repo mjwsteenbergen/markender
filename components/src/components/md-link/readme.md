@@ -1,5 +1,5 @@
 # md-link-storage
-
+<!-- EXCLUDE IN README -->
 
 
 <!-- Auto Generated Below -->
@@ -55,6 +55,6 @@ graph TD;
   style md-link-storage fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
+ 
 
 *Built with [StencilJS](https://stenciljs.com/)*

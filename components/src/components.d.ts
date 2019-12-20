@@ -17,7 +17,13 @@ import {
 
 export namespace Components {
   interface MdBib {
+    /**
+    * How to format the references)
+    */
     'format': string;
+    /**
+    * Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format)
+    */
     'src': string;
   }
   interface MdBibItem {
@@ -25,16 +31,36 @@ export namespace Components {
     'name': string;
   }
   interface MdCover {
+    /**
+    * Author of the report
+    */
     'author': string;
     'date': string;
+    /**
+    * Title of the report
+    */
     'title': string;
   }
   interface MdImg {
+    /**
+    * How to align the image
+    */
     'align': string;
+    /**
+    * Description of the image that is displayed below
+    */
     'alt': string;
-    'id_2': string;
-    'name': string;
+    /**
+    * The figure number. Do not add. Is added automatically
+    */
     'rank': number;
+    /**
+    * How to reference the figure using the \[ref\] format
+    */
+    'refId': string;
+    /**
+    * Source of the image
+    */
     'src': string;
   }
   interface MdLink {
@@ -48,11 +74,23 @@ export namespace Components {
     'updateLinkSubscribers': (id: string, link: Link) => Promise<void>;
   }
   interface MdStyle {
+    /**
+    * Margin of the printed page
+    */
     'margin': string;
+    /**
+    * The style it should assume
+    */
     'name': string;
+    /**
+    * The url of your personal sheet
+    */
     'url': string;
   }
   interface MdToc {
+    /**
+    * Flag to display chapter numbers before chapters
+    */
     'chapters': boolean;
   }
   interface MdTocItem {
@@ -133,7 +171,13 @@ declare global {
 
 declare namespace LocalJSX {
   interface MdBib {
+    /**
+    * How to format the references)
+    */
     'format'?: string;
+    /**
+    * Source of the bibliography (this should be in [bibtex](http://www.bibtex.org/Format/) format)
+    */
     'src'?: string;
   }
   interface MdBibItem {
@@ -141,16 +185,36 @@ declare namespace LocalJSX {
     'name'?: string;
   }
   interface MdCover {
+    /**
+    * Author of the report
+    */
     'author'?: string;
     'date'?: string;
+    /**
+    * Title of the report
+    */
     'title'?: string;
   }
   interface MdImg {
+    /**
+    * How to align the image
+    */
     'align'?: string;
+    /**
+    * Description of the image that is displayed below
+    */
     'alt'?: string;
-    'id_2'?: string;
-    'name'?: string;
+    /**
+    * The figure number. Do not add. Is added automatically
+    */
     'rank'?: number;
+    /**
+    * How to reference the figure using the \[ref\] format
+    */
+    'refId'?: string;
+    /**
+    * Source of the image
+    */
     'src'?: string;
   }
   interface MdLink {
@@ -160,11 +224,23 @@ declare namespace LocalJSX {
   }
   interface MdLinkStorage {}
   interface MdStyle {
+    /**
+    * Margin of the printed page
+    */
     'margin'?: string;
+    /**
+    * The style it should assume
+    */
     'name'?: string;
+    /**
+    * The url of your personal sheet
+    */
     'url'?: string;
   }
   interface MdToc {
+    /**
+    * Flag to display chapter numbers before chapters
+    */
     'chapters'?: boolean;
   }
   interface MdTocItem {
