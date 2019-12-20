@@ -33,8 +33,8 @@ in markdown:
 | -------- | --------- | ----------------------------------------------------- | -------- | -------------------- |
 | `align`  | `align`   | How to align the image                                | `string` | `"center"`           |
 | `alt`    | `alt`     | Description of the image that is displayed below      | `string` | `undefined`          |
+| `id`     | `id`      | How to reference the figure using the \[ref\] format  | `string` | `"fig:" + this.rank` |
 | `rank`   | `rank`    | The figure number. Do not add. Is added automatically | `number` | `undefined`          |
-| `refId`  | `ref-id`  | How to reference the figure using the \[ref\] format  | `string` | `"fig:" + this.rank` |
 | `src`    | `src`     | Source of the image                                   | `string` | `undefined`          |
 
 

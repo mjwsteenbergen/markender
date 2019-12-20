@@ -34,24 +34,24 @@ export class MdImg {
   /**
    * How to reference the figure using the \[ref\] format
    */
-  @Prop() refId: string = "fig:" + this.rank;
+  @Prop() id: string = "fig:" + this.rank;
 
   render() {
     var alt_text = this.alt ? ": " + this.alt : "";
 
     document.querySelectorAll("md-link-storage").forEach((item) => {
       const storage = item as unknown as MdLinkStorage;
-      storage.update(this.refId, {
+      storage.update(this.id, {
         displayValue: "Figure " + this.rank,
         type: ReferenceType.figure,
-        href: "#" + this.refId,
+        href: "#" + this.id,
         isUsed: false,
         index: Number.MAX_VALUE
       });
     });
 
     return (
-      <div id={this.refId} class="wrapper">
+      <div id={this.id} class="wrapper">
         <img class={this.align} src={this.src} />
         <span class="md-img-desc">{"Figure " + this.rank + alt_text}</span>
       </div>

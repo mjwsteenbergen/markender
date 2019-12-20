@@ -54,13 +54,13 @@ export namespace Components {
     */
     'alt': string;
     /**
+    * How to reference the figure using the \[ref\] format
+    */
+    'id': string;
+    /**
     * The figure number. Do not add. Is added automatically
     */
     'rank': number;
-    /**
-    * How to reference the figure using the \[ref\] format
-    */
-    'refId': string;
     /**
     * Source of the image
     */
@@ -220,13 +220,13 @@ declare namespace LocalJSX {
     */
     'alt'?: string;
     /**
+    * How to reference the figure using the \[ref\] format
+    */
+    'id'?: string;
+    /**
     * The figure number. Do not add. Is added automatically
     */
     'rank'?: number;
-    /**
-    * How to reference the figure using the \[ref\] format
-    */
-    'refId'?: string;
     /**
     * Source of the image
     */
