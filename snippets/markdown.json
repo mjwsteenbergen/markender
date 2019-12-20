@@ -39,7 +39,7 @@
     "Generate bib url": {
         "prefix": "bib-url",
         "body": [
-            "<md-bib-url accessed=\"$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE\"->$1</md-bib-url>$0"
+            "<md-bib-url accessed=\"$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE\">$1</md-bib-url>$0"
         ]
     },
     "Generate bib from doi": {
