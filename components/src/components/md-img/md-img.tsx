@@ -53,7 +53,7 @@ export class MdImg {
     return (
       <div id={this.id} class="wrapper">
         <img class={this.align} src={this.src} />
-        <span class="md-img-desc">{"Figure " + this.rank + alt_text}</span>
+        <span class="md-img-desc">{"Figure " + this.rank + alt_text} <md-link-button link={this.id}></md-link-button> </span>
       </div>
     );
   }

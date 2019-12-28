@@ -38,6 +38,19 @@ in markdown:
 | `src`    | `src`     | Source of the image                                   | `string` | `undefined`          |
 
 
+## Dependencies
+
+### Depends on
+
+- [md-link-button](../md-link-button)
+
+### Graph
+```mermaid
+graph TD;
+  md-img --> md-link-button
+  style md-img fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

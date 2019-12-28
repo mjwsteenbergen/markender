@@ -107,13 +107,6 @@ function setChapters() {
           break;
       }
       var chaptername = item.textContent;
-      item.innerHTML =
-        '<span class="md-toc-chapter-number">' +
-        addedText +
-        "</span>" +
-        '<span class="md-toc-extra-space"> </span>' +
-        '<span class="md-toc-chapter-name">' + item.innerHTML + '</span>';
-
       let basename = chaptername.replace(new RegExp("\\W"), "-").replace("--", "-").toLowerCase();
       let name = basename;
       let count = 0;
@@ -121,6 +114,15 @@ function setChapters() {
         count++;
         name = basename + "-" + count;
       }
+
+      item.innerHTML =
+        '<span class="md-toc-chapter-number">' +
+        addedText +
+        "</span>" +
+        '<span class="md-toc-extra-space"> </span>' +
+        '<span class="md-toc-chapter-name">' + item.innerHTML + '</span>' +
+        '<md-link-button link="' + name + '"></md-link-button>';
+
 
       item.id = name;
       names.push(name);

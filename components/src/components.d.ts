@@ -71,6 +71,12 @@ export namespace Components {
     'name': string;
     'rank': number;
   }
+  interface MdLinkButton {
+    /**
+    * Flag to display chapter numbers before chapters
+    */
+    'link': string;
+  }
   interface MdLinkStorage {
     'getValue': (id: string) => Promise<Link>;
     'subscribe': (id: string, element: LinkSubscriber) => Promise<void>;
@@ -143,6 +149,12 @@ declare global {
     new (): HTMLMdLinkElement;
   };
 
+  interface HTMLMdLinkButtonElement extends Components.MdLinkButton, HTMLStencilElement {}
+  var HTMLMdLinkButtonElement: {
+    prototype: HTMLMdLinkButtonElement;
+    new (): HTMLMdLinkButtonElement;
+  };
+
   interface HTMLMdLinkStorageElement extends Components.MdLinkStorage, HTMLStencilElement {}
   var HTMLMdLinkStorageElement: {
     prototype: HTMLMdLinkStorageElement;
@@ -173,6 +185,7 @@ declare global {
     'md-cover': HTMLMdCoverElement;
     'md-img': HTMLMdImgElement;
     'md-link': HTMLMdLinkElement;
+    'md-link-button': HTMLMdLinkButtonElement;
     'md-link-storage': HTMLMdLinkStorageElement;
     'md-style': HTMLMdStyleElement;
     'md-toc': HTMLMdTocElement;
@@ -237,6 +250,12 @@ declare namespace LocalJSX {
     'name'?: string;
     'rank'?: number;
   }
+  interface MdLinkButton {
+    /**
+    * Flag to display chapter numbers before chapters
+    */
+    'link'?: string;
+  }
   interface MdLinkStorage {}
   interface MdStyle {
     /**
@@ -272,6 +291,7 @@ declare namespace LocalJSX {
     'md-cover': MdCover;
     'md-img': MdImg;
     'md-link': MdLink;
+    'md-link-button': MdLinkButton;
     'md-link-storage': MdLinkStorage;
     'md-style': MdStyle;
     'md-toc': MdToc;
@@ -291,6 +311,7 @@ declare module "@stencil/core" {
       'md-cover': LocalJSX.MdCover & JSXBase.HTMLAttributes<HTMLMdCoverElement>;
       'md-img': LocalJSX.MdImg & JSXBase.HTMLAttributes<HTMLMdImgElement>;
       'md-link': LocalJSX.MdLink & JSXBase.HTMLAttributes<HTMLMdLinkElement>;
+      'md-link-button': LocalJSX.MdLinkButton & JSXBase.HTMLAttributes<HTMLMdLinkButtonElement>;
       'md-link-storage': LocalJSX.MdLinkStorage & JSXBase.HTMLAttributes<HTMLMdLinkStorageElement>;
       'md-style': LocalJSX.MdStyle & JSXBase.HTMLAttributes<HTMLMdStyleElement>;
       'md-toc': LocalJSX.MdToc & JSXBase.HTMLAttributes<HTMLMdTocElement>;

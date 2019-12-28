@@ -21,14 +21,6 @@ export class TableOfContentsItem {
         isUsed: false,
         index: Number.MAX_VALUE
       });
-
-      storage.update(this.href, {
-        displayValue: "Chapter " + this.chapter,
-        type: ReferenceType.chapter,
-        href: "#" + this.href,
-        isUsed: false,
-        index: Number.MAX_VALUE
-      });
     });
   }
 
