@@ -213,6 +213,13 @@ Make sure to use the following settings to make it very pretty:
 # Change Log
 ## 2.0.0
  - Moved from vanilla web components to StencilJS to make adding new features easier
+ - Fixed md-bib-url snippet
+ - Show all references by default
+ - Add bibliography export
+ - Table of contents
+   - Same chapter titles no longer clash
+   - Chapter names with weird characters are now correctly linkable
+   - Chapters are referencable
 
 ## 1.5.1
  - Bug fixes
