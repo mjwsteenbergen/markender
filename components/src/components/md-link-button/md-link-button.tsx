@@ -2,7 +2,8 @@ import { Component, Prop, h } from "@stencil/core";
 import { ClipboardHelper } from "../clipboard";
 
 @Component({
-  tag: "md-link-button"
+  tag: "md-link-button",
+  styleUrl: "md-link-button.scss"
 })
 export class LinkButton {
 
@@ -12,7 +13,7 @@ export class LinkButton {
   @Prop() link: string;
 
   render() {
-    return <a style={{
+    return <a class="md-link-button" style={{
       "padding-left": "10px",
       "cursor": "pointer"
     }} onClick={() => ClipboardHelper.copyTextToClipboard(this.link)}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

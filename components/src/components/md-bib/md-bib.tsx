@@ -56,15 +56,16 @@ export class Bibliography implements LinkSubscriber {
       }
     });
 
-    if(this.src != undefined) {
+    if(this.src !== undefined) {
       this.loadFromSource();
     }
   }
 
   async addToStorage(entry: BibtexEntry) {
     let storage = document.querySelector("md-link-storage") as unknown as MdLinkStorage;
-    await storage.subscribe(entry.citationKey, this);
-    await storage.update(entry.citationKey, {
+    await storage.subscribe("@" + entry.citationKey, this);
+    this.ranking["@" + entry.citationKey] = Number.MAX_VALUE;
+    await storage.update("@" + entry.citationKey, {
       displayValue: this.formatBib(entry, Number.MAX_VALUE),
       type: ReferenceType.reference,
       href: "#ref-" + entry.citationKey,
@@ -86,7 +87,7 @@ export class Bibliography implements LinkSubscriber {
         var ranka = this.ranking[a.citationKey] || (Number.MAX_VALUE - this.items.indexOf(a));
         var rankb = this.ranking[b.citationKey] || (Number.MAX_VALUE - this.items.indexOf(b));
         return ranka - rankb;
-      }).map((i, index) => <md-bib-item name={this.formatBib(i, index+1)} bibitem={i}></md-bib-item>)}
+      }).map((i) => <md-bib-item name={this.formatBib(i, (this.ranking["@" + i.citationKey] || -1))} bibitem={i}></md-bib-item>)}
     </div>;
   }
 
@@ -104,12 +105,15 @@ export class Bibliography implements LinkSubscriber {
   }
 
   async onReferenceChanged(id: string, lnk: Link) {
-    if (this.ranking[id] !== lnk.index) {
-      this.ranking[id] = lnk.index;
-      let bibItem = this.items.filter(i => i.citationKey === id)[0];
+    this.ranking[id] = lnk.index;
+    this.forceRerender = !this.forceRerender;
+    let bibItem = this.items.filter(i => "@" + i.citationKey === id)[0];
+    if (lnk.index !== undefined) {
       lnk.displayValue = this.formatBib(bibItem, lnk.index);
-      this.forceRerender = !this.forceRerender;
+    }
 
+    if (this.ranking[id] !== lnk.index) {
+      this.forceRerender = !this.forceRerender;
       let storage = document.querySelector("md-link-storage") as unknown as MdLinkStorage;
       await storage.update(id, lnk);
     }

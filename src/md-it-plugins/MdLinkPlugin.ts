@@ -59,7 +59,7 @@ function linker(state: State, silent: boolean) {
         state.pos = labelStart;
         state.posMax = labelEnd;
 
-        var links = res.str.split(',');
+        var links = res.str.split(';');
         
         links.forEach(element => {
             token = state.push('link_open', 'md-link', 1);

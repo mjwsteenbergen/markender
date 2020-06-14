@@ -13,8 +13,9 @@ export class MdBibItem {
     let storage = document.querySelector("md-link-storage");
     let lnk = await storage.getValue(this.bibitem.citationKey);
     if(lnk !== undefined) {
+      console.error("lnk was not defined");
       lnk.displayValue = this.name;
-      storage.update(this.bibitem.citationKey, lnk);
+      storage.update("@" + this.bibitem.citationKey, lnk);
     }
   }
 

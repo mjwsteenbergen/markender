@@ -47,7 +47,7 @@ function linker(state, silent) {
     if (!silent) {
         state.pos = labelStart;
         state.posMax = labelEnd;
-        var links = res.str.split(',');
+        var links = res.str.split(';');
         links.forEach(element => {
             token = state.push('link_open', 'md-link', 1);
             token.attrs = [['link', element.trimLeft()]];

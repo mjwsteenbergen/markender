@@ -8,10 +8,12 @@ export class MdLinkStorage {
 
   subscribers: { [id: string]: LinkSubscriber[]; };
   values: { [id: string]: Link; };
+  index: number;
 
   connectedCallback() {
     this.subscribers = {};
     this.values = {};
+    this.index = 0;
   }
 
   render() {
@@ -21,12 +23,12 @@ export class MdLinkStorage {
   @Method()
   async update(id: string, link: Link) {
     this.values[id] = link;
-    console.log("Force update on " + id, link);
     this.updateLinkSubscribers(id, link);
   }
 
   async updateLinkSubscribers(id: string, link: Link) {
     let requesters = this.getSubscribers(id, this.subscribers);
+    // console.log("Force update on " + id, link, requesters);
     requesters.forEach(element => {
       element.onReferenceChanged(id, link);
     });
@@ -38,7 +40,7 @@ export class MdLinkStorage {
       dict[id] = [];
       arr = dict[id];
     }
-    console.log("Subscribed to " + id, element);
+    // console.log("Subscribed to " + id, element);
     dict[id].push(element);
   }
 
@@ -64,14 +66,3 @@ export class MdLinkStorage {
 
 var linkStorage = document.createElement("md-link-storage");
 document.body.appendChild(linkStorage);
-
-// export function getLinkStorage(func: (storage: MdLinkStorage) => void): any {
-//     var storage = document.querySelectorAll("md-link-storage")[0] as MdLinkStorage;
-//     if (storage.update === undefined) {
-//         setTimeout(() => {
-//             this.getLinkStorage(func);
-//         }, 200);
-//     } else {
-//         func(storage);
-//     }
-// }

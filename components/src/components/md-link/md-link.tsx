@@ -30,7 +30,7 @@ export class MdLink implements LinkSubscriber {
     let update = false;
     let type = ReferenceType[link.type];
     if (!this.element.classList.contains(type)) {
-      this.element.classList.add(type)
+      this.element.classList.add(type);
     }
 
     this.element.classList.remove("notfound");
@@ -40,7 +40,7 @@ export class MdLink implements LinkSubscriber {
       update = true;
     }
 
-    if (link.index === Number.MAX_VALUE || link.index > this.rank) {
+    if (link.index === Number.MAX_VALUE || link.index > this.rank || (link.index === undefined && this.rank !== undefined)) {
       link.index = this.rank;
       update = true;
     }
@@ -52,7 +52,7 @@ export class MdLink implements LinkSubscriber {
       });
 
     }
-    this.linkObj = { ...this.linkObj, ...link} ;
+    this.linkObj = link;
   }
 }
 
