@@ -211,6 +211,9 @@ Make sure to use the following settings to make it very pretty:
 ```
 
 # Change Log
+## 2.0.1
+ - Fix CI
+
 ## 2.0.0
  - Moved from vanilla web components to StencilJS to make adding new features easier
  - Fixed md-bib-url snippet

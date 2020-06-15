@@ -2,7 +2,7 @@
 	"name": "markender",
 	"displayName": "markender",
 	"description": "Creating beautiful markdown documents",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"publisher": "mjwsteenbergen",
 	"repository": {
 		"type": "git",

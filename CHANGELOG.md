@@ -1,4 +1,7 @@
 # Change Log
+## 2.0.1
+ - Fix CI
+
 ## 2.0.0
  - Moved from vanilla web components to StencilJS to make adding new features easier
  - Fixed md-bib-url snippet
