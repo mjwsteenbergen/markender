@@ -2,8 +2,11 @@
 .vscode-test/**
 out/test/**
 src/**
+docs/**
 .gitignore
-vsc-extension-quickstart.md
 **/tsconfig.json
 **/tslint.json
 **/*.map
+components/**/**
+!components/morecss.css
+!components/dist/**
