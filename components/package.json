@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@stencil/core": "^2.3.0",
-    "@stencil/sass": "^1.4.0",
+    "@stencil/sass": "^1.4.1",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "rollup": "^2.33.3",
