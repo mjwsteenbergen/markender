@@ -26,7 +26,7 @@
     "deploy": "(npm run build) && (npm run build.patch) && (npm run webpack)"
   },
   "devDependencies": {
-    "@stencil/core": "^2.3.0",
+    "@stencil/core": "^2.4.0",
     "@stencil/sass": "^1.4.1",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
