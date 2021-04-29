@@ -1,0 +1,28 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: saturday
+    timezone: Europe/Amsterdam
+  open-pull-requests-limit: 10
+  target-branch: vNext
+  assignees:
+  - mjwsteenbergen
+  ignore:
+  - dependency-name: "@types/vscode"
+    versions:
+    - 1.52.0
+    - 1.53.0
+    - 1.54.0
+- package-ecosystem: npm
+  directory: "/components"
+  schedule:
+    interval: weekly
+    day: saturday
+    timezone: Europe/Amsterdam
+  open-pull-requests-limit: 10
+  target-branch: vNext
+  assignees:
+  - mjwsteenbergen
