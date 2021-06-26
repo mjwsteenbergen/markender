@@ -31,7 +31,7 @@
     "css-loader": "^5.2.4",
     "file-loader": "^6.2.0",
     "rollup": "^2.45.2",
-    "style-loader": "^2.0.0",
+    "style-loader": "^3.0.0",
     "webpack": "5.35.1",
     "webpack-cli": "4.6.0"
   },
